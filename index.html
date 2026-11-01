@@ -10503,6 +10503,14 @@ body.admin-open #managementHomeButton{display:none!important}
 .aff-ref-frame{position:relative!important}
 .aff-ref-badge{position:absolute;z-index:40;right:6px;top:6px;display:inline-flex;align-items:center;justify-content:center;min-height:17px;padding:2px 5px;border-radius:999px;background:#172026;color:#c5f90b;font-size:6.5px;font-weight:950;letter-spacing:.035em;line-height:1;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.16)}
 body:not(.user-is-admin) .aff-ref-badge{display:none!important}
+
+/* V1073 — Navigation Offres & devis : ouverture directe des simulateurs sans popup de changement. */
+[data-sim3-cdr]{position:relative}
+.sim3-cdr-ref{display:none;position:absolute;z-index:80;top:7px;right:8px;padding:3px 7px;border-radius:999px;background:#172026;color:#c5f90b;border:1px solid #c5f90b;font-size:8px;font-weight:950;line-height:1;letter-spacing:.04em;white-space:nowrap;box-shadow:0 2px 5px #0002;pointer-events:none}
+body.user-is-admin.sim3-active [data-sim3-cdr]>.sim3-cdr-ref{display:inline-flex}
+body:not(.user-is-admin) [data-sim3-cdr]>.sim3-cdr-ref,body:not(.sim3-active) [data-sim3-cdr]>.sim3-cdr-ref{display:none!important}
+@media(max-width:720px){.sim3-cdr-ref{top:5px;right:6px;font-size:7px;padding:3px 6px}}
+
 </style>
 
 <style id="commonQuoteSendV983">
@@ -10511,7 +10519,7 @@ body:not(.user-is-admin) .aff-ref-badge{display:none!important}
 .common-quote-send-card{width:min(1560px,calc(100vw - 12px));max-height:calc(100vh - 14px);overflow:auto;padding:20px;border-radius:18px;border-top:8px solid #c5f90b;background:#eef2ef;box-shadow:0 30px 90px rgba(0,0,0,.5)}
 .common-quote-send-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:10px}.common-quote-send-head span{display:block;color:#65727a;font-size:8px;font-weight:950;letter-spacing:.06em}.common-quote-send-head h2{margin:3px 0 3px;color:#172026;font-size:22px}.common-quote-send-head p{margin:0;max-width:950px;color:#617078;font-size:10px;line-height:1.4}.common-quote-send-close{width:36px;height:36px;border:0;border-radius:50%;background:#172026;color:#c5f90b;font-size:22px;font-weight:950;cursor:pointer}
 .common-quote-send-client{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:10px}.common-quote-send-client>div{padding:8px 10px;border:1px solid #d5ddd8;border-radius:9px;background:#fff}.common-quote-send-client span{display:block;color:#6c797f;font-size:7px;font-weight:900;text-transform:uppercase}.common-quote-send-client strong{display:block;margin-top:2px;color:#172026;font-size:10px;overflow-wrap:anywhere}
-.common-quote-send-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.common-quote-send-mail{display:grid;grid-template-rows:auto auto 34px auto minmax(190px,1fr) 38px 18px;min-width:0;padding:10px;border:1px solid #cfd8d2;border-radius:12px;background:#fff}.common-quote-send-mail.free{border-color:#3966f9}.common-quote-send-mail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding-bottom:6px;border-bottom:1px solid #dfe5e1}.common-quote-send-mail-head span{color:#6b777d;font-size:7px;font-weight:950;text-transform:uppercase}.common-quote-send-mail-head strong{display:block;margin-top:2px;color:#172026;font-size:12px}.common-quote-send-mail label{margin:5px 0 3px;color:#65727a;font-size:7px;font-weight:950;text-transform:uppercase}.common-quote-send-mail input,.common-quote-send-mail textarea{font-size:10px}.common-quote-send-mail textarea{resize:none;min-height:190px}.common-quote-send-mail .btn{width:100%;min-height:38px}.common-quote-send-status{padding-top:4px;color:#65727a;font-size:7px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.common-quote-send-global-status{margin-top:10px;padding:11px 13px;border:1px solid #b9c9ff;border-left:5px solid #3966f9;border-radius:9px;background:#eef3ff;color:#24324a;font-size:10.5px;font-weight:850;line-height:1.45}.common-quote-send-global-status.error{border-color:#efb8b8;border-left-color:#b74141;background:#fff0f0;color:#7f2525}
+.common-quote-send-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.common-quote-send-mail{display:grid;grid-template-rows:auto auto 34px auto minmax(190px,1fr) 38px 18px;min-width:0;padding:10px;border:1px solid #cfd8d2;border-radius:12px;background:#fff}.common-quote-send-mail.free{border-color:#3966f9}.common-quote-send-mail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding-bottom:6px;border-bottom:1px solid #dfe5e1}.common-quote-send-mail-head span{color:#6b777d;font-size:7px;font-weight:950;text-transform:uppercase}.common-quote-send-mail-head strong{display:block;margin-top:2px;color:#172026;font-size:12px}.common-quote-send-mail label{margin:5px 0 3px;color:#65727a;font-size:7px;font-weight:950;text-transform:uppercase}.common-quote-send-mail input,.common-quote-send-mail textarea{font-size:10px}.common-quote-send-mail textarea{resize:none;min-height:190px}.common-quote-send-mail .btn{width:100%;min-height:38px}.common-quote-send-status{padding-top:4px;color:#65727a;font-size:7px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.common-quote-send-global-status{margin-top:10px;padding:11px 13px;border:1px solid #b9c9ff;border-left:5px solid #3966f9;border-radius:9px;background:#eef3ff;color:#24324a;font-size:10.5px;font-weight:850;line-height:1.45}.common-quote-send-global-status.error{border-color:#efb8b8;border-left-color:#b74141;background:#fff0f0;color:#7f2525}.common-quote-send-global-status.warning{border-color:#efd795;border-left-color:#c78900;background:#fff8df;color:#6f5000}.common-quote-send-global-status.success{border-color:#b7d98d;border-left-color:#6d9b00;background:#f4fae9;color:#385000}
 @media(max-width:1100px){.common-quote-send-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.common-quote-send-client,.common-quote-send-grid{grid-template-columns:1fr}.common-quote-send-card{padding:12px}}
 
 /* V986 — cadre COMMON PDF + envoi client */
@@ -15360,13 +15368,25 @@ Bien à vous,
   function openCommonSubmenuTarget(item){
     const target=String(item?.target||'').trim();
     if(/^simulator:\d+$/i.test(target)){
-      const n=Number(target.split(':')[1]),button=commonSubmenuSimulatorButton(n),
-        current=typeof commonCurrentSimulatorNumber==='function'?Number(commonCurrentSimulatorNumber()):0;
+      const n=Number(target.split(':')[1]),button=commonSubmenuSimulatorButton(n);
       if(button){
-        // Même simulateur : ouverture directe. Autre simulateur : la logique COMMON
-        // du bouton conserve le popup de confirmation/reset déjà validé.
-        if(current===n)document.body.classList.remove('management-submenu-open');
+        // V1074 — Depuis « Offres & devis », utiliser le vrai bouton interne du
+        // simulateur. On ferme d’abord complètement le sous-menu puis on neutralise
+        // uniquement pour ce clic la confirmation « Changer de simulateur ? ».
+        document.body.classList.remove(
+          'management-submenu-open',
+          'management-hub-open',
+          'management-construction-open',
+          'dashboard-open',
+          'admin-open'
+        );
+        activeCommonSubmenuModuleId='';
+        bypassSimulatorSwitchConfirmationOnce=true;
         button.click();
+        // Sécurité si le gestionnaire du bouton n’a pas consommé le drapeau.
+        bypassSimulatorSwitchConfirmationOnce=false;
+        lastSimulatorSelection=simulatorDescriptorFromNumber(n);
+        window.scrollTo({top:0,behavior:'auto'});
         return
       }
     }
@@ -17257,7 +17277,9 @@ Bien à vous,
     const status=document.getElementById('quoteStorageStatus');
     if(status)status.textContent=context.reason==='simulator-switch'
       ?`Nouveau projet · Simulateur ${destination.simulator} · données du simulateur précédent réinitialisées.`
-      :'Projet réinitialisé · valeurs par défaut restaurées.';
+      :context.reason==='management-simulator-selection'
+        ?`Nouveau projet · Simulateur ${destination.simulator} · ouverture directe depuis Offres & devis.`
+        :'Projet réinitialisé · valeurs par défaut restaurées.';
 
     window.scrollTo({top:0,behavior:'auto'});
     return true
@@ -25692,6 +25714,7 @@ Bien à vous,
     if(title)title.textContent=activeSimulatorMode==='offgrid'?'Étape 2 — Profil de consommation 1/4 horaires':'Étape 2 — Donnée de consommation';
     const offgridMode=activeSimulatorMode==='offgrid',
       step5RespectWrap=document.getElementById('offgridStep5RespectWrap'),exportInteractiveProfile=document.getElementById('exportOffgridInteractiveProfile');
+    document.body.classList.toggle('sim3-active',offgridMode);
     if(exportInteractiveProfile)exportInteractiveProfile.hidden=!offgridMode;
     if(step5RespectWrap)step5RespectWrap.hidden=!offgridMode||!Boolean(document.getElementById('roofPreviewEnabled')?.checked);
     if(!offgridMode)commonRoofPanelEditMode=null;
@@ -27701,13 +27724,78 @@ Bien à vous,
     else if(btn.dataset.target&&!String(btn.dataset.target).startsWith('manage'))lastSimulatorSelection={kind:'section',value:btn.dataset.target};
   }
 
+  let bypassSimulatorSwitchConfirmationOnce=false;
+
   function requestCleanSimulatorSwitch(descriptor){
     if(!descriptor)return false;
+    if(bypassSimulatorSwitchConfirmationOnce){
+      bypassSimulatorSwitchConfirmationOnce=false;
+      return false
+    }
     const current=currentSimulatorDescriptor();
     if(Number(current?.simulator)===Number(descriptor.simulator))return false;
 
     openProjectResetModal({mode:'switch',descriptor});
     return true
+  }
+
+  function openSimulatorFromManagementMenu(descriptor){
+    if(!descriptor)return;
+    const current=currentSimulatorDescriptor(),changing=Number(current?.simulator)!==Number(descriptor.simulator);
+    document.body.classList.remove('management-submenu-open','management-hub-open','management-construction-open');
+
+    // V1073 : l'ouverture du simulateur est prioritaire et ne dépend plus du
+    // bouton .tab interne. Ainsi, une erreur de nettoyage ne peut plus bloquer
+    // l'accès à Sim 3 depuis « Offres & devis ».
+    try{
+      if(descriptor.kind==='mode')setSimulatorMode(descriptor.value,{scroll:false});
+      else openSection(descriptor.value);
+    }catch(error){
+      console.error('Ouverture directe du simulateur impossible :',error);
+      if(Number(descriptor.simulator)===3){
+        activeSimulatorMode='offgrid';
+        document.body.classList.add('sim3-active');
+        document.querySelectorAll('.tab,.panel').forEach(el=>el.classList.remove('active'));
+        document.getElementById('choice')?.classList.add('active');
+        document.querySelector('.tab[data-simulator-mode="offgrid"]')?.classList.add('active')
+      }
+    }
+
+    lastSimulatorSelection={kind:descriptor.kind,value:descriptor.value};
+
+    // Le nettoyage vient après l'ouverture et est volontairement tolérant :
+    // il ne doit jamais empêcher la navigation vers le simulateur demandé.
+    if(changing){
+      try{resetProjectFormControlsToDefaults()}catch(error){console.warn('Reset formulaire partiel :',error)}
+      try{startNewQuote()}catch(error){console.warn('Nouveau devis partiel :',error)}
+
+      if(window.quotePdfObjectUrl){
+        try{URL.revokeObjectURL(window.quotePdfObjectUrl)}catch{}
+      }
+      window.quotePdfObjectUrl='';
+      window.quotePdfBlob=null;
+      window.quotePdfFilename='';
+      window.quotePdfVariant='';
+
+      const commonPdf=document.getElementById('commonPdfReadyFrame');
+      if(commonPdf)commonPdf.hidden=true;
+      const quoteLink=document.getElementById('quotePdfDownload');
+      if(quoteLink){
+        quoteLink.removeAttribute('href');
+        quoteLink.classList.remove('ready');
+        quoteLink.textContent='PDF non généré'
+      }
+
+      // Réaffirmer le simulateur après le reset des contrôles.
+      try{
+        if(descriptor.kind==='mode')setSimulatorMode(descriptor.value,{scroll:false});
+        else openSection(descriptor.value)
+      }catch(error){console.warn('Réaffirmation simulateur :',error)}
+    }
+
+    const status=document.getElementById('quoteStorageStatus');
+    if(status)status.textContent=`Nouveau projet · Simulateur ${descriptor.simulator} · ouverture directe depuis Offres & devis.`;
+    window.scrollTo({top:0,behavior:'auto'})
   }
 
   function confirmProjectResetAction(){
@@ -36912,23 +37000,45 @@ document.addEventListener('DOMContentLoaded',()=>{
     const template=normalizeOfferAdminConfig({commonQuoteSmsTemplate:offerAdminConfig.commonQuoteSmsTemplate}).commonQuoteSmsTemplate;
     return applyEmailVariables(String(template?.body||DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.body))
   }
+  function normalizeSmsError(value){
+    return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  }
+  function classifySmsError(error){
+    const message=String(error?.message||error||'Erreur inconnue').trim(),needle=normalizeSmsError(message);
+    if(/credit|credits|iap|balance|solde|insuff|not enough/.test(needle))return{requested:true,sent:false,status:'credit',tone:'warning',label:'Crédit SMS Odoo insuffisant',detail:message};
+    if(/invalid.*(phone|number|numero)|(phone|number|numero).*invalid|numero incorrect|malformed/.test(needle))return{requested:true,sent:false,status:'invalid_number',tone:'error',label:'Numéro SMS invalide',detail:message};
+    if(/access|permission|forbidden|unauthor|denied/.test(needle))return{requested:true,sent:false,status:'forbidden',tone:'error',label:'Accès SMS Odoo refusé',detail:message};
+    return{requested:true,sent:false,status:'error',tone:'error',label:`Erreur SMS Odoo : ${message}`,detail:message}
+  }
+  function classifySmsResult(result,phone){
+    const stateName=String(result?.state||'').trim().toLowerCase();
+    if(['sent','delivered','done'].includes(stateName))return{requested:true,sent:true,status:'sent',tone:'success',state:stateName,label:`SMS envoyé au ${phone} ✓`};
+    if(['error','failed','failure','cancel','canceled','cancelled'].includes(stateName))return classifySmsError(result?.failure_type||result?.failureType||`État Odoo : ${stateName}`);
+    if(['outgoing','process','processing','pending','queued','draft',''].includes(stateName))return{requested:true,sent:false,status:'pending',tone:'warning',state:stateName||'accepted',label:`SMS en attente chez Odoo · ${phone}`};
+    return{requested:true,sent:false,status:'pending',tone:'warning',state:stateName,label:`SMS accepté par Odoo (${stateName}) · ${phone}`}
+  }
   async function sendSmsIfEnabled(){
     const toggle=el('commonQuoteSendSmsEnabled');
-    if(!toggle?.checked)return{requested:false,sent:false,label:'SMS non demandé'};
+    if(!toggle?.checked)return{requested:false,sent:false,status:'disabled',tone:'',label:'SMS non demandé'};
     const phone=String(state.client?.phone||'').trim();
-    if(!phone)return{requested:true,sent:false,label:'SMS non envoyé : numéro absent'};
+    if(!phone)return{requested:true,sent:false,status:'missing_number',tone:'error',label:'SMS non envoyé : numéro absent'};
     try{
       const result=await odooContactNoteRequest({mode:'send_sms',partnerId:state.client.odooPartnerId,phone,body:smsText(),clientName:state.client.name||'',actionId:'COMMON-PDF-SMS'});
-      return{requested:true,sent:Boolean(result?.ok!==false),label:`SMS envoyé au ${phone} ✓`}
-    }catch(error){return{requested:true,sent:false,label:`SMS non envoyé : ${error.message||error}`}}
+      return classifySmsResult(result,phone)
+    }catch(error){return classifySmsError(error)}
   }
   function showSuccess(smsResult){
     const simulator=commonCurrentSimulatorNumber(),kicker=el('commonQuoteSendSuccessKicker'),title=el('commonQuoteSendSuccessTitle'),status=el('commonQuoteSendSuccessStatus');
     if(kicker)kicker.textContent=`ENVOI CONFIRMÉ ✓ · SIMULATEUR ${simulator}`;
     if(title)title.textContent=state.pdf?.name||'Devis envoyé';
     let message='✓ E-mail envoyé au client';
-    if(smsResult?.requested&&smsResult?.sent)message='✓ E-mail et SMS envoyés au client';
-    else if(smsResult?.requested&&!smsResult?.sent)message=`E-mail envoyé au client · ${smsResult?.label||'SMS non envoyé'}`;
+    if(smsResult?.requested){
+      if(smsResult.status==='sent')message='✓ E-mail envoyé · ✓ SMS envoyé';
+      else if(smsResult.status==='pending')message='✓ E-mail envoyé · SMS en attente chez Odoo';
+      else if(smsResult.status==='credit')message='✓ E-mail envoyé · ⚠ Crédit SMS Odoo insuffisant';
+      else if(smsResult.status==='invalid_number')message='✓ E-mail envoyé · ⚠ Numéro SMS invalide';
+      else message=`✓ E-mail envoyé · ⚠ ${smsResult?.label||'SMS non envoyé'}`
+    }
     if(status)status.textContent=message;
     close();
     const modal=el('commonQuoteSendSuccessModal');modal?.classList.add('open');modal?.setAttribute('aria-hidden','false')
@@ -36948,9 +37058,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     openCrmSenderForPayload({actionId:'COMMON-PDF',client:state.client,button,statusEl,subject,body,attachment:state.pdf,requireOdooAttachment:true,successLabel:'Envoyé ✓',onSuccess:async()=>{
       const global=el('commonQuoteSendGlobalStatus');if(global){global.classList.remove('error');global.textContent='Mail envoyé. Envoi SMS éventuel…'}
       const smsResult=await sendSmsIfEnabled();
-      if(global)global.textContent=`Devis ${state.pdf.reference} envoyé à ${state.client.email} · mail copié dans Odoo · PDF classé dans Offre(s) envoyée(s) ✓${smsResult.requested?` · ${smsResult.label}`:''}`;
+      if(global){
+        global.classList.remove('error','warning','success');
+        if(smsResult?.tone)global.classList.add(smsResult.tone);
+        else global.classList.add('success');
+        global.textContent=`Devis ${state.pdf.reference} envoyé à ${state.client.email} · mail copié dans Odoo · PDF classé dans Offre(s) envoyée(s) ✓${smsResult.requested?` · ${smsResult.label}`:''}`
+      }
       try{
-        const q=state.record||activeQuoteRecord;if(q?.id){const qd={...(q.quote_data||{})},art={...(qd.artifacts||{})},sent=Array.isArray(art.sent)?art.sent.slice():[];sent.push({at:new Date().toISOString(),to:state.client.email,phone:state.client.phone||'',smsRequested:Boolean(smsResult.requested),smsSent:Boolean(smsResult.sent),reference:state.pdf.reference,storagePath:state.pdf.storagePath});art.sent=sent;qd.artifacts=art;const {data}=await database.from('quotes').update({quote_data:qd}).eq('id',q.id).select('*').single();if(data)activeQuoteRecord=data}
+        const q=state.record||activeQuoteRecord;if(q?.id){const qd={...(q.quote_data||{})},art={...(qd.artifacts||{})},sent=Array.isArray(art.sent)?art.sent.slice():[];sent.push({at:new Date().toISOString(),to:state.client.email,phone:state.client.phone||'',smsRequested:Boolean(smsResult.requested),smsSent:Boolean(smsResult.sent),smsStatus:String(smsResult.status||''),smsState:String(smsResult.state||''),smsLabel:String(smsResult.label||''),reference:state.pdf.reference,storagePath:state.pdf.storagePath});art.sent=sent;qd.artifacts=art;const {data}=await database.from('quotes').update({quote_data:qd}).eq('id',q.id).select('*').single();if(data)activeQuoteRecord=data}
       }catch(e){console.warn('Historique envoi devis',e)}
       showSuccess(smsResult)
     }})
@@ -37018,7 +37133,134 @@ document.addEventListener('DOMContentLoaded',()=>{
   window.refreshAffReferences=()=>scan(document);
 })();
 </script>
-<div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">Version application V1067</div>
+
+<script>
+/* V1075 — Boucle CDR Sim 3 corrigée.
+   V1074 — Navigation Offres & devis corrigée.
+   V1070 — Références des cadres du Simulateur 3.
+   Convention : SIM3 · CDR-001, CDR-002, ...
+   Visible uniquement pour l’administrateur. */
+(function(){
+  const SIM3_CDR_MAP=[
+    ['CDR-001','#commonQuoteStep'],
+    ['CDR-002','#commonClientStep'],
+
+    ['CDR-003','#energyStep'],
+    ['CDR-004','#offgridOperatingModeBox'],
+    ['CDR-005','#offgridConsumptionPanel > .offgrid-baseload-box'],
+    ['CDR-006','#offgridConsumptionPanel > .offgrid-week-box'],
+    ['CDR-007','#offgridMonthBox'],
+    ['CDR-008','#offgridMonthEditor'],
+    ['CDR-009','.offgrid-annual-profile-box'],
+
+    ['CDR-010','#offgridSizingStep'],
+    ['CDR-011','#offgridCamsBox'],
+    ['CDR-012','#offgridEliaComparison'],
+    ['CDR-013','#offgridSizingManualBox'],
+    ['CDR-014','#offgridSizingManualBox .offgrid-manual-backup-card'],
+    ['CDR-015','#offgridSizingAutoBox'],
+    ['CDR-016','#offgridAutoOrientationConfigs','closest:.offgrid-auto-column'],
+    ['CDR-017','#offgridAutoSolarInverterBox','closest:.offgrid-auto-column'],
+    ['CDR-018','#offgridAutoSolarInverterBox'],
+    ['CDR-019','#offgridAutoMaxBatteries','closest:.offgrid-auto-column'],
+    ['CDR-020','#offgridAutoBackupEnabledField','closest:.offgrid-auto-column'],
+    ['CDR-021','#offgridAutoEconomicYears','closest:.offgrid-auto-amortization'],
+    ['CDR-022','#offgridParetoCard'],
+    ['CDR-023','#offgridSizingSimulationCanvas','closest:.offgrid-analysis-chart-card'],
+    ['CDR-024','#offgridSizingSimulationCanvas','closest:.offgrid-analysis-chart-card','child:.offgrid-efficiency-mode-box'],
+    ['CDR-025','#offgridSimulationCursorData'],
+    ['CDR-026','#offgridSimulationPeriodSummary'],
+    ['CDR-027','#offgridGeneratorCanvas','closest:.offgrid-analysis-chart-card'],
+    ['CDR-028','#offgridGeneratorTable'],
+
+    ['CDR-029','#offgridStep4Context'],
+    ['CDR-030','#panelStepTitle','closest:.panel','child:.layout-box'],
+    ['CDR-031','#roofPreviewStep'],
+    ['CDR-032','#roofFlatCommonBox'],
+    ['CDR-033','#roofFlatCorridorCard'],
+    ['CDR-034','#roofFlatSurfaceStep'],
+
+    ['CDR-035','#mpptStepTitle','closest:.mppt-box'],
+    ['CDR-036','#manualMpptControls'],
+    ['CDR-037','#inverterStepTitle','closest:.inverter-box'],
+    ['CDR-038','#batteryStepTitle','closest:.battery-box'],
+    ['CDR-039','#accessoriesStepTitle','closest:.battery-box'],
+    ['CDR-040','#optionsStepTitle','closest:.battery-box'],
+    ['CDR-041','#summaryStepTitle','closest:.quote-box'],
+    ['CDR-042','#summaryStepTitle','closest:.quote-box','child:.miscellaneous-box'],
+    ['CDR-043','#profitabilityStepTitle','closest:.energy-box'],
+    ['CDR-044','#paymentTermsStep'],
+    ['CDR-045','#paymentTermsStep .payment-term-card:nth-of-type(1)'],
+    ['CDR-046','#paymentTermsStep .payment-term-card:nth-of-type(2)'],
+    ['CDR-047','#paymentTermsStep .payment-term-card:nth-of-type(3)'],
+    ['CDR-048','#paymentTermsStep .payment-term-card:nth-of-type(4)'],
+    ['CDR-049','#paymentTermsStep .discount-box']  ];
+
+  function resolveSim3CdrTarget(entry){
+    let el=document.querySelector(entry[1]);
+    if(!el)return null;
+    for(let i=2;i<entry.length;i++){
+      const op=entry[i];
+      if(op.startsWith('closest:'))el=el.closest(op.slice(8));
+      else if(op.startsWith('child:'))el=el?.querySelector(op.slice(6));
+      if(!el)return null;
+    }
+    return el;
+  }
+
+  function decorateSim3CdrReferences(){
+    SIM3_CDR_MAP.forEach(entry=>{
+      const ref=entry[0],el=resolveSim3CdrTarget(entry);
+      if(!el)return;
+      if(el.dataset.sim3Cdr!==ref)el.dataset.sim3Cdr=ref;
+      let badge=Array.from(el.children).find(child=>child.classList?.contains('sim3-cdr-ref'));
+      if(!badge){
+        badge=document.createElement('span');
+        badge.className='sim3-cdr-ref';
+        badge.textContent=`SIM3 · ${ref}`;
+        badge.setAttribute('aria-hidden','true');
+        el.appendChild(badge);
+      }else{
+        const label=`SIM3 · ${ref}`;
+        if(badge.textContent!==label)badge.textContent=label;
+        if(badge.getAttribute('aria-hidden')!=='true')badge.setAttribute('aria-hidden','true');
+      }
+    });
+  }
+
+  function syncSim3AdminCdrMode(){
+    const active=document.querySelector('.tab[data-simulator-mode="offgrid"].active');
+    document.body.classList.toggle('sim3-active',Boolean(active));
+    decorateSim3CdrReferences();
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    syncSim3AdminCdrMode();
+    document.querySelector('.sim-tabs')?.addEventListener('click',()=>requestAnimationFrame(syncSim3AdminCdrMode));
+    const choice=document.getElementById('choice');
+    if(choice){
+      let sim3CdrRefreshPending=false;
+      const observer=new MutationObserver(records=>{
+        if(!document.body.classList.contains('sim3-active')||sim3CdrRefreshPending)return;
+        const meaningful=records.some(record=>
+          Array.from(record.addedNodes||[]).some(node=>
+            !(node instanceof HTMLElement&&node.classList.contains('sim3-cdr-ref'))
+          )
+        );
+        if(!meaningful)return;
+        sim3CdrRefreshPending=true;
+        requestAnimationFrame(()=>{
+          sim3CdrRefreshPending=false;
+          decorateSim3CdrReferences();
+        });
+      });
+      observer.observe(choice,{childList:true,subtree:true});
+    }
+  });
+})();
+</script>
+
+<div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">Version application V1075</div>
 
 <style id="crmAct009StylesV1003">
 .crm-act009-tool{display:grid;gap:14px}
@@ -37664,7 +37906,7 @@ ${error.message||error}`)
 
   window.registerCrmActionTool('ACT-009',renderAct009V1012);
   window.registerCrmActionTool('ACT-09',renderAct009V1012);
-  window.addEventListener('DOMContentLoaded',()=>{const f=document.getElementById('appVersionFooter');if(f)f.textContent='Version application V1067'});
+  window.addEventListener('DOMContentLoaded',()=>{const f=document.getElementById('appVersionFooter');if(f)f.textContent='Version application V1073'});
 })();
 </script>
 
@@ -39249,6 +39491,82 @@ body.assistant-mail-open .assistant-mail-attachments{
 @media(max-width:1500px){
   body.assistant-mail-open .assistant-mail-workspace{grid-template-columns:minmax(220px,250px) minmax(0,1fr)!important}
   body.assistant-mail-open .assistant-mail-phase2{grid-template-columns:minmax(0,1fr) minmax(360px,.95fr) minmax(360px,.95fr)!important}
+}
+</style>
+
+
+<style id="mobileSimulatorScrollV1068">
+/* V1068 — Sur mobile, l'accueil reste plein écran, mais les simulateurs doivent
+   retrouver un vrai défilement vertical tactile. */
+@media (max-width:760px), (hover:none) and (pointer:coarse){
+  html{
+    height:auto!important;
+    min-height:100%!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    zoom:1!important;
+  }
+
+  body:not(.management-hub-open):not(.assistant-mail-open):not(.dashboard-open):not(.management-construction-open):not(.management-submenu-open):not(.schematic-editor-open){
+    position:static!important;
+    height:auto!important;
+    min-height:100dvh!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    touch-action:pan-y!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-y:auto!important;
+  }
+
+  body:not(.management-hub-open):not(.assistant-mail-open):not(.dashboard-open):not(.management-construction-open):not(.management-submenu-open):not(.schematic-editor-open) #evosunApp,
+  body:not(.management-hub-open):not(.assistant-mail-open):not(.dashboard-open):not(.management-construction-open):not(.management-submenu-open):not(.schematic-editor-open) .app{
+    position:relative!important;
+    height:auto!important;
+    min-height:100dvh!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  body:not(.management-hub-open):not(.assistant-mail-open):not(.dashboard-open):not(.management-construction-open):not(.management-submenu-open):not(.schematic-editor-open) .panel.active{
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  body.sim5-open,
+  body.admin-open{
+    height:auto!important;
+    min-height:100dvh!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    touch-action:pan-y!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+
+  #industrialSimulator{
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+
+  #industrialSimulatorFrame{
+    width:100%!important;
+    max-width:100%!important;
+    overflow:visible!important;
+  }
+
+  /* Les boutons flottants ne doivent pas bloquer le geste vertical. */
+  .stage-quick-nav,
+  .pdf-jump-button,
+  .top-jump-button,
+  #managementHomeButton{
+    touch-action:manipulation!important;
+  }
 }
 </style>
 </body>
