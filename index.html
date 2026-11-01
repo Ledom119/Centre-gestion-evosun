@@ -10620,6 +10620,29 @@ body.assistant-mail-open .assistant-mail-hub{display:flex;flex-direction:column}
 @media(max-width:900px){body.assistant-mail-open{overflow:auto!important}.assistant-mail-hub{height:auto;min-height:100vh;overflow:visible}.assistant-mail-topbar{padding:0 16px}.assistant-mail-brand strong{font-size:20px}.assistant-mail-brand span{display:none}.assistant-mail-body{padding:14px}.assistant-mail-summary{grid-template-columns:1fr}.assistant-mail-workspace{grid-template-columns:1fr}.assistant-mail-list-panel{min-height:360px}.assistant-mail-viewer{min-height:480px}}
 </style>
 
+
+<style id="adminCommonMailV1066Styles">
+  .admin-common-mail-block{background:#e9efeb;border:1px solid #d1dbd4;border-radius:16px;padding:16px 18px 20px}
+  .admin-common-mail-block .admin-crm-config-head{margin-bottom:12px}
+  .admin-common-mail-card{margin:16px 0;padding:18px 20px 20px;background:#fff;border:1px solid #cfd9d2;border-left:6px solid #c5f90b;border-radius:14px;box-shadow:0 7px 18px rgba(23,32,38,.08)}
+  .admin-common-mail-card:nth-child(even){background:#f7fafc}
+  .admin-common-return-mail-card{background:#eef5ff!important;border-color:#b9cbe8;border-left-color:#3966f9}
+  .admin-validation-page-card{background:#f7fbe9!important}
+  .admin-common-sms-card{background:#fffaf0!important;border-left-color:#e8af24}
+  .admin-common-signature-card{background:#f7f7f9!important;border-left-color:#68747c}
+  .admin-common-card-title{display:flex;flex-direction:column;gap:4px;margin:-2px 0 15px;padding-bottom:12px;border-bottom:1px solid #dce4df}
+  .admin-common-card-title strong{font-size:15px;color:#172026}
+  .admin-common-card-title small{color:#68757a;font-size:11px;line-height:1.35}
+  .admin-common-mail-card .admin-mail-template-row-grid{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+  .admin-common-mail-card label{display:block;margin:13px 0 5px;font-size:12px;font-weight:900;color:#24313a}
+  .admin-common-mail-card .input{width:100%;max-width:none}
+  .admin-common-mail-card textarea{width:100%;min-height:110px;overflow:hidden;resize:vertical;line-height:1.48;padding:12px 13px}
+  .admin-common-mail-card textarea.admin-common-mail-body{min-height:220px}
+  .admin-common-return-mail-card textarea.admin-common-mail-body{min-height:280px}
+  .admin-common-mail-card .help{display:block;margin-top:10px;line-height:1.45}
+  #adminCommonQuoteMailTemplatesRows{display:block}
+  @media(max-width:760px){.admin-common-mail-card{padding:15px}.admin-common-mail-block{padding:12px}}
+</style>
 </head>
 <body>
 <div class="login-screen" id="loginScreen"><form class="login-card" id="loginForm"><h1>Simulateur technique EVO-Sun</h1><p>Connectez-vous pour accéder au catalogue, aux prix et au calculateur de devis.</p><label for="loginEmail">Adresse e-mail</label><input class="input" id="loginEmail" type="email" autocomplete="username" required><label for="loginPassword">Mot de passe</label><input class="input" id="loginPassword" type="password" autocomplete="current-password" required><label class="login-remember" for="loginRememberMe"><input id="loginRememberMe" type="checkbox"><span><strong>Se souvenir de moi sur cet appareil</strong><small>Conserve la session et préremplit l’adresse e-mail. Le mot de passe n’est pas prérempli par cette option.</small></span></label><button class="btn primary" type="submit">Se connecter</button><div class="login-error" id="loginError" aria-live="polite"></div></form></div>
@@ -12380,10 +12403,10 @@ body.assistant-mail-open .assistant-mail-hub{display:flex;flex-direction:column}
     <div class="admin-theme-content" data-admin-theme-content="emails">
       <div class="admin-theme-content-head"><div><h3>Modèles d’e-mails</h3><p class="admin-theme-intro">Gérez les modèles d’e-mails, le SMS automatique et le texte optionnel ajouté sous la signature dans tous les envois client.</p></div><button class="btn secondary admin-theme-back" type="button">Retour aux thèmes</button></div>
       <div class="admin-shared-config-note"><strong>Variables disponibles :</strong> {client} · {email} · {reference} · {projet} · {date} · {societe}. Elles sont remplacées automatiquement lors de la préparation du mail.</div>
-      <div class="admin-crm-config-block">
+      <div class="admin-crm-config-block admin-common-mail-block">
         <div class="admin-crm-config-head"><div><strong>COMMON · Envoi du PDF au client</strong><small>Ces 3 modèles sont proposés dans le popup COMMON « Envoyer au client ». Un 4e cadre libre est toujours ajouté automatiquement.</small></div></div>
         <div id="adminCommonQuoteMailTemplatesRows"></div>
-        <div class="admin-mail-template-row" id="adminCommonQuoteSmsTemplateRow">
+        <div class="admin-mail-template-row admin-common-mail-card admin-common-sms-card" id="adminCommonQuoteSmsTemplateRow">
           <div class="admin-mail-template-row-grid">
             <div><label>COMMON · SMS 01</label><input class="input" id="adminCommonQuoteSmsName" value="COMMON-PDF · SMS 01" readonly></div>
             <div><label>Usage</label><input class="input" value="AFF-275 · Envoi du devis au client" readonly></div>
@@ -12392,7 +12415,7 @@ body.assistant-mail-open .assistant-mail-hub{display:flex;flex-direction:column}
           <textarea class="input" id="adminCommonQuoteSmsBody" rows="4"></textarea>
           <small class="help">Variables disponibles : {client} · {reference} · {projet} · {date} · {societe} · {lien_validation}. Le SMS est envoyé uniquement si la case SMS reste cochée dans AFF-275.</small>
         </div>
-        <div class="admin-mail-template-row" id="adminMailPostSignatureTextRow">
+        <div class="admin-mail-template-row admin-common-mail-card admin-common-signature-card" id="adminMailPostSignatureTextRow">
           <div class="admin-mail-template-row-grid">
             <div><label>Texte sous signature</label><input class="input" value="COMMON · Tous les envois e-mail client" readonly></div>
             <div><label>Usage</label><input class="input" value="Case « Répondre à ce mail »" readonly></div>
@@ -12401,28 +12424,33 @@ body.assistant-mail-open .assistant-mail-hub{display:flex;flex-direction:column}
           <textarea class="input" id="adminMailPostSignatureText" rows="4"></textarea>
           <small class="help">Ce texte est ajouté uniquement si la case « Répondre à ce mail » est cochée au moment de l’envoi.</small>
         </div>
-        <div class="admin-mail-template-row" id="adminQuoteValidationEmailRow">
-          <div class="admin-mail-template-row-grid">
-            <div><label>Validation du devis par e-mail</label><input class="input" value="Bon de commande · lien e-mail du PDF" readonly></div>
-            <div><label>Usage</label><input class="input" value="Bouton cliquable dans le bon de commande" readonly></div>
-          </div>
+        <div class="admin-mail-template-row admin-common-mail-card admin-validation-page-card" id="adminQuoteValidationEmailRow">
+          <div class="admin-common-card-title"><strong>COMMON · Validation de l’offre</strong><small>Réglages de la page publique et du bouton intégré au bon de commande.</small></div>
+          <label>Usage</label>
+          <input class="input" value="Bon de commande · page sécurisée de validation" readonly>
           <label>Texte du bouton dans le PDF</label>
           <input class="input" id="adminQuoteValidationButtonLabel" type="text">
           <label>Titre de la page de validation</label>
           <input class="input" id="adminQuoteValidationPageTitle" type="text">
           <label>Texte d’introduction de la page</label>
-          <textarea class="input" id="adminQuoteValidationPageIntro" rows="4"></textarea>
+          <textarea class="input admin-common-long-text" id="adminQuoteValidationPageIntro" rows="4"></textarea>
           <label>Texte du bouton de confirmation sur la page</label>
           <input class="input" id="adminQuoteValidationPageConfirmLabel" type="text">
           <label>Titre affiché après confirmation</label>
           <input class="input" id="adminQuoteValidationConfirmationTitle" type="text">
           <label>Texte affiché après confirmation</label>
-          <textarea class="input" id="adminQuoteValidationConfirmationBody" rows="3"></textarea>
-          <label>Objet du mail de confirmation envoyé au client</label>
+          <textarea class="input admin-common-long-text" id="adminQuoteValidationConfirmationBody" rows="4"></textarea>
+        </div>
+
+        <div class="admin-mail-template-row admin-common-mail-card admin-common-return-mail-card" id="adminQuoteValidationReturnMailRow">
+          <div class="admin-common-card-title"><strong>COMMON · Mail retour — validation de l’offre</strong><small>Mail envoyé automatiquement au client immédiatement après confirmation de son offre et de ses options.</small></div>
+          <label>Usage</label>
+          <input class="input" value="Retour automatique après « Confirmer mon accord »" readonly>
+          <label>Objet du mail</label>
           <input class="input" id="adminQuoteValidationSubject" type="text">
-          <label>Corps du mail de confirmation envoyé au client</label>
-          <textarea class="input" id="adminQuoteValidationBody" rows="10"></textarea>
-          <small class="help">Variables du mail : {client} · {reference} · {projet} · {date} · {societe} · {montant} · {options_choisies} · {montant_options} · {total} · {adresse}. Le choix des options est effectué sur une page EVO-Sun sécurisée, pas directement dans l’e-mail.</small>
+          <label>Corps du mail</label>
+          <textarea class="input admin-common-mail-body admin-common-long-text" id="adminQuoteValidationBody" rows="12"></textarea>
+          <small class="help">Variables disponibles : {client} · {reference} · {projet} · {date} · {societe} · {montant} · {options_choisies} · {montant_options} · {total} · {adresse}. Ce mail est envoyé par clever-processor après la validation du client.</small>
         </div>
       </div>
       <div class="admin-crm-config-block">
@@ -14844,6 +14872,15 @@ Bien à vous,
   }
   function openCustomEquipmentCategory(id){currentCustomEquipmentCategoryId=String(id||'');openSection('manageCustomEquipmentCategory');renderCustomEquipmentCategory()}
 
+  function autoSizeAdminCommonMailTextareas(){
+    const fields=document.querySelectorAll('.admin-common-mail-block textarea');
+    fields.forEach(field=>{
+      const resize=()=>{field.style.height='auto';field.style.height=`${Math.max(field.scrollHeight+4,110)}px`};
+      resize();
+      if(field.dataset.adminMailAutoSize!=='1'){field.dataset.adminMailAutoSize='1';field.addEventListener('input',resize)}
+    })
+  }
+
   function renderAdminMailTemplates(){
     const root=document.getElementById('adminMailTemplatesRows'),commonRoot=document.getElementById('adminCommonQuoteMailTemplatesRows');
     if(root){
@@ -14852,7 +14889,7 @@ Bien à vous,
     }
     if(commonRoot){
       const common=normalizeOfferAdminConfig({commonQuoteMailTemplates:offerAdminConfig.commonQuoteMailTemplates}).commonQuoteMailTemplates;
-      commonRoot.innerHTML=common.map((item,index)=>`<div class="admin-mail-template-row" data-common-quote-mail-id="${escapeHtml(item.id)}"><div class="admin-mail-template-row-grid"><div><label>COMMON · Mail ${index+1}</label><input class="input admin-common-mail-name" value="${escapeHtml(item.name)}"></div><div><label>Objet du mail</label><input class="input admin-common-mail-subject" value="${escapeHtml(item.subject)}"></div></div><label>Corps du mail</label><textarea class="input admin-common-mail-body">${escapeHtml(item.body)}</textarea></div>`).join('');
+      commonRoot.innerHTML=common.map((item,index)=>`<div class="admin-mail-template-row admin-common-mail-card admin-common-quote-mail-card" data-common-quote-mail-id="${escapeHtml(item.id)}"><div class="admin-common-card-title"><strong>COMMON · Mail ${index+1}</strong><small>Modèle proposé dans « Envoyer le PDF au client ».</small></div><label>Nom du modèle</label><input class="input admin-common-mail-name" value="${escapeHtml(item.name)}"><label>Objet du mail</label><input class="input admin-common-mail-subject" value="${escapeHtml(item.subject)}"><label>Corps du mail</label><textarea class="input admin-common-mail-body admin-common-long-text" rows="10">${escapeHtml(item.body)}</textarea></div>`).join('');
     }
     const sms=normalizeOfferAdminConfig({commonQuoteSmsTemplate:offerAdminConfig.commonQuoteSmsTemplate}).commonQuoteSmsTemplate,smsBody=document.getElementById('adminCommonQuoteSmsBody');
     if(smsBody)smsBody.value=sms.body||'';
@@ -14870,6 +14907,7 @@ Bien à vous,
     if(validationPageConfirmLabel)validationPageConfirmLabel.value=String(validationCfg.pageConfirmLabel??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageConfirmLabel);
     if(validationConfirmationTitle)validationConfirmationTitle.value=String(validationCfg.confirmationTitle??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationTitle);
     if(validationConfirmationBody)validationConfirmationBody.value=String(validationCfg.confirmationBody??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationBody);
+    setTimeout(autoSizeAdminCommonMailTextareas,0);
   }
   function collectAdminMailTemplates(){
     return [...document.querySelectorAll('#adminMailTemplatesRows .admin-mail-template-row')].map((row,index)=>({id:row.dataset.mailTemplateId||`mail-${Date.now()}-${index}`,name:row.querySelector('.admin-mail-name')?.value?.trim()||`Mail ${index+1}`,subject:row.querySelector('.admin-mail-subject')?.value||'',body:row.querySelector('.admin-mail-body')?.value||''}));
@@ -36803,7 +36841,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   window.refreshAffReferences=()=>scan(document);
 })();
 </script>
-<div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">Version application V1065</div>
+<div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">Version application V1066</div>
 
 <style id="crmAct009StylesV1003">
 .crm-act009-tool{display:grid;gap:14px}
@@ -37449,7 +37487,7 @@ ${error.message||error}`)
 
   window.registerCrmActionTool('ACT-009',renderAct009V1012);
   window.registerCrmActionTool('ACT-09',renderAct009V1012);
-  window.addEventListener('DOMContentLoaded',()=>{const f=document.getElementById('appVersionFooter');if(f)f.textContent='Version application V1065'});
+  window.addEventListener('DOMContentLoaded',()=>{const f=document.getElementById('appVersionFooter');if(f)f.textContent='Version application V1066'});
 })();
 </script>
 
