@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation de votre offre EVO-Sun</title>
+
+<style>
+:root{
+  --green:#c5f90b;
+  --dark:#172026;
+  --line:#dce4df;
+  --soft:#f4f7f5
+}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:#eef2ef;
+  color:var(--dark);
+  font-family:Arial,Helvetica,sans-serif
+}
+
+.wrap{
+  max-width:920px;
+  margin:30px auto;
+  padding:0 18px
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:0 12px 36px #0002;
+  overflow:hidden
+}
+
+.head{
+  background:var(--dark);
+  color:#fff;
+  padding:22px 26px;
+  border-bottom:4px solid var(--green);
+  display:flex;
+  justify-content:space-between;
+  gap:20px
+}
+
+.head b{
+  font-size:22px
+}
+
+.head span{
+  color:var(--green);
+  font-weight:900
+}
+
+.main{
+  padding:26px
+}
+
+.muted{
+  color:#68757a;
+  line-height:1.5
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:20px 0
+}
+
+.meta div,
+.opt{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px
+}
+
+.meta span{
+  display:block;
+  font-size:9px;
+  text-transform:uppercase;
+  font-weight:900;
+  color:#78848a
+}
+
+.base{
+  background:var(--dark);
+  color:#fff;
+  padding:16px 18px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.base strong{
+  color:var(--green);
+  font-size:27px
+}
+
+.opts{
+  display:grid;
+  gap:10px;
+  margin-top:16px
+}
+
+.opt{
+  display:flex;
+  gap:12px;
+  align-items:center
+}
+
+.opt input{
+  width:21px;
+  height:21px;
+  accent-color:var(--green)
+}
+
+.opt .copy{
+  flex:1
+}
+
+.sum{
+  margin-top:20px;
+  border-top:1px solid var(--line);
+  padding-top:14px
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0
+}
+
+.row.total{
+  font-size:21px;
+  font-weight:950;
+  border-top:1px solid var(--line);
+  margin-top:7px;
+  padding-top:12px
+}
+
+.row.total strong{
+  color:#739600
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  min-height:54px;
+  border:2px solid var(--dark);
+  border-radius:999px;
+  background:var(--green);
+  color:var(--dark);
+  font-size:17px;
+  font-weight:950;
+  cursor:pointer
+}
+
+.loading,
+.error,
+.success{
+  text-align:center;
+  padding:42px 24px
+}
+
+.error{
+  color:#9b2c22
+}
+
+.success h1{
+  margin-bottom:8px
+}
+
+@media(max-width:700px){
+  .wrap{
+    margin:0;
+    padding:0
+  }
+
+  .card{
+    border-radius:0;
+    min-height:100vh
+  }
+
+  .meta{
+    grid-template-columns:1fr
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+  <div class="card">
+
+    <div class="head">
+      <b>EVO-SUN</b>
+      <span>VALIDATION DE L'OFFRE</span>
+    </div>
+
+    <div id="app" class="main">
+      <div class="loading">
+        Chargement de votre offre...
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API =
+  'https://jcajdwqrjuavedzkevfd.supabase.co/functions/v1/clever-processor';
+
+const p =
+  new URLSearchParams(location.search);
+
+const quote =
+  p.get('quote') || '';
+
+const exp =
+  p.get('exp') || '';
+
+const data =
+  p.get('data') || '';
+
+const sig =
+  p.get('sig') || '';
+
+const app =
+  document.getElementById('app');
+
+const esc = s =>
+  String(s ?? '')
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[c])
+    );
+
+const eur = n =>
+  new Intl.NumberFormat(
+    'fr-BE',
+    {
+      style:'currency',
+      currency:'EUR'
+    }
+  ).format(
+    Number(n) || 0
+  );
+
+async function load(){
+
+  try{
+
+    const u =
+      new URL(API);
+
+    u.searchParams.set(
+      'mode',
+      'public_data'
+    );
+
+    u.searchParams.set(
+      'quote',
+      quote
+    );
+
+    u.searchParams.set(
+      'exp',
+      exp
+    );
+
+    u.searchParams.set(
+      'data',
+      data
+    );
+
+    u.searchParams.set(
+      'sig',
+      sig
+    );
+
+    const r =
+      await fetch(u);
+
+    const j =
+      await r.json();
+
+    if(
+      !r.ok ||
+      !j.ok
+    ){
+      throw Error(
+        j.error ||
+        `HTTP ${r.status}`
+      );
+    }
+
+    render(
+      j.validation
+    );
+
+  }catch(e){
+
+    app.innerHTML =
+      `<div class="error">
+        <h2>
+          Validation indisponible
+        </h2>
+        <p>
+          ${esc(e.message || e)}
+        </p>
+      </div>`;
+
+  }
+}
+
+function render(v){
+
+  const cfg =
+    v.config || {};
+
+  const opts =
+    Array.isArray(v.options)
+      ? v.options
+      : [];
+
+  app.innerHTML =
+    `
+    <h1>
+      ${esc(
+        cfg.pageTitle ||
+        'Validation de votre offre'
+      )}
+    </h1>
+
+    <p class="muted">
+      ${esc(
+        cfg.pageIntro ||
+        'Sélectionnez les options puis confirmez votre accord.'
+      )}
+    </p>
+
+    <div class="meta">
+
+      <div>
+        <span>Client</span>
+        <strong>
+          ${esc(v.client || '-')}
+        </strong>
+      </div>
+
+      <div>
+        <span>Référence</span>
+        <strong>
+          ${esc(v.reference || '-')}
+        </strong>
+      </div>
+
+      <div>
+        <span>Projet</span>
+        <strong>
+          ${esc(v.project || '-')}
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="base">
+      <b>
+        Montant de base TVAC
+      </b>
+
+      <strong>
+        ${eur(v.baseAmount)}
+      </strong>
+    </div>
+
+    <div class="opts">
+
+      ${
+        opts.length
+          ? opts.map(
+              (o,i) =>
+                `
+                <label class="opt">
+
+                  <input
+                    type="checkbox"
+                    data-key="${esc(
+                      o.key ||
+                      `option-${i}`
+                    )}"
+                    data-amount="${
+                      Number(o.amount) || 0
+                    }"
+                  >
+
+                  <span class="copy">
+
+                    <b>
+                      ${esc(
+                        o.name ||
+                        'Option'
+                      )}
+                    </b>
+
+                    <br>
+
+                    <small>
+                      Quantité ${
+                        Math.max(
+                          1,
+                          Number(
+                            o.quantity
+                          ) || 1
+                        )
+                      }
+                    </small>
+
+                  </span>
+
+                  <strong>
+                    ${eur(o.amount)}
+                  </strong>
+
+                </label>
+                `
+            ).join('')
+          : `
+            <div class="opt">
+              Aucune option supplémentaire proposée.
+            </div>
+          `
+      }
+
+    </div>
+
+    <div class="sum">
+
+      <div class="row">
+
+        <span>
+          Montant de base
+        </span>
+
+        <b>
+          ${eur(v.baseAmount)}
+        </b>
+
+      </div>
+
+      <div class="row">
+
+        <span>
+          Options sélectionnées
+        </span>
+
+        <b id="ot">
+          0,00 €
+        </b>
+
+      </div>
+
+      <div class="row total">
+
+        <span>
+          Total validé
+        </span>
+
+        <strong id="tt">
+          ${eur(v.baseAmount)}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <button id="confirm">
+      ${esc(
+        cfg.pageConfirmLabel ||
+        'CONFIRMER MON ACCORD'
+      )}
+    </button>
+    `;
+
+  document
+    .querySelectorAll(
+      'input[type=checkbox]'
+    )
+    .forEach(
+      x =>
+        x.addEventListener(
+          'change',
+          () => update(v)
+        )
+    );
+
+  document
+    .getElementById(
+      'confirm'
+    )
+    .onclick =
+      () => confirm(v);
+
+  update(v);
+}
+
+function update(v){
+
+  let o = 0;
+
+  document
+    .querySelectorAll(
+      'input[type=checkbox]:checked'
+    )
+    .forEach(
+      x =>
+        o +=
+          Number(
+            x.dataset.amount
+          ) || 0
+    );
+
+  document
+    .getElementById('ot')
+    .textContent =
+      eur(o);
+
+  document
+    .getElementById('tt')
+    .textContent =
+      eur(
+        (Number(v.baseAmount) || 0)
+        +
+        o
+      );
+}
+
+async function confirm(v){
+
+  const btn =
+    document.getElementById(
+      'confirm'
+    );
+
+  btn.disabled =
+    true;
+
+  btn.textContent =
+    'ENREGISTREMENT...';
+
+  try{
+
+    const selected =
+      [
+        ...document.querySelectorAll(
+          'input[type=checkbox]:checked'
+        )
+      ]
+      .map(
+        x => x.dataset.key
+      );
+
+    const r =
+      await fetch(
+        API,
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':
+              'application/json'
+          },
+
+          body:
+            JSON.stringify({
+              mode:
+                'confirm_validation',
+
+              quoteId:
+                quote,
+
+              exp,
+
+              data,
+
+              sig,
+
+              selectedOptionKeys:
+                selected
+            })
+        }
+      );
+
+    const j =
+      await r.json();
+
+    if(
+      !r.ok ||
+      !j.ok
+    ){
+      throw Error(
+        j.error ||
+        `HTTP ${r.status}`
+      );
+    }
+
+    const n =
+      j.validation || {};
+
+    app.innerHTML =
+      `
+      <div class="success">
+
+        <h1>
+          ${esc(
+            v.config
+              ?.confirmationTitle
+            ||
+            'Merci, votre validation est enregistrée.'
+          )}
+        </h1>
+
+        <p class="muted">
+          ${esc(
+            v.config
+              ?.confirmationBody
+            ||
+            'Votre choix a été transmis à EVO-Sun.'
+          )}
+        </p>
+
+        <p>
+
+          <strong>
+            ${esc(
+              n.reference ||
+              v.reference ||
+              ''
+            )}
+          </strong>
+
+          <br>
+
+          Total validé :
+
+          <strong>
+            ${eur(
+              n.finalAmount
+            )}
+          </strong>
+
+        </p>
+
+      </div>
+      `;
+
+  }catch(e){
+
+    btn.disabled =
+      false;
+
+    btn.textContent =
+      v.config
+        ?.pageConfirmLabel
+      ||
+      'CONFIRMER MON ACCORD';
+
+    alert(
+      e.message || e
+    );
+  }
+}
+
+load();
+</script>
+
+</body>
+</html>
