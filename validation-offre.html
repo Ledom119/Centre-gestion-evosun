@@ -3,193 +3,378 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Validation de votre offre EVO-Sun</title>
+
+<title>Validation de l’offre</title>
 
 <style>
 :root{
   --green:#c5f90b;
   --dark:#172026;
   --line:#dce4df;
-  --soft:#f4f7f5
+  --soft:#f4f7f5;
+  --muted:#68757a;
 }
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
   background:#eef2ef;
   color:var(--dark);
-  font-family:Arial,Helvetica,sans-serif
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 .wrap{
   max-width:920px;
   margin:30px auto;
-  padding:0 18px
+  padding:0 18px;
 }
 
 .card{
   background:#fff;
   border:1px solid var(--line);
   border-radius:20px;
-  box-shadow:0 12px 36px #0002;
-  overflow:hidden
+  box-shadow:0 12px 36px rgba(23,32,38,.12);
+  overflow:hidden;
 }
 
 .head{
+  min-height:92px;
   background:var(--dark);
   color:#fff;
-  padding:22px 26px;
+  padding:18px 28px;
   border-bottom:4px solid var(--green);
+
   display:flex;
   justify-content:space-between;
-  gap:20px
+  align-items:center;
+  gap:20px;
 }
 
-.head b{
-  font-size:22px
+.company-logo{
+  display:block;
+  max-width:220px;
+  max-height:58px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
 }
 
-.head span{
+.company-name-fallback{
+  font-size:24px;
+  font-weight:900;
+  color:#fff;
+}
+
+.head-title{
   color:var(--green);
-  font-weight:900
+  font-size:20px;
+  font-weight:950;
+  text-align:right;
+  text-transform:uppercase;
 }
 
 .main{
-  padding:26px
+  padding:28px;
+}
+
+h1{
+  margin:2px 0 10px;
+  font-size:34px;
+  line-height:1.1;
 }
 
 .muted{
-  color:#68757a;
-  line-height:1.5
+  color:var(--muted);
+  line-height:1.55;
+  font-size:16px;
 }
 
 .meta{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin:20px 0
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin:24px 0 22px;
 }
 
-.meta div,
-.opt{
+.meta-card{
   border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px
+  border-radius:14px;
+  padding:15px 16px;
+  min-height:92px;
+  background:#fff;
 }
 
-.meta span{
+.meta-card span{
   display:block;
+  margin-bottom:5px;
   font-size:9px;
   text-transform:uppercase;
+  font-weight:950;
+  letter-spacing:.06em;
+  color:#78848a;
+}
+
+.meta-card strong{
+  display:block;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.reference-link{
+  display:inline-block;
+  color:var(--dark);
+  text-decoration:none;
+  border-bottom:2px solid var(--green);
+}
+
+.reference-link:hover{
+  color:#759600;
+}
+
+.pdf-download{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  margin-top:11px;
+  padding:8px 12px;
+
+  border:1px solid var(--dark);
+  border-radius:999px;
+
+  color:var(--dark);
+  background:#fff;
+
+  text-decoration:none;
+  font-size:11px;
   font-weight:900;
-  color:#78848a
+
+  transition:.15s ease;
+}
+
+.pdf-download:hover{
+  background:var(--green);
+}
+
+.pdf-download[hidden]{
+  display:none;
+}
+
+.pdf-unavailable{
+  display:block;
+  margin-top:9px;
+  font-size:10px;
+  color:#899398;
 }
 
 .base{
   background:var(--dark);
   color:#fff;
-  padding:16px 18px;
-  border-radius:14px;
+
+  padding:17px 19px;
+  border-radius:15px;
+
   display:flex;
   justify-content:space-between;
-  align-items:center
+  align-items:center;
+
+  margin-bottom:18px;
+}
+
+.base b{
+  font-size:16px;
 }
 
 .base strong{
   color:var(--green);
-  font-size:27px
+  font-size:29px;
 }
 
 .opts{
   display:grid;
-  gap:10px;
-  margin-top:16px
+  gap:11px;
 }
 
 .opt{
   display:flex;
-  gap:12px;
-  align-items:center
+  gap:13px;
+  align-items:center;
+
+  border:1px solid var(--line);
+  border-radius:14px;
+
+  padding:15px 16px;
+  background:#fff;
+
+  cursor:pointer;
+}
+
+.opt:hover{
+  border-color:#b8ce73;
+}
+
+.opt:has(input:checked){
+  background:#f5fae9;
+  border-color:#a9c94c;
 }
 
 .opt input{
-  width:21px;
-  height:21px;
-  accent-color:var(--green)
+  width:22px;
+  height:22px;
+  accent-color:var(--green);
+  cursor:pointer;
 }
 
 .opt .copy{
-  flex:1
+  flex:1;
+}
+
+.opt .copy b{
+  display:block;
+  font-size:16px;
+}
+
+.opt small{
+  color:var(--muted);
+}
+
+.opt-price{
+  font-size:15px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
 .sum{
-  margin-top:20px;
+  margin-top:22px;
+  padding-top:16px;
   border-top:1px solid var(--line);
-  padding-top:14px
 }
 
 .row{
   display:flex;
   justify-content:space-between;
-  padding:5px 0
+  gap:20px;
+  padding:6px 0;
 }
 
 .row.total{
-  font-size:21px;
+  font-size:23px;
   font-weight:950;
+
   border-top:1px solid var(--line);
-  margin-top:7px;
-  padding-top:12px
+
+  margin-top:8px;
+  padding-top:14px;
 }
 
 .row.total strong{
-  color:#739600
+  color:#759600;
 }
 
 button{
   width:100%;
-  margin-top:20px;
-  min-height:54px;
+
+  margin-top:22px;
+  min-height:58px;
+
   border:2px solid var(--dark);
   border-radius:999px;
+
   background:var(--green);
   color:var(--dark);
-  font-size:17px;
+
+  font-size:18px;
   font-weight:950;
-  cursor:pointer
+
+  cursor:pointer;
+}
+
+button:hover{
+  background:#d7ff43;
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:wait;
 }
 
 .loading,
 .error,
 .success{
   text-align:center;
-  padding:42px 24px
+  padding:55px 25px;
 }
 
 .error{
-  color:#9b2c22
+  color:#9b2c22;
 }
 
 .success h1{
-  margin-bottom:8px
+  margin-bottom:10px;
+}
+
+.success-total{
+  margin-top:25px;
+  font-size:22px;
+}
+
+.success-total strong{
+  color:#759600;
+}
+
+.footer-note{
+  margin-top:14px;
+  text-align:center;
+  color:#8a9498;
+  font-size:10px;
+  line-height:1.5;
 }
 
 @media(max-width:700px){
+
   .wrap{
     margin:0;
-    padding:0
+    padding:0;
   }
 
   .card{
+    min-height:100vh;
     border-radius:0;
-    min-height:100vh
+  }
+
+  .head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .head-title{
+    text-align:left;
+    font-size:16px;
+  }
+
+  .company-logo{
+    max-width:190px;
+    max-height:50px;
+  }
+
+  .main{
+    padding:22px 18px;
+  }
+
+  h1{
+    font-size:28px;
   }
 
   .meta{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
+  }
+
+  .base strong{
+    font-size:23px;
   }
 }
 </style>
@@ -198,213 +383,425 @@ button{
 <body>
 
 <div class="wrap">
+
   <div class="card">
 
     <div class="head">
-      <b>EVO-SUN</b>
-      <span>VALIDATION DE L'OFFRE</span>
+
+      <div id="companyIdentity">
+
+        <span
+          id="companyNameFallback"
+          class="company-name-fallback"
+        >
+          EVO-SUN
+        </span>
+
+        <img
+          id="companyLogo"
+          class="company-logo"
+          alt="Logo société"
+          hidden
+        >
+
+      </div>
+
+      <div class="head-title">
+        Validation de l’offre
+      </div>
+
     </div>
 
     <div id="app" class="main">
+
       <div class="loading">
         Chargement de votre offre...
       </div>
+
     </div>
 
   </div>
+
 </div>
 
 <script>
+
 const API =
   'https://jcajdwqrjuavedzkevfd.supabase.co/functions/v1/clever-processor';
 
-const p =
-  new URLSearchParams(location.search);
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
 
 const quote =
-  p.get('quote') || '';
+  params.get('quote') || '';
 
 const exp =
-  p.get('exp') || '';
+  params.get('exp') || '';
 
 const data =
-  p.get('data') || '';
+  params.get('data') || '';
 
 const sig =
-  p.get('sig') || '';
+  params.get('sig') || '';
 
 const app =
   document.getElementById('app');
 
-const esc = s =>
-  String(s ?? '')
+const companyLogo =
+  document.getElementById(
+    'companyLogo'
+  );
+
+const companyNameFallback =
+  document.getElementById(
+    'companyNameFallback'
+  );
+
+const esc = value =>
+  String(value ?? '')
     .replace(
       /[&<>"']/g,
-      c => ({
+      character => ({
         '&':'&amp;',
         '<':'&lt;',
         '>':'&gt;',
         '"':'&quot;',
         "'":'&#39;'
-      }[c])
+      }[character])
     );
 
-const eur = n =>
+const eur = value =>
   new Intl.NumberFormat(
     'fr-BE',
     {
       style:'currency',
-      currency:'EUR'
+      currency:'EUR',
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
     }
   ).format(
-    Number(n) || 0
+    Number(value) || 0
   );
+
+function configureCompany(
+  validation
+){
+
+  const companyName =
+    String(
+      validation.companyName ||
+      validation.company ||
+      'EVO-Sun'
+    );
+
+  const logoUrl =
+    String(
+      validation.companyLogoUrl ||
+      validation.logoUrl ||
+      ''
+    ).trim();
+
+  companyNameFallback.textContent =
+    companyName;
+
+  if(
+    logoUrl &&
+    /^https:\/\//i.test(
+      logoUrl
+    )
+  ){
+
+    companyLogo.src =
+      logoUrl;
+
+    companyLogo.alt =
+      companyName;
+
+    companyLogo.hidden =
+      false;
+
+    companyNameFallback.hidden =
+      true;
+
+    companyLogo.onerror =
+      () => {
+
+        companyLogo.hidden =
+          true;
+
+        companyNameFallback.hidden =
+          false;
+
+      };
+
+  }else{
+
+    companyLogo.hidden =
+      true;
+
+    companyNameFallback.hidden =
+      false;
+
+  }
+}
 
 async function load(){
 
   try{
 
-    const u =
+    const requestUrl =
       new URL(API);
 
-    u.searchParams.set(
-      'mode',
-      'public_data'
-    );
+    requestUrl
+      .searchParams
+      .set(
+        'mode',
+        'public_data'
+      );
 
-    u.searchParams.set(
-      'quote',
-      quote
-    );
+    requestUrl
+      .searchParams
+      .set(
+        'quote',
+        quote
+      );
 
-    u.searchParams.set(
-      'exp',
-      exp
-    );
+    requestUrl
+      .searchParams
+      .set(
+        'exp',
+        exp
+      );
 
-    u.searchParams.set(
-      'data',
-      data
-    );
+    requestUrl
+      .searchParams
+      .set(
+        'data',
+        data
+      );
 
-    u.searchParams.set(
-      'sig',
-      sig
-    );
+    requestUrl
+      .searchParams
+      .set(
+        'sig',
+        sig
+      );
 
-    const r =
-      await fetch(u);
+    const response =
+      await fetch(
+        requestUrl
+      );
 
-    const j =
-      await r.json();
+    const result =
+      await response
+        .json();
 
     if(
-      !r.ok ||
-      !j.ok
+      !response.ok ||
+      !result.ok
     ){
-      throw Error(
-        j.error ||
-        `HTTP ${r.status}`
+
+      throw new Error(
+        result.error ||
+        `HTTP ${response.status}`
       );
+
     }
 
-    render(
-      j.validation
+    const validation =
+      result.validation || {};
+
+    configureCompany(
+      validation
     );
 
-  }catch(e){
+    render(
+      validation
+    );
+
+  }catch(error){
 
     app.innerHTML =
-      `<div class="error">
+      `
+      <div class="error">
+
         <h2>
           Validation indisponible
         </h2>
+
         <p>
-          ${esc(e.message || e)}
+          ${esc(
+            error.message ||
+            error
+          )}
         </p>
-      </div>`;
+
+      </div>
+      `;
 
   }
 }
 
-function render(v){
+function render(
+  validation
+){
 
-  const cfg =
-    v.config || {};
+  const config =
+    validation.config || {};
 
-  const opts =
-    Array.isArray(v.options)
-      ? v.options
+  const options =
+    Array.isArray(
+      validation.options
+    )
+      ? validation.options
       : [];
+
+  const quotePdfUrl =
+    String(
+      validation.quotePdfUrl ||
+      validation.pdfUrl ||
+      ''
+    ).trim();
+
+  const hasPdf =
+    /^https:\/\//i.test(
+      quotePdfUrl
+    );
+
+  const reference =
+    String(
+      validation.reference ||
+      '-'
+    );
 
   app.innerHTML =
     `
     <h1>
-      ${esc(
-        cfg.pageTitle ||
-        'Validation de votre offre'
-      )}
+      Validation de l’offre
     </h1>
 
     <p class="muted">
       ${esc(
-        cfg.pageIntro ||
-        'Sélectionnez les options puis confirmez votre accord.'
+        config.pageIntro ||
+        'Sélectionnez les options que vous souhaitez retenir. Le total se recalcule automatiquement avant votre confirmation.'
       )}
     </p>
 
     <div class="meta">
 
-      <div>
-        <span>Client</span>
+      <div class="meta-card">
+
+        <span>
+          Client
+        </span>
+
         <strong>
-          ${esc(v.client || '-')}
+          ${esc(
+            validation.client ||
+            '-'
+          )}
         </strong>
+
       </div>
 
-      <div>
-        <span>Référence</span>
-        <strong>
-          ${esc(v.reference || '-')}
-        </strong>
+      <div class="meta-card">
+
+        <span>
+          Référence
+        </span>
+
+        ${
+          hasPdf
+            ? `
+              <strong>
+                <a
+                  class="reference-link"
+                  href="${esc(quotePdfUrl)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Ouvrir le devis PDF"
+                >
+                  ${esc(reference)}
+                </a>
+              </strong>
+
+              <a
+                class="pdf-download"
+                href="${esc(quotePdfUrl)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📄 Télécharger le devis PDF
+              </a>
+            `
+            : `
+              <strong>
+                ${esc(reference)}
+              </strong>
+
+              <span class="pdf-unavailable">
+                PDF du devis non disponible
+              </span>
+            `
+        }
+
       </div>
 
-      <div>
-        <span>Projet</span>
+      <div class="meta-card">
+
+        <span>
+          Projet
+        </span>
+
         <strong>
-          ${esc(v.project || '-')}
+          ${esc(
+            validation.project ||
+            '-'
+          )}
         </strong>
+
       </div>
 
     </div>
 
     <div class="base">
+
       <b>
         Montant de base TVAC
       </b>
 
       <strong>
-        ${eur(v.baseAmount)}
+        ${eur(
+          validation.baseAmount
+        )}
       </strong>
+
     </div>
 
     <div class="opts">
 
       ${
-        opts.length
-          ? opts.map(
-              (o,i) =>
+        options.length
+          ? options.map(
+              (
+                option,
+                index
+              ) =>
                 `
                 <label class="opt">
 
                   <input
                     type="checkbox"
                     data-key="${esc(
-                      o.key ||
-                      `option-${i}`
+                      option.key ||
+                      `option-${index}`
                     )}"
                     data-amount="${
-                      Number(o.amount) || 0
+                      Number(
+                        option.amount
+                      ) || 0
                     }"
                   >
 
@@ -412,19 +809,17 @@ function render(v){
 
                     <b>
                       ${esc(
-                        o.name ||
+                        option.name ||
                         'Option'
                       )}
                     </b>
-
-                    <br>
 
                     <small>
                       Quantité ${
                         Math.max(
                           1,
                           Number(
-                            o.quantity
+                            option.quantity
                           ) || 1
                         )
                       }
@@ -432,9 +827,11 @@ function render(v){
 
                   </span>
 
-                  <strong>
-                    ${eur(o.amount)}
-                  </strong>
+                  <span class="opt-price">
+                    ${eur(
+                      option.amount
+                    )}
+                  </span>
 
                 </label>
                 `
@@ -457,7 +854,9 @@ function render(v){
         </span>
 
         <b>
-          ${eur(v.baseAmount)}
+          ${eur(
+            validation.baseAmount
+          )}
         </b>
 
       </div>
@@ -468,7 +867,7 @@ function render(v){
           Options sélectionnées
         </span>
 
-        <b id="ot">
+        <b id="optionsTotal">
           0,00 €
         </b>
 
@@ -480,8 +879,10 @@ function render(v){
           Total validé
         </span>
 
-        <strong id="tt">
-          ${eur(v.baseAmount)}
+        <strong id="grandTotal">
+          ${eur(
+            validation.baseAmount
+          )}
         </strong>
 
       </div>
@@ -489,11 +890,18 @@ function render(v){
     </div>
 
     <button id="confirm">
+
       ${esc(
-        cfg.pageConfirmLabel ||
+        config.pageConfirmLabel ||
         'CONFIRMER MON ACCORD'
       )}
+
     </button>
+
+    <div class="footer-note">
+      Votre validation est enregistrée de manière sécurisée
+      et associée à la référence de votre offre.
+    </div>
     `;
 
   document
@@ -501,10 +909,13 @@ function render(v){
       'input[type=checkbox]'
     )
     .forEach(
-      x =>
-        x.addEventListener(
+      checkbox =>
+        checkbox.addEventListener(
           'change',
-          () => update(v)
+          () =>
+            updateTotals(
+              validation
+            )
         )
     );
 
@@ -513,68 +924,93 @@ function render(v){
       'confirm'
     )
     .onclick =
-      () => confirm(v);
+      () =>
+        confirmValidation(
+          validation
+        );
 
-  update(v);
+  updateTotals(
+    validation
+  );
 }
 
-function update(v){
+function updateTotals(
+  validation
+){
 
-  let o = 0;
+  let optionsTotal =
+    0;
 
   document
     .querySelectorAll(
       'input[type=checkbox]:checked'
     )
     .forEach(
-      x =>
-        o +=
+      checkbox => {
+
+        optionsTotal +=
           Number(
-            x.dataset.amount
-          ) || 0
+            checkbox.dataset.amount
+          ) || 0;
+
+      }
     );
 
   document
-    .getElementById('ot')
-    .textContent =
-      eur(o);
-
-  document
-    .getElementById('tt')
+    .getElementById(
+      'optionsTotal'
+    )
     .textContent =
       eur(
-        (Number(v.baseAmount) || 0)
+        optionsTotal
+      );
+
+  document
+    .getElementById(
+      'grandTotal'
+    )
+    .textContent =
+      eur(
+        (
+          Number(
+            validation.baseAmount
+          ) || 0
+        )
         +
-        o
+        optionsTotal
       );
 }
 
-async function confirm(v){
+async function confirmValidation(
+  validation
+){
 
-  const btn =
+  const button =
     document.getElementById(
       'confirm'
     );
 
-  btn.disabled =
+  button.disabled =
     true;
 
-  btn.textContent =
+  button.textContent =
     'ENREGISTREMENT...';
 
   try{
 
-    const selected =
+    const selectedOptionKeys =
       [
-        ...document.querySelectorAll(
-          'input[type=checkbox]:checked'
-        )
+        ...document
+          .querySelectorAll(
+            'input[type=checkbox]:checked'
+          )
       ]
       .map(
-        x => x.dataset.key
+        checkbox =>
+          checkbox.dataset.key
       );
 
-    const r =
+    const response =
       await fetch(
         API,
         {
@@ -587,6 +1023,7 @@ async function confirm(v){
 
           body:
             JSON.stringify({
+
               mode:
                 'confirm_validation',
 
@@ -599,27 +1036,30 @@ async function confirm(v){
 
               sig,
 
-              selectedOptionKeys:
-                selected
+              selectedOptionKeys
+
             })
         }
       );
 
-    const j =
-      await r.json();
+    const result =
+      await response
+        .json();
 
     if(
-      !r.ok ||
-      !j.ok
+      !response.ok ||
+      !result.ok
     ){
-      throw Error(
-        j.error ||
-        `HTTP ${r.status}`
+
+      throw new Error(
+        result.error ||
+        `HTTP ${response.status}`
       );
+
     }
 
-    const n =
-      j.validation || {};
+    const confirmed =
+      result.validation || {};
 
     app.innerHTML =
       `
@@ -627,7 +1067,7 @@ async function confirm(v){
 
         <h1>
           ${esc(
-            v.config
+            validation.config
               ?.confirmationTitle
             ||
             'Merci, votre validation est enregistrée.'
@@ -636,7 +1076,7 @@ async function confirm(v){
 
         <p class="muted">
           ${esc(
-            v.config
+            validation.config
               ?.confirmationBody
             ||
             'Votre choix a été transmis à EVO-Sun.'
@@ -647,40 +1087,43 @@ async function confirm(v){
 
           <strong>
             ${esc(
-              n.reference ||
-              v.reference ||
+              confirmed.reference ||
+              validation.reference ||
               ''
-            )}
-          </strong>
-
-          <br>
-
-          Total validé :
-
-          <strong>
-            ${eur(
-              n.finalAmount
             )}
           </strong>
 
         </p>
 
+        <div class="success-total">
+
+          Total validé :
+
+          <strong>
+            ${eur(
+              confirmed.finalAmount
+            )}
+          </strong>
+
+        </div>
+
       </div>
       `;
 
-  }catch(e){
+  }catch(error){
 
-    btn.disabled =
+    button.disabled =
       false;
 
-    btn.textContent =
-      v.config
+    button.textContent =
+      validation.config
         ?.pageConfirmLabel
       ||
       'CONFIRMER MON ACCORD';
 
-    alert(
-      e.message || e
+    window.alert(
+      error.message ||
+      error
     );
   }
 }
