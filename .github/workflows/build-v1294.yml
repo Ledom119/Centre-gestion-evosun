@@ -1,0 +1,122 @@
+name: Build V1294
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-v1294.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create index V-1294.html
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          src = Path("index.html")
+          dst = Path("index V-1294.html")
+          text = src.read_text(encoding="utf-8")
+
+          if "<title>Simulateur technique EVO-Sun — V1293</title>" not in text:
+              raise SystemExit("La base index.html n'est pas la V1293 attendue.")
+
+          # Version courante
+          text = re.sub(r"(?<!\\d)V1293(?!\\d)", "V1294", text)
+
+          # Catalogue Victron -> Odoo
+          text = text.replace(">Créer dans Odoo</button>", ">Envoyer vers Odoo</button>")
+          text = text.replace("textContent='Création…'", "textContent='Envoi vers Odoo…'")
+          text = text.replace('textContent="Création…"', 'textContent="Envoi vers Odoo…"')
+          text = text.replace("textContent='Créer dans Odoo'", "textContent='Envoyer vers Odoo'")
+          text = text.replace('textContent="Créer dans Odoo"', 'textContent="Envoyer vers Odoo"')
+
+          old = """if(notice){
+        notice.textContent=`${code} créé dans Odoo #${productId}. Prix, photo, description, datasheet et catégorie(s) eCommerce Odoo sont liés. Choisissez maintenant CP / PT puis le silo autorisé.`;
+      }"""
+
+          new = """if(notice){
+        const rp=result?.product||{},
+          photoOk=rp.imageImported===true,
+          pdfOk=rp.datasheetImported===true || Boolean(rp.attachment && !rp.attachment?.error),
+          tagOk=String(rp?.productTag?.name||'').toLowerCase()==='victron',
+          catCount=Array.isArray(rp?.ecommerceCategoryIds)?rp.ecommerceCategoryIds.length:ecommerceCategoryIds.length,
+          checks=[
+            `✓ Produit Odoo #${productId}`,
+            `${photoOk?'✓':'⚠'} Photo ${photoOk?'importée':'non confirmée'}`,
+            `${pdfOk?'✓':'⚠'} Fiche technique ${pdfOk?'importée':'non confirmée'}`,
+            `${tagOk?'✓':'⚠'} Étiquette Victron`,
+            `✓ ${catCount} catégorie${catCount>1?'s':''} eCommerce`
+          ];
+        notice.textContent=`${code} · ${checks.join(' · ')}. Choisissez maintenant CP / PT puis le silo autorisé.`;
+      }"""
+
+          if old not in text:
+              raise SystemExit("Bloc de confirmation Victron/Odoo introuvable.")
+          text = text.replace(old, new, 1)
+
+          css = r"""
+/* V1294 — Admin / Catalogue Victron : espace agrandi, sans ascenseur interne */
+body.admin-open [data-admin-theme-content="victron-catalog"].active{
+  min-height:calc(100vh - 190px)!important;
+  overflow:visible!important;
+}
+body.admin-open [data-admin-theme-content="victron-catalog"]{
+  overflow:visible!important;
+}
+body.admin-open [data-admin-theme-content="victron-catalog"] .victron-catalog-list{
+  display:grid!important;
+  gap:8px!important;
+  min-height:68vh!important;
+  max-height:none!important;
+  overflow:visible!important;
+  align-content:start!important;
+  padding:6px 10px 16px 2px!important;
+}
+body.admin-open [data-admin-theme-content="victron-catalog"] .victron-catalog-head{
+  position:sticky!important;
+  top:0!important;
+  z-index:12!important;
+  background:#eef2ef!important;
+}
+"""
+
+          marker = '<style id="v1187BundledStyles">'
+          pos = text.find(marker)
+          if pos < 0:
+              raise SystemExit("Style principal introuvable.")
+          end = text.find("</style>", pos)
+          if end < 0:
+              raise SystemExit("Fin du style principal introuvable.")
+          text = text[:end] + css + "\n" + text[end:]
+
+          checks = [
+              "<title>Simulateur technique EVO-Sun — V1294</title>" in text,
+              "Envoyer vers Odoo" in text,
+              "V1294 — Admin / Catalogue Victron" in text,
+              "create_victron_product" in text,
+              text.rstrip().endswith("</html>")
+          ]
+          if not all(checks):
+              raise SystemExit("Validation V1294 échouée.")
+
+          dst.write_text(text, encoding="utf-8")
+          print(f"Créé: {dst} ({dst.stat().st_size} octets)")
+
+      - name: Commit V1294
+        run: |
+          git config user.name "ChatGPT"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "index V-1294.html"
+          git commit -m "V1294 - Catalogue Victron et envoi Odoo"
+          git push
