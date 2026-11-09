@@ -1,0 +1,218 @@
+name: Build V1296
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/build-v1296.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate V1296
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          src = Path("index V-1295.html")
+          dst = Path("index V-1296.html")
+          text = src.read_text(encoding="utf-8")
+
+          if "<title>Simulateur technique EVO-Sun — V1295</title>" not in text:
+              raise SystemExit("Base V1295 non trouvée")
+
+          text = re.sub(r"(?<!\d)V1295(?!\d)", "V1296", text)
+
+          old_card = '      <button data-bt-ref="BT-158" class="admin-theme-card" id="adminCatalogThemeCard" type="button" data-admin-theme="catalog"><strong>Catalogue matériel</strong><span>Panneaux, chargeurs, onduleurs, batteries, accessoires, options et catégories personnalisées.</span><em class="admin-odoo-new-badge" id="adminOdooNewProductsBadge">Vérification Odoo…</em></button>'
+          new_group = '''      <div class="admin-product-catalogs-v1296" data-cdr-ref="CDR-069" data-frame-title="Gestion des produits" data-ref-scope="ADMIN">
+        <div class="admin-product-catalogs-head">
+          <div><span>PRODUITS</span><strong>3 catalogues clairement séparés</strong></div>
+          <small>Victron = source fournisseur · Odoo = catalogue commercial · CDG = catalogue opérationnel du Centre de gestion.</small>
+        </div>
+        <div class="admin-product-catalogs-grid">
+          <button data-bt-ref="BT-819" class="admin-theme-card admin-product-catalog-card" type="button" data-admin-theme="victron-catalog"><strong>1 · Catalogue Victron</strong><span>Ensemble des produits Victron : références, prix, photos, fiches techniques et envoi vers Odoo.</span></button>
+          <button data-bt-ref="BT-820" class="admin-theme-card admin-product-catalog-card" type="button" data-admin-theme="odoo-migration"><strong>2 · Catalogue Odoo</strong><span>Tous les produits commerciaux : Victron envoyé vers Odoo + produits ajoutés manuellement dans Odoo.</span></button>
+          <button data-bt-ref="BT-821" class="admin-theme-card admin-product-catalog-card" type="button" data-admin-theme="catalog"><strong>3 · Catalogue produits CDG</strong><span>Tous les produits migrés depuis Odoo vers le Centre de gestion, classés CP / PT.</span></button>
+        </div>
+      </div>
+      <button data-bt-ref="BT-158" class="admin-theme-card admin-product-legacy-card" id="adminCatalogThemeCard" type="button" data-admin-theme="catalog"><strong>Catalogue produits CDG</strong><span>Panneaux, chargeurs, onduleurs, batteries, accessoires, options et catégories personnalisées.</span><em class="admin-odoo-new-badge" id="adminOdooNewProductsBadge">Vérification Odoo…</em></button>'''
+          if old_card not in text:
+              raise SystemExit("Carte catalogue CDG introuvable")
+          text = text.replace(old_card, new_group, 1)
+
+          text = text.replace(
+              '<button data-bt-ref="BT-166" class="admin-theme-card" type="button" data-admin-theme="odoo-migration"><strong>Migration Odoo</strong><span>Laboratoire de liaison des produits Odoo avec les catégories du simulateur, sans impact sur la production.</span></button>',
+              '<button data-bt-ref="BT-166" class="admin-theme-card admin-product-legacy-card" type="button" data-admin-theme="odoo-migration"><strong>Catalogue Odoo</strong><span>Tous les produits commerciaux Odoo et leur migration vers le Centre de gestion.</span></button>',
+              1
+          )
+          text = text.replace(
+              '<button data-bt-ref="BT-666" class="admin-theme-card" type="button" data-admin-theme="victron-catalog"><strong>Catalogue Victron</strong><span>Catalogue fabricant E-Order : références officielles, prix, synchronisation et liaison avec Odoo.</span></button>',
+              '<button data-bt-ref="BT-666" class="admin-theme-card admin-product-legacy-card" type="button" data-admin-theme="victron-catalog"><strong>Catalogue Victron</strong><span>Catalogue fabricant E-Order : références officielles, prix, synchronisation et liaison avec Odoo.</span></button>',
+              1
+          )
+
+          css = """
+/* V1296 — séparation claire des trois catalogues produits dans l'Admin. */
+.admin-product-catalogs-v1296{grid-column:1/-1;border:2px solid #c5f90b;border-radius:20px;padding:16px;background:linear-gradient(135deg,#172026,#22303a);box-shadow:0 12px 28px rgba(0,0,0,.16)}
+.admin-product-catalogs-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:14px;color:#fff}
+.admin-product-catalogs-head span{display:block;color:#c5f90b;font-size:11px;font-weight:900;letter-spacing:.12em}
+.admin-product-catalogs-head strong{display:block;margin-top:4px;font-size:21px}
+.admin-product-catalogs-head small{max-width:720px;color:#cbd5da;line-height:1.45}
+.admin-product-catalogs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.admin-product-catalogs-grid .admin-product-catalog-card{display:flex!important;min-height:132px!important;background:#f8faf9!important;border:1px solid #d7e0dc!important;border-left:5px solid #c5f90b!important;color:#172026!important}
+.admin-product-catalogs-grid .admin-product-catalog-card strong{font-size:17px!important;color:#172026!important}
+.admin-product-catalogs-grid .admin-product-catalog-card span{color:#5d6b72!important}
+.admin-product-legacy-card{display:none!important}
+@media(max-width:900px){.admin-product-catalogs-grid{grid-template-columns:1fr}.admin-product-catalogs-head{align-items:flex-start;flex-direction:column}}
+"""
+          marker = '<style id="v1187BundledStyles">'
+          p = text.find(marker)
+          q = text.find("</style>", p)
+          if p < 0 or q < 0:
+              raise SystemExit("Style principal introuvable")
+          text = text[:q] + css + "\n" + text[q:]
+
+          text = text.replace(
+              '<div class="admin-theme-content" data-admin-theme-content="catalog"><div class="admin-theme-content-head"><div><h3>Catalogue matériel</h3><p class="admin-theme-intro">Tous les équipements et accessoires sont regroupés ici. Chaque famille dispose de son propre onglet ; les catégories créées dans l’Admin s’ajoutent automatiquement.</p>',
+              '<div class="admin-theme-content" data-admin-theme-content="catalog"><div class="admin-theme-content-head"><div><h3>Catalogue produits CDG</h3><p class="admin-theme-intro">Catalogue opérationnel du Centre de gestion. Il reprend tous les produits migrés depuis Odoo, rangés dans leur catégorie CP-xxx et associés à leur profil PT-xxx.</p>',
+              1
+          )
+          text = text.replace(
+              '<div class="admin-theme-content-head"><div><h3>Produits Odoo</h3><p class="admin-theme-intro">Odoo est désormais l’unique source des produits. Affectez chaque produit à une catégorie CP-xxx, puis à un profil technique PT-xxx. Le PT définit les champs à compléter avant validation des calculs.</p></div><button data-bt-ref="BT-227"',
+              '<div class="admin-theme-content-head"><div><h3>Catalogue Odoo</h3><p class="admin-theme-intro">Tous les produits commerciaux Odoo sont repris ici : produits envoyés depuis Victron et produits ajoutés manuellement dans Odoo. Pour migrer un produit vers le Catalogue produits CDG, choisissez obligatoirement sa catégorie CP-xxx.</p></div><button data-bt-ref="BT-227"',
+              1
+          )
+          text = text.replace(
+              '<div class="odoo-migration-note"><strong>Règle :</strong> tous les produits viennent d’Odoo. Un produit classé est immédiatement disponible commercialement dans SIM 5, même sans fiche technique. Il n’est utilisé dans les calculs des SIM 1–4 qu’après validation de sa fiche technique.</div>',
+              '<div class="odoo-migration-note"><strong>Migration Odoo → CDG :</strong> choisissez obligatoirement la catégorie produit CP-xxx. Au premier classement, SIM1 à SIM5 sont autorisés par défaut. Vous pourrez ensuite désélectionner les simulateurs inutiles. SIM1 à SIM4 exigent toujours un PT complet pour le calcul ; SIM5 reste commercialement disponible sans PT complet.</div>',
+              1
+          )
+          text = text.replace(
+              '<div class="victron-catalog-note"><strong>Flux produit Victron :</strong> 1 · Synchroniser E-Order → 2 · Créer/Lier dans Odoo → 3 · activer le suivi prix et associer photo / datasheet → 4 · choisir CP / PT → 5 · autoriser uniquement le silo voulu après validation technique. Aucun produit n’est activé automatiquement dans un simulateur.</div>',
+              '<div class="victron-catalog-note"><strong>Flux simplifié :</strong> choisissez un produit Victron puis cliquez sur « Ajouter à Odoo ». Le prix, la photo, la description, la fiche technique, l’étiquette Victron et le suivi du prix sont gérés automatiquement. Ensuite, dans Catalogue Odoo, choisissez la catégorie CP pour migrer le produit vers le Catalogue produits CDG.</div>',
+              1
+          )
+
+          text = text.replace('>Envoyer vers Odoo</button>', '>Ajouter à Odoo</button>')
+          text = text.replace("btn.textContent='Envoyer vers Odoo'", "btn.textContent='Ajouter à Odoo'")
+          text = text.replace("btn.textContent='Envoi vers Odoo…'", "btn.textContent='Ajout dans Odoo…'")
+          text = text.replace('>Configurer PT / silo</button>', '>Configurer dans CDG</button>')
+
+          text = text.replace(
+              ":mapping?.useInSimulator===true?['SIM1','SIM2','SIM3']:[];",
+              ":mapping?.useInSimulator===true?['SIM1','SIM2','SIM3','SIM4','SIM5']:[];",
+              1
+          )
+          text = text.replace(
+              "simulatorIds:Array.isArray(item?.simulatorIds)?[...new Set(item.simulatorIds.map(v=>String(v||'').toUpperCase()).filter(v=>/^SIM[1-6]$/.test(v)))]:item?.useInSimulator===true?['SIM1','SIM2','SIM3']:[],",
+              "simulatorIds:Array.isArray(item?.simulatorIds)?[...new Set(item.simulatorIds.map(v=>String(v||'').toUpperCase()).filter(v=>/^SIM[1-6]$/.test(v)))]:item?.useInSimulator===true?['SIM1','SIM2','SIM3','SIM4','SIM5']:[],",
+              1
+          )
+
+          old_allowed = """function odooProductAllowedInSilo(mapping={},siloId=''){
+    const silo=String(siloId||currentSimulatorIdentity?.().id||'SIM1').toUpperCase();
+    return technicalProfileDefinitionState(mapping).complete&&odooProductSimulatorIds(mapping).includes(silo)
+  }"""
+          new_allowed = """function odooProductAllowedInSilo(mapping={},siloId=''){
+    const silo=String(siloId||currentSimulatorIdentity?.().id||'SIM1').toUpperCase(),
+      allowed=odooProductSimulatorIds(mapping).includes(silo);
+    if(!allowed)return false;
+    if(silo==='SIM5')return Boolean(mapping?.appCategory);
+    return technicalProfileDefinitionState(mapping).complete
+  }"""
+          if old_allowed not in text:
+              raise SystemExit("Règle d'autorisation SIM introuvable")
+          text = text.replace(old_allowed, new_allowed, 1)
+
+          old_part = "simulatorIds=definition.complete?odooProductSimulatorIds(previous):[],useInSimulator=simulatorIds.length>0,"
+          new_part = "simulatorIds=appCategory?(String(previous.appCategory||'')?odooProductSimulatorIds(previous):['SIM1','SIM2','SIM3','SIM4','SIM5']):[],useInSimulator=simulatorIds.length>0,"
+          if old_part not in text:
+              raise SystemExit("Règle de premier classement introuvable")
+          text = text.replace(old_part, new_part, 1)
+
+          text = text.replace(
+              "mapping.useInSimulator=false;mapping.simulatorIds=[];mapping.technicalValidatedAt=null;const state=technicalProfileDefinitionState(mapping);",
+              "mapping.useInSimulator=odooProductSimulatorIds(mapping).length>0;mapping.technicalValidatedAt=null;const state=technicalProfileDefinitionState(mapping);",
+              1
+          )
+          text = text.replace(
+              "mapping.useInSimulator=false;mapping.simulatorIds=[];mapping.technicalValidatedAt=null;mapping.technicalSource=null;",
+              "mapping.useInSimulator=odooProductSimulatorIds(mapping).length>0;mapping.technicalValidatedAt=null;mapping.technicalSource=null;",
+              1
+          )
+
+          # Retirer uniquement le bloc qui interdit de régler les SIM avant PT complet.
+          text, guard_count = re.subn(
+              r"\n    if\(!definition\.complete\)\{if\(notice\)notice\.textContent=.*?;return\}",
+              "",
+              text,
+              count=1
+          )
+          if guard_count != 1:
+              raise SystemExit("Verrou du sélecteur SIM introuvable")
+
+          text = text.replace(
+              '<label>Catégorie simulateur</label><select class="select odoo-migration-category">',
+              '<label>Catégorie produit CDG <b>*</b></label><select class="select odoo-migration-category">',
+              1
+          )
+          text = text.replace(
+              'Affectation en attente · cliquez sur Enregistrer les affectations.',
+              'Catégorie CDG sélectionnée. SIM1 à SIM5 sont présélectionnés par défaut · cliquez sur Enregistrer les affectations.',
+              1
+          )
+          text = text.replace(
+              'Choisissez maintenant CP / PT puis le silo autorisé.',
+              'Le produit est maintenant dans le Catalogue Odoo. Choisissez sa catégorie CP pour le migrer vers le Catalogue produits CDG.',
+              1
+          )
+          text = text.replace(
+              'Choisissez CP, PT, complétez/validez la fiche puis autorisez uniquement le silo voulu.',
+              'Choisissez la catégorie CP pour migrer le produit vers le Catalogue produits CDG. SIM1 à SIM5 seront présélectionnés par défaut.',
+              1
+          )
+
+          text = text.replace('CATALOGUE MATÉRIEL · COMMON','CATALOGUE PRODUITS CDG · COMMON')
+          text = text.replace('Catalogue matériel','Catalogue produits CDG')
+          text = text.replace('Migration Odoo','Catalogue Odoo')
+
+          required = [
+              "<title>Simulateur technique EVO-Sun — V1296</title>",
+              "CDR-069",
+              "BT-819",
+              "BT-820",
+              "BT-821",
+              "1 · Catalogue Victron",
+              "2 · Catalogue Odoo",
+              "3 · Catalogue produits CDG",
+              "['SIM1','SIM2','SIM3','SIM4','SIM5']",
+              "if(silo==='SIM5')return Boolean(mapping?.appCategory)",
+              "Ajouter à Odoo"
+          ]
+          missing = [x for x in required if x not in text]
+          if missing:
+              raise SystemExit("Validation V1296 échouée: " + repr(missing))
+          if not text.rstrip().endswith("</html>"):
+              raise SystemExit("HTML incomplet")
+
+          dst.write_text(text, encoding="utf-8")
+          print("Créé:", dst, dst.stat().st_size)
+          PY
+
+      - name: Commit V1296
+        shell: bash
+        run: |
+          git config user.name "ChatGPT"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "index V-1296.html"
+          git commit -m "V1296 - catalogues produits et SIM1-5 par défaut"
+          git push
