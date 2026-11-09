@@ -1,0 +1,22 @@
+name: Package V1297
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/package-v1297.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: index-V-1297
+          path: "index V-1297.html"
+          if-no-files-found: error
