@@ -1,0 +1,27 @@
+name: Run V1296
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/run-v1296.yml"
+      - ".github/scripts/build_v1296.py"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate V1296
+        run: python3 .github/scripts/build_v1296.py
+      - name: Commit V1296
+        run: |
+          git config user.name "ChatGPT"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "index V-1296.html"
+          git commit -m "V1296 - catalogues produits et SIM1-5 par défaut"
+          git push
