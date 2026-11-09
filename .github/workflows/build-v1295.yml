@@ -28,64 +28,60 @@ jobs:
           text = src.read_text(encoding="utf-8")
 
           if "<title>Simulateur technique EVO-Sun — V1294</title>" not in text:
-              raise SystemExit("La base index V-1294.html n'est pas la V1294 attendue.")
+              raise SystemExit("Base V1294 non trouvée")
 
-          # Version courante
           text = re.sub(r"(?<!\d)V1294(?!\d)", "V1295", text)
 
-          old = """function resolvedSmartSolarNominalPvPower(controller,battery,batteryReference){
-    const byDatasheet=Number(controller?.pv?.[battery]);
-    if(Number.isFinite(byDatasheet)&&byDatasheet>0)return byDatasheet;
-    const fallback=Number(batteryReference||battery||0)*Number(controller?.chargeA||0);
-    return Number.isFinite(fallback)&&fallback>0?fallback:0
-  }"""
-
-          new = """function resolvedSmartSolarNominalPvPower(controller,battery,batteryReference){
-    const pvMap=(controller?.pv&&typeof controller.pv==='object')?controller.pv:{},
-      declaredVoltages=[12,24,48].filter(voltage=>Number(pvMap?.[voltage])>0),
-      byDatasheet=Number(pvMap?.[battery]);
-
-    /* V1295 — si une fiche technique déclare des puissances PV par tension,
-       seules ces tensions sont compatibles. Une tension absente n'est jamais
-       inventée par le fallback Vbat × courant de charge. */
-    if(declaredVoltages.length){
-      return Number.isFinite(byDatasheet)&&byDatasheet>0?byDatasheet:0
-    }
-
-    /* Compatibilité héritée uniquement pour les anciens produits locaux
-       qui ne possèdent aucune donnée pv12 / pv24 / pv48. */
-    const fallback=Number(batteryReference||battery||0)*Number(controller?.chargeA||0);
-    return Number.isFinite(fallback)&&fallback>0?fallback:0
-  }"""
-
-          if old not in text:
-              raise SystemExit("Fonction resolvedSmartSolarNominalPvPower introuvable ou déjà modifiée.")
-          text = text.replace(old, new, 1)
-
-          # Documentation du calcul mise à jour
-          text = text.replace(
-            "7. Puissance PV admissible par appareil = tension batterie de référence × courant de charge × (1 + surcharge configurée).\n         Références : 13 V / 26 V / 52 V pour systèmes 12 V / 24 V / 48 V.",
-            "7. Puissance PV admissible par appareil = valeur de fiche technique pv12/pv24/pv48 lorsqu'elle existe.\n         Si au moins une puissance par tension est déclarée, toute tension absente est incompatible.\n         Le calcul tension batterie × courant de charge reste uniquement un fallback pour les anciens produits sans aucune donnée PV par tension."
+          pattern = re.compile(
+              r"function resolvedSmartSolarNominalPvPower\(controller,battery,batteryReference\)\{.*?\n  \}",
+              re.S
+          )
+          replacement = (
+              "function resolvedSmartSolarNominalPvPower(controller,battery,batteryReference){\n"
+              "    const pvMap=(controller?.pv&&typeof controller.pv==='object')?controller.pv:{},\n"
+              "      declaredVoltages=[12,24,48].filter(voltage=>Number(pvMap?.[voltage])>0),\n"
+              "      byDatasheet=Number(pvMap?.[battery]);\n\n"
+              "    /* V1295 — si une fiche technique déclare des puissances PV par tension,\n"
+              "       seules ces tensions sont compatibles. Une tension absente n'est jamais\n"
+              "       inventée par le fallback Vbat × courant de charge. */\n"
+              "    if(declaredVoltages.length){\n"
+              "      return Number.isFinite(byDatasheet)&&byDatasheet>0?byDatasheet:0\n"
+              "    }\n\n"
+              "    /* Fallback réservé aux anciens produits sans pv12 / pv24 / pv48. */\n"
+              "    const fallback=Number(batteryReference||battery||0)*Number(controller?.chargeA||0);\n"
+              "    return Number.isFinite(fallback)&&fallback>0?fallback:0\n"
+              "  }"
           )
 
-          # Message de diagnostic plus clair dans les rejets
-          marker = "const minVmpRequired=Math.max(battery+(Number(controller.startDeltaV)||5),Number(controller.startV||controller.absoluteStartV)||0),\n        nominalPower=resolvedSmartSolarNominalPvPower(controller,battery,batteryReference),"
-          replacement = "const minVmpRequired=Math.max(battery+(Number(controller.startDeltaV)||5),Number(controller.startV||controller.absoluteStartV)||0),\n        nominalPower=resolvedSmartSolarNominalPvPower(controller,battery,batteryReference),"
-          if marker not in text:
-              raise SystemExit("Bloc diagnostic SmartSolar introuvable.")
+          text, count = pattern.subn(replacement, text, count=1)
+          if count != 1:
+              raise SystemExit("Fonction SmartSolar non remplacée")
 
-          # Contrôles attendus
-          if "pv:{48:11520}" not in text or "SmartSolar MPPT RS 450/200" not in text:
-              raise SystemExit("Référence technique RS 450/200 manquante.")
-          if "pv:{48:5760}" not in text or "SmartSolar MPPT RS 450/100" not in text:
-              raise SystemExit("Référence technique RS 450/100 manquante.")
+          old_doc = (
+              "7. Puissance PV admissible par appareil = tension batterie de référence × courant de charge × (1 + surcharge configurée).\n"
+              "         Références : 13 V / 26 V / 52 V pour systèmes 12 V / 24 V / 48 V."
+          )
+          new_doc = (
+              "7. Puissance PV admissible par appareil = valeur de fiche technique pv12/pv24/pv48 lorsqu'elle existe.\n"
+              "         Si au moins une puissance par tension est déclarée, toute tension absente est incompatible.\n"
+              "         Le calcul tension batterie × courant de charge reste uniquement un fallback pour les anciens produits sans aucune donnée PV par tension."
+          )
+          text = text.replace(old_doc, new_doc, 1)
 
-          if "<title>Simulateur technique EVO-Sun — V1295</title>" not in text:
-              raise SystemExit("Version V1295 non appliquée.")
-          if "declaredVoltages.length" not in text:
-              raise SystemExit("Verrouillage de tension SmartSolar non appliqué.")
+          required = [
+              "<title>Simulateur technique EVO-Sun — V1295</title>",
+              "declaredVoltages.length",
+              "pv:{48:11520}",
+              "SmartSolar MPPT RS 450/200",
+              "pv:{48:5760}",
+              "SmartSolar MPPT RS 450/100",
+              "create_victron_product"
+          ]
+          missing = [x for x in required if x not in text]
+          if missing:
+              raise SystemExit("Validation V1295 échouée: " + repr(missing))
           if not text.rstrip().endswith("</html>"):
-              raise SystemExit("HTML incomplet.")
+              raise SystemExit("HTML incomplet")
 
           dst.write_text(text, encoding="utf-8")
           print(f"Créé: {dst} ({dst.stat().st_size} octets)")
