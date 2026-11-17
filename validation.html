@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Validation de l'offre — EVO-Sun / Meca-Sol</title>
+<style>
+:root{--green:#c5f90b;--dark:#172026;--muted:#66757e}
+*{box-sizing:border-box}body{background:#edf3ee;color:var(--dark);font:16px Arial,sans-serif;margin:0}
+.wrap{max-width:960px;margin:28px auto;padding:0 18px}.sheet{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 14px 42px #17202625}
+header{background:var(--dark);border-bottom:6px solid var(--green);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 30px}
+header strong{font-size:28px}header span{font-size:16px;color:var(--green);font-weight:900;letter-spacing:.03em}
+header img{max-width:190px;max-height:80px;object-fit:contain;display:none}
+main{padding:26px 32px 38px}h1{font-size:30px;margin:6px 0 10px}p{line-height:1.45;color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}.summary>div,.option{border:1px solid #d9e1dc;border-radius:12px;padding:13px}
+.summary small{display:block;color:var(--muted);margin-bottom:6px}.summary b{overflow-wrap:anywhere}
+.base{background:var(--dark);color:#fff;border-radius:14px;padding:20px;display:flex;gap:16px;align-items:center;justify-content:space-between}.base b{color:var(--green);font-size:22px;text-align:right}
+h2{margin:24px 0 12px;font-size:19px}.options{display:grid;gap:10px}.option{display:flex;align-items:center;gap:12px}.option input{height:21px;width:21px;accent-color:var(--green)}.option label{flex:1;cursor:pointer}.option label small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.option b{text-align:right}
+.amounts{border-top:1px solid #d7dfd9;margin-top:24px;padding-top:12px}.line{display:flex;justify-content:space-between;gap:15px;padding:7px 0}.line b{text-align:right}.line.total{font-size:22px;font-weight:900;border-top:1px solid #d7dfd9;margin-top:9px;padding-top:15px}.line.total b{color:#668b00}
+button{border:0;border-radius:999px;background:var(--green);color:var(--dark);font-size:16px;font-weight:900;min-height:54px;padding:12px 25px;cursor:pointer}button:disabled{opacity:.55;cursor:default}#confirm{width:100%;margin-top:24px}
+#status{margin:0 0 14px;color:#405461;font-size:14px}#status.error{color:#a62020}#status.success{color:#386800}.hidden{display:none!important}
+.done{padding:40px 18px;text-align:center}.done strong{font-size:24px}.done .total-price{font-size:27px;font-weight:900;color:#5e8300;margin:20px 0}
+@media(max-width:700px){.wrap{margin:0;padding:0}.sheet{min-height:100vh;border-radius:0}header{padding:18px;flex-wrap:wrap}main{padding:20px 16px}.summary{grid-template-columns:1fr}.base,.line{flex-wrap:wrap}.base b,.line b{width:100%;text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="sheet">
+<header><div><img id="logo" alt="Logo société"><strong id="brand">EVO-Sun / Meca-Sol</strong></div><span>VALIDATION DE L’OFFRE</span></header>
+<main>
+<div id="status" role="status" aria-live="polite">Chargement sécurisé du devis…</div>
+<section id="proposal" class="hidden">
+<h1 id="heading">Validation de votre offre</h1><p id="intro"></p>
+<div class="summary"><div><small>Client</small><b id="client"></b></div><div><small>Référence</small><b id="reference"></b></div><div><small>Projet</small><b id="project"></b></div></div>
+<div class="base"><strong>Montant de base</strong><b id="base"></b></div>
+<h2>Options facultatives</h2><div id="options" class="options"></div>
+<div class="amounts">
+<div class="line"><span>Montant de base</span><b id="base2"></b></div>
+<div class="line"><span>Options retenues</span><b id="optotal"></b></div>
+<div class="line total"><span>Total validé</span><b id="total"></b></div>
+</div>
+<button type="button" id="confirm" disabled>CONFIRMER MON ACCORD</button>
+</section>
+<section id="done" class="done hidden"><strong id="doneTitle">Validation enregistrée</strong><p id="doneText"></p><p id="doneRef"></p><div id="doneAmount" class="total-price"></div></section>
+</main></div></div>
+<script>
+(function(){
+"use strict";
+var API="https://jcajdwqrjuavedzkevfd.supabase.co/functions/v1/clever-processor";
+var params=new URLSearchParams(location.search);
+var quote=params.get("quote"),exp=params.get("exp"),sig=params.get("sig");
+var url=API+"?"+new URLSearchParams({quote:quote||"",exp:exp||"",sig:sig||""}).toString();
+var state=null;
+function el(id){return document.getElementById(id)}
+function status(msg,error){el("status").textContent=msg;el("status").className=error?"error":"success"}
+function money(n){
+ var number=Number(n)||0;
+ var eur=new Intl.NumberFormat("fr-BE",{style:"currency",currency:"EUR"}).format(number);
+ if(!state||!state.isMeca)return eur;
+ var x=new Intl.NumberFormat("fr-FR",{maximumFractionDigits:0}).format(number*(Number(state.exchangeRate)||655.957));
+ return eur+" | "+x+" FCFA";
+}
+function showDone(v){
+ el("proposal").classList.add("hidden");el("done").classList.remove("hidden");
+ el("doneTitle").textContent=(v.config&&v.config.confirmationTitle)||"Merci, votre validation est enregistrée.";
+ el("doneText").textContent=(v.config&&v.config.confirmationBody)||("Votre choix a été transmis à "+(v.isMeca?"Meca-Sol":"EVO-Sun")+".");
+ if(v.isMeca)el("doneText").textContent=el("doneText").textContent.replace(/EVO[- ]?Sun/gi,"Meca-Sol");
+ el("doneRef").textContent="Référence : "+(v.reference||"");
+ el("doneAmount").textContent=money(v.finalAmount);
+ status("Validation confirmée.",false);
+}
+function update(){
+ var amount=0;
+ document.querySelectorAll("#options input[type=checkbox]:checked").forEach(function(n){amount+=Number(n.dataset.amount)||0});
+ el("optotal").textContent=money(amount);el("total").textContent=money((Number(state.baseAmount)||0)+amount);
+}
+function draw(v){
+ state=v;
+ el("brand").textContent=v.isMeca?"Meca-Sol":"EVO-Sun";
+ if(/^https:\/\//i.test(v.logoUrl||"")){
+  var img=el("logo");img.referrerPolicy="no-referrer";img.src=v.logoUrl;img.onload=function(){img.style.display="block";el("brand").style.display="none"};
+  img.onerror=function(){img.style.display="none";el("brand").style.display="block"};
+ }
+ if(v.confirmedAt){showDone(v);return}
+ el("heading").textContent=(v.config&&v.config.pageTitle)||"Validation de votre offre";
+ el("intro").textContent=(v.config&&v.config.pageIntro)||"Sélectionnez vos options puis confirmez votre accord.";
+ el("client").textContent=v.client||"—";el("reference").textContent=v.reference||"—";el("project").textContent=v.project||"—";
+ el("base").textContent=money(v.baseAmount);el("base2").textContent=money(v.baseAmount);
+ el("options").replaceChildren();
+ var opts=Array.isArray(v.options)?v.options:[];
+ if(!opts.length){var p=document.createElement("p");p.textContent="Aucune option facultative.";el("options").appendChild(p)}
+ opts.forEach(function(o,i){
+  var line=document.createElement("div");line.className="option";
+  var cb=document.createElement("input");cb.type="checkbox";cb.id="option-"+i;cb.value=String(o.key||"");cb.dataset.amount=String(Number(o.amount)||0);
+  cb.checked=Array.isArray(v.selectedOptionKeys)&&v.selectedOptionKeys.map(String).includes(cb.value);
+  var label=document.createElement("label");label.htmlFor=cb.id;label.textContent=String(o.name||"Option");
+  var small=document.createElement("small");small.textContent="Quantité "+(Number(o.quantity)||1);label.appendChild(small);
+  var price=document.createElement("b");price.textContent=money(o.amount);
+  line.append(cb,label,price);el("options").appendChild(line);cb.addEventListener("change",update);
+ });
+ el("proposal").classList.remove("hidden");el("confirm").disabled=false;el("confirm").textContent=(v.config&&v.config.pageConfirmLabel)||"CONFIRMER MON ACCORD";
+ update();status("",false);
+}
+async function read(){
+ if(!quote||!exp||!sig){status("Lien de validation incomplet. Demandez un nouveau lien.",true);return}
+ try{
+  var response=await fetch(url,{method:"GET",headers:{Accept:"application/json"},cache:"no-store"});
+  var data=await response.json();
+  if(!response.ok||!data.ok||!data.validation)throw Error(data.error||"Devis introuvable");
+  draw(data.validation);
+ }catch(e){status("Impossible de charger le devis : "+String(e.message||e),true)}
+}
+el("confirm").addEventListener("click",async function(){
+ if(!state||this.disabled)return;
+ this.disabled=true;status("Enregistrement de votre validation…",false);
+ try{
+  var selected=Array.from(document.querySelectorAll("#options input:checked")).map(function(x){return x.value});
+  var response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({mode:"confirm_validation",quote:quote,exp:exp,sig:sig,selectedOptionKeys:selected})});
+  var data=await response.json();
+  if(!response.ok||!data.ok)throw Error(data.error||"Enregistrement refusé");
+  state=Object.assign({},state,data.validation||{});showDone(state);
+ }catch(e){status("Votre validation n’a pas été confirmée : "+String(e.message||e),true);this.disabled=false}
+});
+read();
+})();
+</script>
+</body></html>
