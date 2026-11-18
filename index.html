@@ -60,6 +60,53 @@
 body.sim7-meca-3-payments #paymentTermsStep .payment-terms-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 body.sim7-meca-3-payments #paymentGrdCard{display:none!important}
 @media(max-width:850px){body.sim7-meca-3-payments #paymentTermsStep .payment-terms-grid{grid-template-columns:1fr}}
+
+/* V1575 — COMMON Envoi PDF au client : compact, commun SIM1/SIM5/SIM7 */
+#commonQuoteSendModal{padding:12px}
+#commonQuoteSendModal .common-quote-send-card{
+  width:min(850px,calc(100vw - 28px));max-height:min(740px,calc(100vh - 40px));
+  padding:14px 16px;overflow-y:auto;overscroll-behavior:contain
+}
+#commonQuoteSendModal .common-quote-send-head{margin-bottom:8px}
+#commonQuoteSendModal .common-quote-send-head h2{font-size:19px}
+#commonQuoteSendModal .common-quote-send-head p{font-size:11px;max-width:740px}
+#commonQuoteSendModal .common-quote-send-client{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-bottom:10px}
+#commonQuoteSendModal .common-quote-send-client>div:nth-child(3),
+#commonQuoteSendModal .common-quote-send-client>div:nth-child(4){display:none!important}
+#commonQuoteSendModal .common-quote-send-client>div{padding:6px 9px}
+#commonQuoteSendModal .common-quote-send-client strong{font-size:10px}
+#commonQuoteSendModal .common-quote-send-sms-toggle{display:flex!important}
+#commonQuoteSendModal .common-quote-send-grid{display:block}
+#commonQuoteSendModal .common-send-choice-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:10px}
+#commonQuoteSendModal .common-send-choice{
+  cursor:pointer;min-width:0;border:1px solid #cbd6cf;border-radius:10px;
+  padding:8px 9px;font-size:10px;font-weight:850;line-height:1.25;
+  color:#23313a;background:#fff;text-align:center;min-height:42px;
+  overflow-wrap:anywhere
+}
+#commonQuoteSendModal .common-send-choice.active{
+  background:#edffd0;border:2px solid #9cc600;color:#172026
+}
+#commonQuoteSendModal .common-send-editor{
+  display:grid;gap:8px;border-radius:12px;background:#fff;border:1px solid #d5ddd8;padding:11px
+}
+#commonQuoteSendModal .common-send-editor label{display:block;color:#4c5f66;font-size:10px;font-weight:900;margin-bottom:3px}
+#commonQuoteSendModal .common-send-editor input,#commonQuoteSendModal .common-send-editor textarea{
+  box-sizing:border-box;width:100%;border:1px solid #cad7ce;border-radius:8px;
+  background:#fff;color:#172026;font-family:inherit;font-size:12px;padding:9px 10px
+}
+#commonQuoteSendModal .common-send-editor textarea{resize:vertical;min-height:120px;max-height:240px;line-height:1.4}
+#commonQuoteSendModal .common-send-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:2px}
+#commonQuoteSendModal .common-send-actions .btn{min-height:37px;font-size:11px;padding:8px 12px;border-radius:9px}
+#commonQuoteSendModal .common-send-actions .btn[disabled]{opacity:.45;cursor:not-allowed}
+#commonQuoteSendModal .common-quote-send-global-status{margin-top:8px;padding:9px 10px;font-size:10px}
+@media(max-width:680px){
+  #commonQuoteSendModal .common-quote-send-card{padding:12px}
+  #commonQuoteSendModal .common-quote-send-client{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #commonQuoteSendModal .common-send-choice-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #commonQuoteSendModal .common-send-actions .btn{flex:1 1 100%}
+}
+
 </style>
 
   
@@ -70,7 +117,7 @@ body.sim7-meca-3-payments #paymentGrdCard{display:none!important}
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simulateur technique EVO-Sun — V1548</title>
+  <title>Simulateur technique EVO-Sun — V1578</title>
   <style id="v1187BundledStyles">
 /* ===== 001 · unnamed-001 ===== */
 :root{--green:#c5f90b;--ink:#151515;--muted:#687078;--line:#dfe3e6;--soft:#f5f6f4;--danger:#b42318}
@@ -11051,10 +11098,21 @@ body.assistant-mail-open .assistant-mail-hub{display:flex;flex-direction:column}
   .admin-common-mail-card label{display:block;margin:13px 0 5px;font-size:12px;font-weight:900;color:#24313a}
   .admin-common-mail-card .input{width:100%;max-width:none}
   .admin-common-mail-card textarea{width:100%;min-height:110px;overflow:hidden;resize:vertical;line-height:1.48;padding:12px 13px}
-  .admin-common-mail-card textarea.admin-common-mail-body{min-height:220px}
+  .admin-common-mail-card textarea.admin-common-mail-body{min-height:150px}
   .admin-common-return-mail-card textarea.admin-common-mail-body{min-height:280px}
   .admin-common-mail-card .help{display:block;margin-top:10px;line-height:1.45}
   #adminCommonQuoteMailTemplatesRows{display:block}
+  .admin-email-company-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start;margin:12px 0}
+  .admin-email-company-pair>.admin-common-mail-card{margin:0;min-width:0}
+  .admin-email-company-pair .admin-common-mail-card{min-width:0}
+  .admin-email-company-pair .admin-common-mail-card textarea.admin-common-mail-body{min-height:150px}
+  .admin-email-company-pair .admin-common-return-mail-card textarea.admin-common-mail-body{min-height:190px}
+  .admin-email-company-pair .admin-common-mail-card label{font-size:10px}
+  .admin-email-company-head{display:flex;align-items:center;gap:9px;margin:0 0 7px;font-weight:950;color:#172026;font-size:12px}
+  .admin-email-company-head .pill{display:inline-flex;padding:5px 11px;border-radius:999px;background:#172026;color:#c5f90b;font-weight:950;font-size:10px}
+  .admin-email-company-pair .meca-email{border-left-color:#3966f9}
+  .admin-email-company-pair .meca-email .pill{background:#3966f9;color:white}
+  @media(max-width:920px){.admin-email-company-pair{grid-template-columns:minmax(0,1fr)}}
   @media(max-width:760px){.admin-common-mail-card{padding:15px}.admin-common-mail-block{padding:12px}}
 
 
@@ -18949,6 +19007,18 @@ html body #globalDisplayZone1 #stageQuickNav .stage-quick-nav-version{display:no
 }
 .shop-pricing-defaults strong{font-size:11px;color:#c5f90b}
 .shop-pricing-defaults small{display:block;margin-top:2px;color:#b9c5cb;font-size:8px}
+.shop-pricing-defaults .shop-pricing-apply-all{
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  margin-top:5px;cursor:pointer;color:#c5f90b;font-size:8px;
+  font-weight:800;line-height:1.15;white-space:nowrap
+}
+.shop-pricing-defaults .shop-pricing-apply-all input[type="checkbox"]{
+  appearance:auto;display:inline-block;flex:0 0 13px;
+  width:13px;min-width:13px;height:13px;min-height:13px;
+  padding:0;margin:0;accent-color:#c5f90b;cursor:pointer;border-radius:3px
+}
+.shop-pricing-defaults .shop-pricing-apply-all span{font-size:8px;color:#c5f90b}
+
 .shop-pricing-defaults label{margin:0;color:#cbd5da;font-size:8px;font-weight:900}
 .shop-pricing-defaults input,.shop-pricing-defaults select{
   width:100%;
@@ -21577,6 +21647,45 @@ body:not(.sim7-mecasol-active) #fieldCount:not(:disabled){cursor:text;background
 }
 </style>
 
+<style id="commonOdooEmailV1577">
+#commonQuoteSendModal .common-send-mail-options{
+ display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+ margin:8px 0 10px;color:#253b43;font-size:10px;font-weight:850;
+}
+#commonQuoteSendModal .common-send-mail-options label{display:inline-flex;align-items:center;gap:6px;cursor:pointer;margin:0}
+#commonQuoteSendModal .common-send-mail-options input{width:16px;height:16px;accent-color:#c5f90b}
+</style>
+<style id="sim3MecasolDistancePlacementV1576">
+/* SIM3 Meca-Sol : le COMMON CDR-850 se trouve immédiatement sous Type de panneau.
+   La même entrée est déplacée dans le DOM : aucune copie, aucun calcul parallèle. */
+#choice #offgridSizingStep .offgrid-sizing-panel-choice .mppt-single-field-distance{
+  margin:12px 0 0;
+  width:100%;max-width:none;
+  padding:12px 14px;
+  border:1px solid #cfdaac;
+  border-left:5px solid #c5f90b;
+  border-radius:12px;
+  background:#f6faed;
+  box-sizing:border-box;
+}
+#choice #offgridSizingStep .offgrid-sizing-panel-choice .mppt-single-field-distance > div{
+  width:100%;max-width:none;
+}
+#choice #offgridSizingStep .offgrid-sizing-panel-choice .mppt-single-field-distance label{
+  display:block;font-weight:850;margin-bottom:6px;color:#172026;
+}
+#choice #offgridSizingStep .offgrid-sizing-panel-choice #solarCableDistance{
+  display:block;width:100%;min-height:48px;box-sizing:border-box;
+  border:1px solid #b3c79a;background:#fff;
+}
+#choice #offgridSizingStep .offgrid-sizing-panel-choice .mppt-single-field-distance .help{
+  display:block;margin-top:6px;
+}
+#choice #offgridSizingStep .offgrid-sizing-panel-choice .solar-cable-distance-warning:not([hidden]){
+  display:block;margin-top:7px;
+}
+</style>
+
 <style id="commonMpptControlsLayoutV1497">
 /* CDR-850 : distances immédiatement sous le choix automatique / manuel. */
 #choice .mppt-box .mppt-single-field-distance{margin:10px 0 17px;max-width:100%;}
@@ -22283,7 +22392,14 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
 #sim5Step2 .sim5-admin-logistics .sim5-admin-profit.is-negative{color:#b6271a}
 
 </style>
-</head>
+<style id="cgsDfRoleVisibilityV1571">
+/* Role determined after Supabase authentication; default always hides DF. */
+html body:not(.cgs-df-admin) #evosunApp .admin-default-id-badge,
+html body:not(.cgs-df-admin) .admin-default-id-badge,
+html body:not(.cgs-df-admin) #evosunApp .sim7-economy-df-badge {
+ display:none!important; visibility:hidden!important; pointer-events:none!important;
+}
+</style></head>
 <body class="management-hub-open" style="margin:0;background:#10171d;background-color:#10171d">
 
 <style>
@@ -22446,10 +22562,34 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
   </div>
   <div class="global-display-zone-1-bottom">
     <div class="global-user-signature" id="globalUserSignature">D. Thonnard</div>
-    <div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">V1548</div>
+    <div class="app-version-footer" id="appVersionFooter" aria-label="Version de l’application">V1578</div>
   </div>
 </aside>
-
+<script id="cgs-build-version-sync">
+/* CGS: une seule version affichée, avec lecture automatique du nom du fichier. */
+(function () {
+  const versionIntegree = 'V1578';
+  let versionAffichee = versionIntegree;
+  try {
+    const fichier = decodeURIComponent(window.location.pathname || '').split('/').pop() || '';
+    const trouve = fichier.match(/^index[ _-]*v[ _-]*(\d{3,5})\.html$/i);
+    if (trouve) versionAffichee = `V${trouve[1]}`;
+  } catch (_) { /* conserver la version intégrée */ }
+  function appliquerVersion() {
+    const pastille = document.getElementById('appVersionFooter');
+    if (pastille) {
+      pastille.textContent = versionAffichee;
+      pastille.title = `Centre de gestion ${versionAffichee}`;
+    }
+    document.title = `Simulateur technique EVO-Sun — ${versionAffichee}`;
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', appliquerVersion, {once: true});
+  } else {
+    appliquerVersion();
+  }
+})();
+</script>
 <aside class="global-display-zone global-display-zone-3" id="globalDisplayZone3" data-cdr-ref="CDR-064" data-frame-title="Zone d’affichage 3" data-ref-scope="COMMON" aria-label="Zone d’affichage 3">
   <div class="global-display-zone-3-bottom">
     <button data-bt-ref="BT-392" class="pdf-jump-button top-jump-button" id="jumpToTopButton" type="button" title="Aller en haut de l’application" aria-label="Aller en haut de l’application"><span>↑</span></button>
@@ -23115,7 +23255,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
       <div class="odoo-client-search-head"><h3>Rechercher un contact Odoo</h3><div><span class="odoo-client-status" id="odooClientStatus">Connexion Odoo à vérifier…</span></div></div>
       <div class="odoo-search-row"><div><label for="odooCustomerQuery">Nom et prénom, société ou e-mail</label><input class="input" id="odooCustomerQuery" data-no-validate-button="true" autocomplete="off" placeholder="Ex. Dupont, Atelier ABC, client@email.be"></div><button data-bt-ref="BT-077" class="btn primary" id="odooCustomerSearchButton" type="button">Rechercher dans Odoo</button></div>
       <div class="odoo-result-list" id="odooCustomerResults"></div>
-      <div class="odoo-create-contact-action"><button type="button" class="btn primary" data-bt-ref="BT-3150" id="odooOpenCreateContact">+ Créer un client sur Odoo</button><span class="help">Si le client n'existe pas encore, créer sa fiche avec l'étiquette de la société.</span></div>
+      <div class="odoo-create-contact-action"><button type="button" class="btn primary" data-bt-ref="BT-3150" id="odooOpenCreateContact">+ Créer un client dans Odoo</button><span class="help">Si le client n'existe pas encore, créer sa fiche avec l'étiquette de la société.</span></div>
     </div>
     <div class="odoo-selected-contact" id="odooSelectedContact" hidden><div><strong id="odooSelectedContactName">—</strong><span id="odooSelectedContactMeta">Contact Odoo sélectionné</span></div><button data-bt-ref="BT-078" class="btn secondary mini" id="odooChangeCustomer" type="button">Changer de client</button></div>
     <div class="client-grid">
@@ -23459,6 +23599,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
         <button data-bt-ref="BT-094" class="btn secondary" id="sim5SaveQuote" type="button">Enregistrer le devis Supabase</button>
         <button data-bt-ref="BT-095" class="btn primary" id="sim5CreatePdfBase" type="button">Créer PDF de base</button>
         <button data-bt-ref="BT-096" class="btn secondary pdf-development-button" id="sim5CreatePdfDevelopment" type="button">Créer PDF en développement</button>
+        <a data-bt-ref="BT-3155" class="btn secondary" id="sim5CustomerValidationLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Ouvrir la validation client</a>
       </div>
     </section>
 
@@ -23769,6 +23910,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
         <label class="radio-choice common-binary-choice-button" data-bt-ref="BT-732"><input type="radio" name="mpptSelectionMode" value="manual"><span>Contrôle manuel indépendant</span></label>
       </div>
       <div class="mppt-field-reminder" id="mpptFieldReminder" aria-live="polite"></div>
+      <span id="sim3MecasolDistanceHome" hidden aria-hidden="true"></span>
       <div class="mppt-single-field-distance" data-cdr-ref="CDR-850"><div><label for="solarCableDistance">Distance panneaux → SmartSolar</label><input class="input" id="solarCableDistance" type="number" min="0.01" step="any" value="0" required aria-describedby="solarCableDistanceValidation"><span class="help">Distance aller simple en mètres, obligatoire et supérieure à 0. Chaque string nécessite 2 conducteurs.</span><span id="solarCableDistanceValidation" class="solar-cable-distance-warning" role="status">Renseignez une distance supérieure à 0 m pour autoriser la sélection SmartSolar.</span></div></div>
       <div id="manualMpptControls" class="energy-box manual-mppt-checker" style="display:none;margin:0 0 18px" data-cdr-ref="CDR-842">
         <div class="stage-title">Vérification électrique des SmartSolar</div>
@@ -24273,7 +24415,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
 </div></div>
     <div class="energy-box"><div class="stage-title" id="profitabilityStepTitle">Étape 11 — Rentabilité du simulateur</div><p class="mppt-intro" id="profitabilityIntro">Retrouvez ici les mêmes données que dans les pages de rentabilité du PDF, afin de contrôler le dimensionnement avant de générer l’offre.</p><div class="quote-controls" id="profitabilityLegacyControls"><div><label for="electricityBuyPrice">Électricité achetée</label><input class="input" id="electricityBuyPrice" type="number" min="0" step="0.01" value="0.35"><span class="help">Prix TVAC en €/kWh.</span></div><div class="sim7-hidden-injection-revenue"><label for="electricitySellPrice">Électricité vendue</label><input class="input" id="electricitySellPrice" type="number" min="0" step="0.01" value="0.06"><span class="help">Rémunération de l’injection en €/kWh.</span></div><div><label for="electricityIndexation">Indexation annuelle</label><select class="select" id="electricityIndexation"><option value="1">1 %</option><option value="2" selected>2 %</option><option value="3">3 %</option><option value="4">4 %</option><option value="5">5 %</option></select></div><div><label for="annualProductionLoss">Perte de production annuelle</label><input class="input" id="annualProductionLoss" type="number" value="0.6" readonly><span class="help">Hypothèse fixée à 0,6 % par an.</span></div></div><div id="profitabilityResults"></div></div>
     <div class="energy-box" id="paymentTermsStep"><div class="stage-title" id="paymentTermsStepTitle">Étape 12 — Conditions de vente</div><p class="mppt-intro" id="sim7PaymentTermsIntro">Définissez la répartition des paiements reprise dans le devis. Le total des quatre échéances doit être égal à 100 %.</p><div class="payment-terms-grid"><div class="payment-term-card"><label for="paymentDeposit">Acompte à la commande</label><select class="select payment-term-select" id="paymentDeposit"><option value="0">0 %</option><option value="5">5 %</option><option value="10">10 %</option><option value="15">15 %</option><option value="20">20 %</option><option value="25" selected>25 %</option><option value="30">30 %</option><option value="35">35 %</option><option value="40">40 %</option><option value="45">45 %</option><option value="50">50 %</option><option value="55">55 %</option><option value="60">60 %</option><option value="65">65 %</option><option value="70">70 %</option><option value="75">75 %</option><option value="80">80 %</option><option value="85">85 %</option><option value="90">90 %</option><option value="95">95 %</option><option value="100">100 %</option></select></div><div class="payment-term-card"><label for="paymentStart">Avant le démarrage du chantier</label><select class="select payment-term-select" id="paymentStart"><option value="0">0 %</option><option value="5">5 %</option><option value="10">10 %</option><option value="15">15 %</option><option value="20">20 %</option><option value="25">25 %</option><option value="30">30 %</option><option value="35">35 %</option><option value="40">40 %</option><option value="45">45 %</option><option value="50" selected>50 %</option><option value="55">55 %</option><option value="60">60 %</option><option value="65">65 %</option><option value="70">70 %</option><option value="75">75 %</option><option value="80">80 %</option><option value="85">85 %</option><option value="90">90 %</option><option value="95">95 %</option><option value="100">100 %</option></select></div><div class="payment-term-card"><label for="paymentCommissioning">À la mise en service</label><select class="select payment-term-select" id="paymentCommissioning"><option value="0">0 %</option><option value="5">5 %</option><option value="10">10 %</option><option value="15">15 %</option><option value="20" selected>20 %</option><option value="25">25 %</option><option value="30">30 %</option><option value="35">35 %</option><option value="40">40 %</option><option value="45">45 %</option><option value="50">50 %</option><option value="55">55 %</option><option value="60">60 %</option><option value="65">65 %</option><option value="70">70 %</option><option value="75">75 %</option><option value="80">80 %</option><option value="85">85 %</option><option value="90">90 %</option><option value="95">95 %</option><option value="100">100 %</option></select></div><div class="payment-term-card" id="paymentGrdCard"><label for="paymentGrd">À la clôture du dossier GRD</label><select class="select payment-term-select" id="paymentGrd"><option value="0">0 %</option><option value="5" selected>5 %</option><option value="10">10 %</option><option value="15">15 %</option><option value="20">20 %</option><option value="25">25 %</option><option value="30">30 %</option><option value="35">35 %</option><option value="40">40 %</option><option value="45">45 %</option><option value="50">50 %</option><option value="55">55 %</option><option value="60">60 %</option><option value="65">65 %</option><option value="70">70 %</option><option value="75">75 %</option><option value="80">80 %</option><option value="85">85 %</option><option value="90">90 %</option><option value="95">95 %</option><option value="100">100 %</option></select></div></div><div class="discount-box"><label class="discount-toggle" for="quoteDiscountEnabled"><input id="quoteDiscountEnabled" type="checkbox"><span>Remise</span></label><div class="discount-controls is-disabled" id="quoteDiscountControls"><div><label for="quoteDiscountPercent">Pourcentage de remise</label><select class="select" id="quoteDiscountPercent" disabled><option value="5">5 %</option><option value="10" selected>10 %</option><option value="15">15 %</option><option value="20">20 %</option><option value="25">25 %</option></select></div><div class="discount-preview" id="quoteDiscountPreview">Remise non appliquée</div></div></div><div class="payment-terms-status" id="paymentTermsStatus" aria-live="polite"><span>Répartition complète des paiements</span><strong>100 %</strong></div><div class="fixed-terms-summary"><div class="fixed-term"><span>Validité de l’offre</span><strong>30 jours</strong></div><div class="fixed-term"><span>Délai de réalisation</span><strong>À convenir</strong></div></div></div>
-    <div class="quote-actions"><div class="pdf-status" id="quotePdfStatus" aria-live="polite">Version V655 — correction génération PDF Simulateur 1</div><button data-bt-ref="BT-152" class="btn primary quote-mail-button" id="openQuoteEmailComposer" type="button">Envoyer au client</button><a class="pdf-download-link" id="quotePdfDownload" href="#" target="_blank" rel="noopener">Ouvrir / télécharger le PDF</a><div class="pdf-variant-actions"><button data-bt-ref="BT-153" class="btn secondary pdf-button" id="exportOffgridInteractiveProfile" type="button" hidden>Exporter le profil interactif HTML</button><button data-bt-ref="BT-154" class="btn primary pdf-button" id="openQuotePdfBase" type="button">Créer PDF de base</button><button data-bt-ref="BT-155" class="btn secondary pdf-button pdf-development-button" id="openQuotePdfDevelopment" type="button">Créer PDF en développement</button></div></div>
+    <div class="quote-actions"><div class="pdf-status" id="quotePdfStatus" aria-live="polite">Version V655 — correction génération PDF Simulateur 1</div><button data-bt-ref="BT-152" class="btn primary quote-mail-button" id="openQuoteEmailComposer" type="button">Envoyer le PDF au client</button><a class="pdf-download-link" id="quotePdfDownload" href="#" target="_blank" rel="noopener">Ouvrir / télécharger le PDF</a><div class="pdf-variant-actions"><button data-bt-ref="BT-153" class="btn secondary pdf-button" id="exportOffgridInteractiveProfile" type="button" hidden>Exporter le profil interactif HTML</button><button data-bt-ref="BT-154" class="btn primary pdf-button" id="openQuotePdfBase" type="button">Créer PDF de base</button><button data-bt-ref="BT-155" class="btn secondary pdf-button pdf-development-button" id="openQuotePdfDevelopment" type="button">Créer PDF en développement</button></div></div>
   </section>
 
   <section class="panel" id="batterySimulator">
@@ -24772,11 +24914,11 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
 
           <div class="shop-pricing-cell"><label>Marge EVO-Sun %</label><input id="shopPricingDefaultMargin" type="number" min="0" max="500" step="0.1"></div>
           <div class="shop-pricing-cell"><label>Marge Meca-Sol %</label><input id="shopPricingDefaultMecasolMargin" type="number" min="0" max="500" step="0.1"></div>
-          <div class="shop-pricing-cell"><label>Particulier %</label><input id="shopPricingDefaultPrivate" type="number" min="0" max="100" step="0.1"></div>
-          <div class="shop-pricing-cell"><label>Partenaire 1 %</label><input id="shopPricingDefaultPartner1" type="number" min="0" max="100" step="0.1"></div>
-          <div class="shop-pricing-cell"><label>Partenaire 2 %</label><input id="shopPricingDefaultPartner2" type="number" min="0" max="100" step="0.1"></div>
-          <div class="shop-pricing-cell"><label>Partenaire 3 %</label><input id="shopPricingDefaultPartner3" type="number" min="0" max="100" step="0.1"></div>
-          <div class="shop-pricing-cell"><label>Partenaire 4 %</label><input id="shopPricingDefaultPartner4" type="number" min="0" max="100" step="0.1"></div>
+          <div class="shop-pricing-cell"><label>Particulier %</label><input id="shopPricingDefaultPrivate" type="number" min="0" max="100" step="0.1"><label class="shop-pricing-apply-all" title="Copier la remise Particulier dans toutes les catégories CP"><input type="checkbox" data-bt-ref="BT-1573" data-shop-pricing-apply="privateDiscountPct" data-default-input="shopPricingDefaultPrivate" aria-label="Appliquer la remise Particulier à toutes les catégories CP"><span>Toutes les CP</span></label></div>
+          <div class="shop-pricing-cell"><label>Partenaire 1 %</label><input id="shopPricingDefaultPartner1" type="number" min="0" max="100" step="0.1"><label class="shop-pricing-apply-all" title="Copier la remise Partenaire 1 dans toutes les catégories CP"><input type="checkbox" data-bt-ref="BT-1574" data-shop-pricing-apply="partner1DiscountPct" data-default-input="shopPricingDefaultPartner1" aria-label="Appliquer la remise Partenaire 1 à toutes les catégories CP"><span>Toutes les CP</span></label></div>
+          <div class="shop-pricing-cell"><label>Partenaire 2 %</label><input id="shopPricingDefaultPartner2" type="number" min="0" max="100" step="0.1"><label class="shop-pricing-apply-all" title="Copier la remise Partenaire 2 dans toutes les catégories CP"><input type="checkbox" data-bt-ref="BT-1575" data-shop-pricing-apply="partner2DiscountPct" data-default-input="shopPricingDefaultPartner2" aria-label="Appliquer la remise Partenaire 2 à toutes les catégories CP"><span>Toutes les CP</span></label></div>
+          <div class="shop-pricing-cell"><label>Partenaire 3 %</label><input id="shopPricingDefaultPartner3" type="number" min="0" max="100" step="0.1"><label class="shop-pricing-apply-all" title="Copier la remise Partenaire 3 dans toutes les catégories CP"><input type="checkbox" data-bt-ref="BT-1576" data-shop-pricing-apply="partner3DiscountPct" data-default-input="shopPricingDefaultPartner3" aria-label="Appliquer la remise Partenaire 3 à toutes les catégories CP"><span>Toutes les CP</span></label></div>
+          <div class="shop-pricing-cell"><label>Partenaire 4 %</label><input id="shopPricingDefaultPartner4" type="number" min="0" max="100" step="0.1"><label class="shop-pricing-apply-all" title="Copier la remise Partenaire 4 dans toutes les catégories CP"><input type="checkbox" data-bt-ref="BT-1577" data-shop-pricing-apply="partner4DiscountPct" data-default-input="shopPricingDefaultPartner4" aria-label="Appliquer la remise Partenaire 4 à toutes les catégories CP"><span>Toutes les CP</span></label></div>
         </div>
 
         <div class="shop-pricing-summary">
@@ -24888,60 +25030,28 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
     </div>
 
     <div class="admin-theme-content" data-admin-theme-content="emails">
-      <div class="admin-theme-content-head"><div><h3>Modèles d’e-mails</h3><p class="admin-theme-intro">Gérez les modèles d’e-mails, le SMS automatique et le texte optionnel ajouté sous la signature dans tous les envois client.</p></div><button data-bt-ref="BT-263" class="btn secondary admin-theme-back" type="button">Retour aux thèmes</button></div>
+      <div class="admin-theme-content-head"><div><h3>Modèles d’e-mails · EVO-Sun / Meca-Sol</h3><p class="admin-theme-intro">Deux configurations éditables côte à côte pour les COMMON de chaque société. Elles sont indépendantes à l'enregistrement et à l'envoi.</p></div><button data-bt-ref="BT-263" class="btn secondary admin-theme-back" type="button">Retour aux thèmes</button></div>
       <div class="admin-shared-config-note"><strong>Variables disponibles :</strong> {client} · {email} · {reference} · {projet} · {date} · {societe}. Elles sont remplacées automatiquement lors de la préparation du mail.</div>
       <div class="admin-crm-config-block admin-common-mail-block">
-        <div class="admin-crm-config-head"><div><strong>COMMON · Envoi du PDF au client</strong><small>Ces 3 modèles sont proposés dans le popup COMMON « Envoyer au client ». Un 4e cadre libre est toujours ajouté automatiquement.</small></div></div>
+        <div class="admin-crm-config-head"><div><strong>COMMON · Envoi du PDF au client — par société</strong><small>Chaque modèle comporte EVO-Sun à gauche et Meca-Sol à droite. Le simulateur choisit automatiquement sa société ; les textes ne sont plus partagés.</small></div></div>
+        <div class="admin-email-company-head" style="margin-bottom:12px"><span class="pill">EVO-Sun</span><span class="pill">Meca-Sol</span><span>Chaque COMMON dispose de deux versions indépendantes.</span></div>
         <div id="adminCommonQuoteMailTemplatesRows"></div>
-        <div class="admin-mail-template-row admin-common-mail-card admin-common-sms-card" id="adminCommonQuoteSmsTemplateRow">
-          <div class="admin-mail-template-row-grid">
-            <div><label>COMMON · SMS 01</label><input class="input" id="adminCommonQuoteSmsName" value="COMMON-PDF · SMS 01" readonly></div>
-            <div><label>Usage</label><input class="input" value="AFF-275 · Envoi du devis au client" readonly></div>
-          </div>
-          <label>Texte du SMS</label>
-          <textarea class="input" id="adminCommonQuoteSmsBody" rows="4"></textarea>
-          <small class="help">Variables disponibles : {client} · {reference} · {projet} · {date} · {societe} · {lien_validation}. Le SMS est envoyé uniquement si la case SMS reste cochée dans AFF-275.</small>
-        </div>
-        <div class="admin-mail-template-row admin-common-mail-card admin-common-signature-card" id="adminMailPostSignatureTextRow">
-          <div class="admin-mail-template-row-grid">
-            <div><label>Texte sous signature</label><input class="input" value="COMMON · Tous les envois e-mail client" readonly></div>
-            <div><label>Usage</label><input class="input" value="Case « Répondre à ce mail »" readonly></div>
-          </div>
-          <label>Texte ajouté après la signature</label>
-          <textarea class="input" id="adminMailPostSignatureText" rows="4"></textarea>
-          <small class="help">Ce texte est ajouté uniquement si la case « Répondre à ce mail » est cochée au moment de l’envoi.</small>
-        </div>
-        <div class="admin-mail-template-row admin-common-mail-card admin-validation-page-card" id="adminQuoteValidationEmailRow">
-          <div class="admin-common-card-title"><strong>COMMON · Validation de l’offre</strong><small>Réglages de la page publique et du bouton intégré au bon de commande.</small></div>
-          <label>Usage</label>
-          <input class="input" value="Bon de commande · page sécurisée de validation" readonly>
-          <label>Texte du bouton dans le PDF</label>
-          <input class="input" id="adminQuoteValidationButtonLabel" type="text">
-          <label>Titre de la page de validation</label>
-          <input class="input" id="adminQuoteValidationPageTitle" type="text">
-          <label>Texte d’introduction de la page</label>
-          <textarea class="input admin-common-long-text" id="adminQuoteValidationPageIntro" rows="4"></textarea>
-          <label>Texte du bouton de confirmation sur la page</label>
-          <input class="input" id="adminQuoteValidationPageConfirmLabel" type="text">
-          <label>Titre affiché après confirmation</label>
-          <input class="input" id="adminQuoteValidationConfirmationTitle" type="text">
-          <label>Texte affiché après confirmation</label>
-          <textarea class="input admin-common-long-text" id="adminQuoteValidationConfirmationBody" rows="4"></textarea>
-        </div>
-
-        <div class="admin-mail-template-row admin-common-mail-card admin-common-return-mail-card" id="adminQuoteValidationReturnMailRow">
-          <div class="admin-common-card-title"><strong>COMMON · Mail retour — validation de l’offre</strong><small>Mail envoyé automatiquement au client immédiatement après confirmation de son offre et de ses options.</small></div>
-          <label>Usage</label>
-          <input class="input" value="Retour automatique après « Confirmer mon accord »" readonly>
-          <label>Objet du mail</label>
-          <input class="input" id="adminQuoteValidationSubject" type="text">
-          <label>Corps du mail</label>
-          <textarea class="input admin-common-mail-body admin-common-long-text" id="adminQuoteValidationBody" rows="12"></textarea>
-          <small class="help">Variables disponibles : {client} · {reference} · {projet} · {date} · {societe} · {montant} · {options_choisies} · {montant_options} · {total} · {adresse}. Ce mail est envoyé par clever-processor après la validation du client.</small>
-        </div>
+<div class="admin-email-company-pair" aria-label="SMS du PDF EVO-Sun et Meca-Sol"><div class="admin-mail-template-row admin-common-mail-card admin-common-sms-card " data-mail-company="evosun"><div class="admin-email-company-head"><span class="pill">EVO-Sun</span><strong>COMMON · SMS 01</strong></div><div class="admin-mail-template-row-grid"><div><label>Usage</label><input class="input" value="AFF-275 · Envoi du devis au client" readonly></div></div>
+    <label>Texte du SMS</label><textarea class="input" id="adminCommonQuoteSmsBody" rows="4"></textarea>
+    <small class="help">Variables : {client} · {reference} · {projet} · {date} · {societe} · {lien_validation}. SMS soumis à la case de confirmation dans AFF-275.</small></div><div class="admin-mail-template-row admin-common-mail-card admin-common-sms-card meca-email" data-mail-company="mecasol"><div class="admin-email-company-head"><span class="pill">Meca-Sol</span><strong>COMMON · SMS 01</strong></div><div class="admin-mail-template-row-grid"><div><label>Usage</label><input class="input" value="AFF-275 · Envoi du devis au client" readonly></div></div>
+    <label>Texte du SMS</label><textarea class="input" id="adminCommonQuoteSmsBodyMecasol" rows="4"></textarea>
+    <small class="help">Variables : {client} · {reference} · {projet} · {date} · {societe} · {lien_validation}. SMS soumis à la case de confirmation dans AFF-275.</small></div></div><div class="admin-email-company-pair" aria-label="Texte sous signature EVO-Sun et Meca-Sol"><div class="admin-mail-template-row admin-common-mail-card admin-common-signature-card " data-mail-company="evosun"><div class="admin-email-company-head"><span class="pill">EVO-Sun</span><strong>COMMON · Texte sous signature</strong></div><label>Texte après signature</label><textarea class="input" id="adminMailPostSignatureText" rows="4"></textarea>
+    <small class="help">Utilisé lorsque « Répondre à ce mail » est sélectionné pour cette société.</small></div><div class="admin-mail-template-row admin-common-mail-card admin-common-signature-card meca-email" data-mail-company="mecasol"><div class="admin-email-company-head"><span class="pill">Meca-Sol</span><strong>COMMON · Texte sous signature</strong></div><label>Texte après signature</label><textarea class="input" id="adminMailPostSignatureTextMecasol" rows="4"></textarea>
+    <small class="help">Utilisé lorsque « Répondre à ce mail » est sélectionné pour cette société.</small></div></div><div class="admin-email-company-pair" aria-label="Page de validation EVO-Sun et Meca-Sol"><div class="admin-mail-template-row admin-common-mail-card admin-validation-page-card " data-mail-company="evosun"><div class="admin-email-company-head"><span class="pill">EVO-Sun</span><strong>COMMON · Validation de l’offre</strong></div><small class="help">Bon de commande · page sécurisée de validation</small><label>Texte du bouton dans le PDF</label><input class="input" id="adminQuoteValidationButtonLabel" type="text"><label>Titre de la page de validation</label><input class="input" id="adminQuoteValidationPageTitle" type="text"><label>Introduction de la page</label><textarea class="input admin-common-long-text" id="adminQuoteValidationPageIntro" rows="3"></textarea><label>Bouton de confirmation</label><input class="input" id="adminQuoteValidationPageConfirmLabel" type="text"><label>Titre après confirmation</label><input class="input" id="adminQuoteValidationConfirmationTitle" type="text"><label>Texte après confirmation</label><textarea class="input admin-common-long-text" id="adminQuoteValidationConfirmationBody" rows="3"></textarea></div><div class="admin-mail-template-row admin-common-mail-card admin-validation-page-card meca-email" data-mail-company="mecasol"><div class="admin-email-company-head"><span class="pill">Meca-Sol</span><strong>COMMON · Validation de l’offre</strong></div><small class="help">Bon de commande · page sécurisée de validation</small><label>Texte du bouton dans le PDF</label><input class="input" id="adminQuoteValidationButtonLabelMecasol" type="text"><label>Titre de la page de validation</label><input class="input" id="adminQuoteValidationPageTitleMecasol" type="text"><label>Introduction de la page</label><textarea class="input admin-common-long-text" id="adminQuoteValidationPageIntroMecasol" rows="3"></textarea><label>Bouton de confirmation</label><input class="input" id="adminQuoteValidationPageConfirmLabelMecasol" type="text"><label>Titre après confirmation</label><input class="input" id="adminQuoteValidationConfirmationTitleMecasol" type="text"><label>Texte après confirmation</label><textarea class="input admin-common-long-text" id="adminQuoteValidationConfirmationBodyMecasol" rows="3"></textarea></div></div><div class="admin-email-company-pair" aria-label="Mail de confirmation EVO-Sun et Meca-Sol"><div class="admin-mail-template-row admin-common-mail-card admin-common-return-mail-card " data-mail-company="evosun"><div class="admin-email-company-head"><span class="pill">EVO-Sun</span><strong>COMMON · Mail retour après validation</strong></div><small class="help">Envoyé après confirmation du client via clever-processor.</small>
+    <label>Objet du mail</label><input class="input" id="adminQuoteValidationSubject" type="text">
+    <label>Corps du mail</label><textarea class="input admin-common-mail-body admin-common-long-text" id="adminQuoteValidationBody" rows="10"></textarea>
+    <small class="help">Variables : {client} · {reference} · {projet} · {date} · {societe} · {montant} · {options_choisies} · {montant_options} · {total} · {adresse}.</small></div><div class="admin-mail-template-row admin-common-mail-card admin-common-return-mail-card meca-email" data-mail-company="mecasol"><div class="admin-email-company-head"><span class="pill">Meca-Sol</span><strong>COMMON · Mail retour après validation</strong></div><small class="help">Envoyé après confirmation du client via clever-processor.</small>
+    <label>Objet du mail</label><input class="input" id="adminQuoteValidationSubjectMecasol" type="text">
+    <label>Corps du mail</label><textarea class="input admin-common-mail-body admin-common-long-text" id="adminQuoteValidationBodyMecasol" rows="10"></textarea>
+    <small class="help">Variables : {client} · {reference} · {projet} · {date} · {societe} · {montant} · {options_choisies} · {montant_options} · {total} · {adresse}.</small></div></div>
       </div>
       <div class="admin-crm-config-block">
-        <div class="admin-crm-config-head"><div><strong>Anciens modèles généraux</strong><small>Modèles historiques conservés pour compatibilité avec les anciens écrans.</small></div></div>
+        <div class="admin-crm-config-head"><div><strong>Anciens modèles généraux</strong><small>Conservés séparément pour EVO-Sun et Meca-Sol, afin d'éviter toute confusion dans les anciens écrans.</small></div></div>
         <div id="adminMailTemplatesRows"></div>
       </div>
       <div class="admin-defaults-footer"><div class="notice" id="adminMailTemplatesNotice" aria-live="polite">Aucune modification en attente.</div><div class="actions"><button data-bt-ref="BT-264" class="btn primary" id="saveAdminMailTemplates" type="button">Enregistrer e-mails, SMS & texte sous signature</button></div></div>
@@ -25682,7 +25792,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
 </div>
 <div class="common-quote-send-modal" id="commonQuoteSendModal" aria-hidden="true">
   <div class="common-quote-send-card" data-aff-ref="AFF-275" role="dialog" aria-modal="true" aria-labelledby="commonQuoteSendTitle">
-    <div class="common-quote-send-head"><div><span>COMMON · PDF CLIENT</span><h2 id="commonQuoteSendTitle">Envoyer le devis au client</h2><p>Le PDF figé de cette révision sera joint au mail et classé dans « Offre(s) envoyée(s) ». Le contenu du mail sera copié dans le chatter Odoo.</p></div><button data-bt-ref="BT-416" class="common-quote-send-close" id="commonQuoteSendClose" type="button" aria-label="Fermer">×</button></div>
+    <div class="common-quote-send-head"><div><span>COMMON · PDF CLIENT</span><h2 id="commonQuoteSendTitle">COMMON · Envoi PDF au client <small id="commonQuoteSendCompanyLabel" style="font-size:12px;color:#c5f90b;white-space:nowrap">—</small></h2><p>Choisissez un des trois modèles COMMON ou un texte libre. Le message est envoyé depuis Odoo, rattaché au chatter du client, avec son PDF. Aucune ouverture d’Outlook.</p></div><button data-bt-ref="BT-416" class="common-quote-send-close" id="commonQuoteSendClose" type="button" aria-label="Fermer">×</button></div>
     <div class="common-quote-send-client">
       <div><span>Client</span><strong id="commonQuoteSendClientName">—</strong></div>
       <div><span>E-mail</span><strong id="commonQuoteSendClientEmail">—</strong></div>
@@ -25696,7 +25806,7 @@ html body > #sim5CatalogSticky.sim5-pinned-portal #sim5FinishOffer.menu-pinned-a
       <span>Envoyer aussi un SMS via Odoo<small id="commonQuoteSendSmsHint">Le SMS est activé par défaut et sera envoyé après le mail.</small></span>
     </label>
     <div class="common-quote-send-grid" id="commonQuoteSendGrid"></div>
-    <div class="common-quote-send-global-status" id="commonQuoteSendGlobalStatus">Choisissez un modèle puis cliquez sur « Envoyer ».</div>
+    <div class="common-quote-send-global-status" id="commonQuoteSendGlobalStatus" role="status" aria-live="polite">Sélectionnez un modèle, puis préparez son envoi.</div>
   </div>
 </div>
 <div class="common-quote-send-success-modal" id="commonQuoteSendSuccessModal" aria-hidden="true">
@@ -26498,8 +26608,8 @@ const SUPABASE_URL='https://jcajdwqrjuavedzkevfd.supabase.co';
   }
   async function openOdooFreeClient(){
     const number=commonCurrentSimulatorNumber();
-    if(number!==1&&number!==7){setOdooClientStatus('La création libre est réservée aux SIM 1 et SIM 7.',true);return}
-    const company=number===7?'mecasol':'evosun';
+    if(number!==1&&number!==5&&number!==7){setOdooClientStatus('La création libre est réservée aux SIM 1, SIM 5 et SIM 7.',true);return}
+    const company=number===7?'mecasol':number===5?activeCompany:'evosun';
     if(!odooTagsLoaded)await loadOdooCustomerTags({force:true});
     const tag=odooFreeClientTag(company);
     if(!tag){setOdooClientStatus(`Étiquette de création ${company==='mecasol'?'Meca-Sol':'EVO-Sun'} non configurée. Administration → Contacts Odoo → Création libre client Odoo.`,true);return}
@@ -26884,6 +26994,40 @@ const SUPABASE_URL='https://jcajdwqrjuavedzkevfd.supabase.co';
   }catch{return JSON.parse(JSON.stringify(DEFAULT_COMPANY_SETTINGS))}};
   const writeCompanySettings=settings=>localStorage.setItem(COMPANY_SETTINGS_KEY,JSON.stringify(settings));
   let companySettings=readCompanySettings();
+  /* V1571: share reference production and electricity labor defaults through the same
+     Supabase Admin configuration as other common settings; localStorage is a cache. */
+  function cgsSharedCompanyDefaults(){
+    return Object.fromEntries(['evosun','mecasol'].map(id=>[id,{
+      monthlyPvReference:(Array.isArray(companySettings[id]?.monthlyPvReference)?companySettings[id].monthlyPvReference:[]).map(v=>Math.max(0,Number(v)||0)).slice(0,12),
+      electricianHourlyRate:companySettings[id]?.electricianHourlyRate??'',
+    }]));
+  }
+  async function cgsLoadSharedCompanyDefaults(){
+    const shared=offerAdminConfig?.sharedCompanyDefaults;
+    if(shared&&typeof shared==='object'){
+      ['evosun','mecasol'].forEach(id=>{
+        const incoming=shared[id],profile=companySettings[id];
+        if(!incoming||!profile)return;
+        const months=incoming.monthlyPvReference;
+        if(Array.isArray(months)&&months.length===12&&months.every(v=>Number.isFinite(Number(v))&&Number(v)>=0)){
+          profile.monthlyPvReference=months.map(v=>Number(v));
+        }
+        if(incoming.electricianHourlyRate!==undefined&&incoming.electricianHourlyRate!==null){
+          profile.electricianHourlyRate=incoming.electricianHourlyRate;
+        }
+      });
+      try{writeCompanySettings(companySettings)}catch{}
+      return;
+    }
+    // Publish historical local company data only from the authenticated administrator.
+    if(isDominiqueAdmin()){
+      const defaults=cgsSharedCompanyDefaults();
+      if(Object.values(defaults).some(c=>c.monthlyPvReference.length===12&&c.monthlyPvReference.some(v=>v>0))){
+        offerAdminConfig.sharedCompanyDefaults=defaults;
+        try{await saveOfferAdminConfig()}catch(e){console.warn('Publication paramètres solaires',e)}
+      }
+    }
+  }
   const ROOF_COMPANY_PRICES_KEY='evosun-roof-company-prices-v1';
   const readRoofCompanyPrices=()=>{try{const data=JSON.parse(localStorage.getItem(ROOF_COMPANY_PRICES_KEY)||'{}');return data&&typeof data==='object'?data:{}}catch{return{}}};
   const writeRoofCompanyPrices=data=>localStorage.setItem(ROOF_COMPANY_PRICES_KEY,JSON.stringify(data||{}));
@@ -27312,6 +27456,27 @@ Bien à vous,
       confirmationTitle:String(rawQuoteValidationEmail.confirmationTitle??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationTitle),
       confirmationBody:String(rawQuoteValidationEmail.confirmationBody??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationBody)
     };
+    // V1575 — COMMON d'e-mails indépendants par société.
+    // Les anciens champs top-level restent la configuration historique EVO-Sun.
+    // Les modèles Meca-Sol sont initialisés une seule fois à partir de modèles neutres,
+    // puis stockés et édités de façon totalement indépendante.
+    const mecaMailRaw=raw.mailCommonsMecasol&&typeof raw.mailCommonsMecasol==='object'&&!Array.isArray(raw.mailCommonsMecasol)?raw.mailCommonsMecasol:{};
+    const mecaMailDefaultText=value=>String(value??'').replace(/EVO[‑–—-\s]*Sun/gi,'Meca-Sol');
+    const mecaMailDefaults=DEFAULT_MAIL_TEMPLATES.map((v,index)=>({id:`mail-meca-${index+1}`,name:v.name,subject:mecaMailDefaultText(v.subject),body:mecaMailDefaultText(v.body)}));
+    const mecaCommonDefaults=DEFAULT_COMMON_QUOTE_MAIL_TEMPLATES.map((v,index)=>({id:`common-quote-mail-meca-${index+1}`,name:v.name,subject:mecaMailDefaultText(v.subject),body:mecaMailDefaultText(v.body)}));
+    const normalizeCompanyTemplates=(source,defaults)=>defaults.map((fallback,index)=>{
+      const v=Array.isArray(source)?source[index]||fallback:fallback;
+      return {id:String(v?.id||fallback.id),name:String(v?.name||fallback.name),subject:String(v?.subject??fallback.subject),body:String(v?.body??fallback.body)}
+    });
+    const mecaValidationDefaults=Object.fromEntries(Object.entries(DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG).map(([k,v])=>[k,mecaMailDefaultText(v)]));
+    const mecaValidationRaw=mecaMailRaw.quoteValidationEmail&&typeof mecaMailRaw.quoteValidationEmail==='object'?mecaMailRaw.quoteValidationEmail:{};
+    const mailCommonsMecasol={
+      mailTemplates:normalizeCompanyTemplates(mecaMailRaw.mailTemplates,mecaMailDefaults),
+      commonQuoteMailTemplates:normalizeCompanyTemplates(mecaMailRaw.commonQuoteMailTemplates,mecaCommonDefaults),
+      commonQuoteSmsTemplate:{id:'common-quote-sms-meca',name:'COMMON-PDF · SMS 01',body:String(mecaMailRaw.commonQuoteSmsTemplate?.body??mecaMailDefaultText(DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.body))},
+      mailPostSignatureText:String(mecaMailRaw.mailPostSignatureText??DEFAULT_MAIL_POST_SIGNATURE_TEXT),
+      quoteValidationEmail:Object.fromEntries(Object.keys(DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG).map(key=>[key,String(mecaValidationRaw[key]??mecaValidationDefaults[key])]))
+    };
     const userSignatures={};
     if(raw.userSignatures&&typeof raw.userSignatures==='object')Object.entries(raw.userSignatures).forEach(([email,item])=>{
       const key=String(email||'').trim().toLowerCase(),url=String(item?.url||'').trim();
@@ -27555,7 +27720,7 @@ Bien à vous,
     const legacyAllEnabled=oldSimco&&typeof oldSimco==='object'&&
       [1,2,3,4,5,6,8,9,10].every(n=>oldSimco[`SIM${n}`]?.evosun===true&&oldSimco[`SIM${n}`]?.mecasol===true)&&
       oldSimco.SIM7?.evosun===false&&oldSimco.SIM7?.mecasol===true;
-    return{cgsExcludedProducts:Object.fromEntries(Object.entries(raw.cgsExcludedProducts&&typeof raw.cgsExcludedProducts==='object'?raw.cgsExcludedProducts:{}).filter(([id,value])=>/^\d+$/.test(String(id))&&value&&typeof value==='object').map(([id,value])=>[id,{excludedAt:String(value.excludedAt||''),simulatorIds:Array.isArray(value.simulatorIds)?value.simulatorIds.filter(v=>/^SIM[1-7]$/.test(String(v))):[],useInSimulator:value.useInSimulator===true}])),victronPhotoCache:raw.victronPhotoCache&&typeof raw.victronPhotoCache==='object'&&!Array.isArray(raw.victronPhotoCache)?raw.victronPhotoCache:{},simulatorCompanies:Object.fromEntries(Array.from({length:10},(_,i)=>{const n=i+1,key=`SIM${n}`,src=raw.simulatorCompanies?.[key];return[key,{evosun:legacyAllEnabled?n<=6:(src?.evosun===undefined?n<=6:Boolean(src.evosun)),mecasol:legacyAllEnabled?n===7:(src?.mecasol===undefined?n===7:Boolean(src.mecasol)),name:String(src?.name||'').trim().slice(0,100)}]})),links:normalizedLinks,photos,photoHistory,managementBackground,sim5SetupPhotos,companyLogos,homeModules,homeModulesInitialized:true,assistantMailAi,technicalOffers:{variables:technicalOfferVariables,dossiers:technicalOfferDossiers},odoo:{allowedTagIds,allowedTagIdsByCompany:{evosun:allowedTagIds,mecasol:allowedMecasolTagIds},webUrl:odooWebUrl,freeCreationTagIds:{evosun:Number(raw.odoo?.freeCreationTagIds?.evosun)||0,mecasol:Number(raw.odoo?.freeCreationTagIds?.mecasol)||0}},crm:{tagIds:crmTagIds,tagIdsByCompany:{evosun:crmTagIds,mecasol:crmMecasolTagIds},statuses:crmStatuses,savStatuses:crmSavStatuses,followupStatuses:crmFollowupStatuses,knownContactIds:crmKnownContactIds,newContactIds:crmNewContactIds,contactBaselineInitialized:crmContactBaselineInitialized,lastContactScanAt:crmLastContactScanAt,actionTools:crmActionTools,senderMailboxes:crmSenderMailboxes,status3ResetV1015:crmStatus3ResetV1015},odooMigration:{mappings:migrationMappings},shopPricing,adminDefaults:raw.adminDefaults&&typeof raw.adminDefaults==='object'&&!Array.isArray(raw.adminDefaults)?{...raw.adminDefaults}:{},mecasolGlobalTransportPercent:(raw.mecasolGlobalTransportPercent!==undefined&&raw.mecasolGlobalTransportPercent!==null&&raw.mecasolGlobalTransportPercent!==''&&Number.isFinite(Number(raw.mecasolGlobalTransportPercent)))?Math.max(0,Number(raw.mecasolGlobalTransportPercent)):undefined,mecasolImportDutyByCp:Object.fromEntries(Object.entries(raw.mecasolImportDutyByCp&&typeof raw.mecasolImportDutyByCp==='object'?raw.mecasolImportDutyByCp:{}).filter(([key,value])=>key&&value!==''&&Number.isFinite(Number(value))&&Number(value)>=0&&Number(value)<=100).map(([key,value])=>[String(key),Number(value)])),equipmentCategories,retiredEquipmentCpIds,equipmentCategoryLabels,equipmentAccessoryVisibility,technicalProfiles,mailTemplates,commonQuoteMailTemplates,commonQuoteSmsTemplate,mailPostSignatureText,quoteValidationEmail,userSignatures,optionQuantities,catalogArchive,productOptions,localBatteryUsage,agenda:{actions:agendaActions,permissions:agendaPermissions},updatedAt:String(raw.updatedAt||'')}
+    return{cgsExcludedProducts:Object.fromEntries(Object.entries(raw.cgsExcludedProducts&&typeof raw.cgsExcludedProducts==='object'?raw.cgsExcludedProducts:{}).filter(([id,value])=>/^\d+$/.test(String(id))&&value&&typeof value==='object').map(([id,value])=>[id,{excludedAt:String(value.excludedAt||''),simulatorIds:Array.isArray(value.simulatorIds)?value.simulatorIds.filter(v=>/^SIM[1-7]$/.test(String(v))):[],useInSimulator:value.useInSimulator===true}])),victronPhotoCache:raw.victronPhotoCache&&typeof raw.victronPhotoCache==='object'&&!Array.isArray(raw.victronPhotoCache)?raw.victronPhotoCache:{},simulatorCompanies:Object.fromEntries(Array.from({length:10},(_,i)=>{const n=i+1,key=`SIM${n}`,src=raw.simulatorCompanies?.[key];return[key,{evosun:legacyAllEnabled?n<=6:(src?.evosun===undefined?n<=6:Boolean(src.evosun)),mecasol:legacyAllEnabled?n===7:(src?.mecasol===undefined?n===7:Boolean(src.mecasol)),name:String(src?.name||'').trim().slice(0,100)}]})),links:normalizedLinks,photos,photoHistory,managementBackground,sim5SetupPhotos,companyLogos,homeModules,homeModulesInitialized:true,assistantMailAi,technicalOffers:{variables:technicalOfferVariables,dossiers:technicalOfferDossiers},odoo:{allowedTagIds,allowedTagIdsByCompany:{evosun:allowedTagIds,mecasol:allowedMecasolTagIds},webUrl:odooWebUrl,freeCreationTagIds:{evosun:Number(raw.odoo?.freeCreationTagIds?.evosun)||0,mecasol:Number(raw.odoo?.freeCreationTagIds?.mecasol)||0}},crm:{tagIds:crmTagIds,tagIdsByCompany:{evosun:crmTagIds,mecasol:crmMecasolTagIds},statuses:crmStatuses,savStatuses:crmSavStatuses,followupStatuses:crmFollowupStatuses,knownContactIds:crmKnownContactIds,newContactIds:crmNewContactIds,contactBaselineInitialized:crmContactBaselineInitialized,lastContactScanAt:crmLastContactScanAt,actionTools:crmActionTools,senderMailboxes:crmSenderMailboxes,status3ResetV1015:crmStatus3ResetV1015},odooMigration:{mappings:migrationMappings},shopPricing,adminDefaults:raw.adminDefaults&&typeof raw.adminDefaults==='object'&&!Array.isArray(raw.adminDefaults)?{...raw.adminDefaults}:{},mecasolGlobalTransportPercent:(raw.mecasolGlobalTransportPercent!==undefined&&raw.mecasolGlobalTransportPercent!==null&&raw.mecasolGlobalTransportPercent!==''&&Number.isFinite(Number(raw.mecasolGlobalTransportPercent)))?Math.max(0,Number(raw.mecasolGlobalTransportPercent)):undefined,mecasolImportDutyByCp:Object.fromEntries(Object.entries(raw.mecasolImportDutyByCp&&typeof raw.mecasolImportDutyByCp==='object'?raw.mecasolImportDutyByCp:{}).filter(([key,value])=>key&&value!==''&&Number.isFinite(Number(value))&&Number(value)>=0&&Number(value)<=100).map(([key,value])=>[String(key),Number(value)])),equipmentCategories,retiredEquipmentCpIds,equipmentCategoryLabels,equipmentAccessoryVisibility,technicalProfiles,mailTemplates,commonQuoteMailTemplates,commonQuoteSmsTemplate,mailPostSignatureText,quoteValidationEmail,mailCommonsMecasol,userSignatures,optionQuantities,catalogArchive,productOptions,localBatteryUsage,agenda:{actions:agendaActions,permissions:agendaPermissions},updatedAt:String(raw.updatedAt||'')}
   }
   function readLocalOfferAdminConfig(){try{return normalizeOfferAdminConfig(JSON.parse(localStorage.getItem(OFFER_ADMIN_CONFIG_LOCAL_KEY)||'{}'))}catch{return normalizeOfferAdminConfig({})}}
   // V1453 : la copie navigateur est un cache, jamais une condition préalable à Supabase.
@@ -32419,6 +32584,7 @@ Bien à vous,
         shopPricingDefaultPartner4:cfg.defaultPartner4DiscountPct
       };
     Object.entries(defaults).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.value=String(Number(value).toFixed(1))});
+    document.querySelectorAll('[data-shop-pricing-apply]').forEach(el=>{el.checked=false});
     const rounding=document.getElementById('shopPricingRounding');if(rounding)rounding.value=cfg.rounding;
 
     root.innerHTML=odooMigrationCategories().map(category=>{
@@ -32441,6 +32607,36 @@ Bien à vous,
     }).join('');
 
     renderShopPricingSummary()
+  }
+
+  // V1575 — Copier la remise de la première ligne vers toutes les catégories
+  // uniquement pour le profil coché. Rien n'est envoyé à Odoo automatiquement.
+  function shopPricingApplyDefaultToAll(checkbox){
+    if(!checkbox?.checked)return;
+    if(!requireAdminAccess()){checkbox.checked=false;return}
+    const field=String(checkbox.dataset.shopPricingApply||'');
+    const allowed=new Set(['privateDiscountPct','partner1DiscountPct','partner2DiscountPct','partner3DiscountPct','partner4DiscountPct']);
+    if(!allowed.has(field)){checkbox.checked=false;return}
+    const source=document.getElementById(String(checkbox.dataset.defaultInput||''));
+    const raw=String(source?.value??'').trim();
+    const value=Number(raw);
+    if(!raw||!Number.isFinite(value)||value<0||value>100){
+      checkbox.checked=false;
+      const notice=document.getElementById('shopPricingNotice');
+      if(notice)notice.textContent='Saisissez un taux de remise compris entre 0 et 100 % avant de cocher « Toutes les CP ».';
+      return
+    }
+    const inputs=[...document.querySelectorAll('#shopPricingRows [data-shop-pricing-field="'+field+'"]')];
+    if(!inputs.length){
+      checkbox.checked=false;
+      const notice=document.getElementById('shopPricingNotice');
+      if(notice)notice.textContent='Aucune catégorie CP chargée : actualisez le catalogue avant une application globale.';
+      return
+    }
+    inputs.forEach(input=>{input.value=value.toFixed(1)});
+    const title=field==='privateDiscountPct'?'Particulier':field.replace('partner','Partenaire ').replace('DiscountPct','');
+    const notice=document.getElementById('shopPricingNotice');
+    if(notice)notice.textContent=`Remise ${title} de ${value.toLocaleString('fr-BE',{maximumFractionDigits:1})} % copiée sur ${inputs.length} catégorie(s) CP. Cliquez sur « Enregistrer les règles » pour conserver ces changements. Aucun prix Odoo n'est modifié ici.`
   }
 
   function shopPricingRowRule(row){
@@ -33877,57 +34073,77 @@ async function retrieveSingleVictronProductPhoto(id,button){
     })
   }
 
+  // V1575 — une source unique par société pour tous les COMMON e-mail.
+  function commonEmailCompanyForQuote(){
+    const customer=window.quotePdfCustomer||pendingPdfCustomer||{};
+    const companyKey=String(customer.companyId||customer.company||'').toLowerCase();
+    const reference=String(customer.reference||document.getElementById('quoteReference')?.value||'');
+    if(companyKey==='mecasol'||/meca[ -]?sol/.test(companyKey)||/^MCS[-\s]/i.test(reference))return 'mecasol';
+    if(companyKey==='evosun'||/evo[ -]?sun/.test(companyKey)||/^(EVS|EVO)[-\s]/i.test(reference))return 'evosun';
+    return activeCompany==='mecasol'?'mecasol':'evosun';
+  }
+  function commonEmailSettingsForCompany(company){
+    return company==='mecasol'?(offerAdminConfig.mailCommonsMecasol||normalizeOfferAdminConfig({}).mailCommonsMecasol):offerAdminConfig;
+  }
+  function commonValidationEmailConfigForCompany(company){
+    return commonEmailSettingsForCompany(company).quoteValidationEmail||DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG;
+  }
   function renderAdminMailTemplates(){
-    const root=document.getElementById('adminMailTemplatesRows'),commonRoot=document.getElementById('adminCommonQuoteMailTemplatesRows');
-    if(root){
-      const templates=normalizeOfferAdminConfig({mailTemplates:offerAdminConfig.mailTemplates}).mailTemplates;
-      root.innerHTML=templates.map((item,index)=>`<div class="admin-mail-template-row" data-mail-template-id="${escapeHtml(item.id)}"><div class="admin-mail-template-row-grid"><div><label>Nom du modèle ${index+1}</label><input class="input admin-mail-name" value="${escapeHtml(item.name)}"></div><div><label>Objet du mail</label><input class="input admin-mail-subject" value="${escapeHtml(item.subject)}"></div></div><label>Corps du mail</label><textarea class="input admin-mail-body">${escapeHtml(item.body)}</textarea></div>`).join('');
-    }
+    const legacyRoot=document.getElementById('adminMailTemplatesRows');
+    const commonRoot=document.getElementById('adminCommonQuoteMailTemplatesRows');
+    const configs=['evosun','mecasol'].map(company=>({company,config:commonEmailSettingsForCompany(company)}));
+    const card=(item,index,company,kind)=>{
+      const isCommon=kind==='common',prefix=isCommon?'admin-common-':'admin-',idAttr=isCommon?'data-common-quote-mail-id':'data-mail-template-id';
+      const cl=isCommon?'admin-mail-template-row admin-common-mail-card admin-common-quote-mail-card':'admin-mail-template-row admin-common-mail-card';
+      const title=isCommon?`COMMON · Mail ${index+1}`:`Mail général ${index+1}`;
+      return `<div class="${cl}${company==='mecasol'?' meca-email':''}" data-mail-company="${company}" ${idAttr}="${escapeHtml(item.id)}">
+        <div class="admin-email-company-head"><span class="pill">${company==='mecasol'?'Meca-Sol':'EVO-Sun'}</span><strong>${title}</strong></div>
+        <label>Nom du modèle</label><input class="input ${prefix}mail-name" value="${escapeHtml(item.name)}">
+        <label>Objet du mail</label><input class="input ${prefix}mail-subject" value="${escapeHtml(item.subject)}">
+        <label>Corps du mail</label><textarea class="input ${prefix}mail-body" rows="9">${escapeHtml(item.body)}</textarea></div>`;
+    };
     if(commonRoot){
-      const common=normalizeOfferAdminConfig({commonQuoteMailTemplates:offerAdminConfig.commonQuoteMailTemplates}).commonQuoteMailTemplates;
-      commonRoot.innerHTML=common.map((item,index)=>`<div class="admin-mail-template-row admin-common-mail-card admin-common-quote-mail-card" data-common-quote-mail-id="${escapeHtml(item.id)}"><div class="admin-common-card-title"><strong>COMMON · Mail ${index+1}</strong><small>Modèle proposé dans « Envoyer le PDF au client ».</small></div><label>Nom du modèle</label><input class="input admin-common-mail-name" value="${escapeHtml(item.name)}"><label>Objet du mail</label><input class="input admin-common-mail-subject" value="${escapeHtml(item.subject)}"><label>Corps du mail</label><textarea class="input admin-common-mail-body admin-common-long-text" rows="10">${escapeHtml(item.body)}</textarea></div>`).join('');
+      commonRoot.innerHTML=Array.from({length:3},(_,index)=>`<div class="admin-email-company-pair">${configs.map(({company,config})=>card(config.commonQuoteMailTemplates[index],index,company,'common')).join('')}</div>`).join('');
     }
-    const sms=normalizeOfferAdminConfig({commonQuoteSmsTemplate:offerAdminConfig.commonQuoteSmsTemplate}).commonQuoteSmsTemplate,smsBody=document.getElementById('adminCommonQuoteSmsBody');
-    if(smsBody)smsBody.value=sms.body||'';
-    const postSignature=document.getElementById('adminMailPostSignatureText');
-    if(postSignature)postSignature.value=String(offerAdminConfig.mailPostSignatureText??DEFAULT_MAIL_POST_SIGNATURE_TEXT);
-    const validationCfg=offerAdminConfig.quoteValidationEmail&&typeof offerAdminConfig.quoteValidationEmail==='object'?offerAdminConfig.quoteValidationEmail:DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG,
-      validationButton=document.getElementById('adminQuoteValidationButtonLabel'),validationSubject=document.getElementById('adminQuoteValidationSubject'),validationBody=document.getElementById('adminQuoteValidationBody'),
-      validationPageTitle=document.getElementById('adminQuoteValidationPageTitle'),validationPageIntro=document.getElementById('adminQuoteValidationPageIntro'),validationPageConfirmLabel=document.getElementById('adminQuoteValidationPageConfirmLabel'),
-      validationConfirmationTitle=document.getElementById('adminQuoteValidationConfirmationTitle'),validationConfirmationBody=document.getElementById('adminQuoteValidationConfirmationBody');
-    if(validationButton)validationButton.value=String(validationCfg.buttonLabel??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.buttonLabel);
-    if(validationSubject)validationSubject.value=String(validationCfg.subject??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.subject);
-    if(validationBody)validationBody.value=String(validationCfg.body??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.body);
-    if(validationPageTitle)validationPageTitle.value=String(validationCfg.pageTitle??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageTitle);
-    if(validationPageIntro)validationPageIntro.value=String(validationCfg.pageIntro??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageIntro);
-    if(validationPageConfirmLabel)validationPageConfirmLabel.value=String(validationCfg.pageConfirmLabel??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageConfirmLabel);
-    if(validationConfirmationTitle)validationConfirmationTitle.value=String(validationCfg.confirmationTitle??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationTitle);
-    if(validationConfirmationBody)validationConfirmationBody.value=String(validationCfg.confirmationBody??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationBody);
+    if(legacyRoot){
+      legacyRoot.innerHTML=Array.from({length:6},(_,index)=>`<div class="admin-email-company-pair">${configs.map(({company,config})=>card(config.mailTemplates[index],index,company,'legacy')).join('')}</div>`).join('');
+    }
+    configs.forEach(({company,config})=>{
+      const suffix=company==='mecasol'?'Mecasol':'';
+      const set=(name,value)=>{const el=document.getElementById(name+suffix);if(el)el.value=String(value??'')};
+      set('adminCommonQuoteSmsBody',config.commonQuoteSmsTemplate?.body||'');
+      set('adminMailPostSignatureText',config.mailPostSignatureText);
+      const values=config.quoteValidationEmail||DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG;
+      const keyMap={ButtonLabel:'buttonLabel',Subject:'subject',Body:'body',PageTitle:'pageTitle',PageIntro:'pageIntro',PageConfirmLabel:'pageConfirmLabel',ConfirmationTitle:'confirmationTitle',ConfirmationBody:'confirmationBody'};
+      Object.entries(keyMap).forEach(([label,key])=>set('adminQuoteValidation'+label,values[key]));
+    });
     setTimeout(autoSizeAdminCommonMailTextareas,0);
   }
-  function collectAdminMailTemplates(){
-    return [...document.querySelectorAll('#adminMailTemplatesRows .admin-mail-template-row')].map((row,index)=>({id:row.dataset.mailTemplateId||`mail-${Date.now()}-${index}`,name:row.querySelector('.admin-mail-name')?.value?.trim()||`Mail ${index+1}`,subject:row.querySelector('.admin-mail-subject')?.value||'',body:row.querySelector('.admin-mail-body')?.value||''}));
+  function collectAdminMailTemplates(company='evosun'){
+    return [...document.querySelectorAll('#adminMailTemplatesRows .admin-mail-template-row[data-mail-company="'+company+'"]')].map((row,index)=>({id:row.dataset.mailTemplateId||`mail-${company}-${index+1}`,name:row.querySelector('.admin-mail-name')?.value?.trim()||`Mail ${index+1}`,subject:row.querySelector('.admin-mail-subject')?.value||'',body:row.querySelector('.admin-mail-body')?.value||''}));
   }
-  function collectAdminCommonQuoteMailTemplates(){
-    return [...document.querySelectorAll('#adminCommonQuoteMailTemplatesRows .admin-mail-template-row')].map((row,index)=>({id:row.dataset.commonQuoteMailId||`common-quote-mail-${index+1}`,name:row.querySelector('.admin-common-mail-name')?.value?.trim()||`Mail ${index+1}`,subject:row.querySelector('.admin-common-mail-subject')?.value||'',body:row.querySelector('.admin-common-mail-body')?.value||''}));
+  function collectAdminCommonQuoteMailTemplates(company='evosun'){
+    return [...document.querySelectorAll('#adminCommonQuoteMailTemplatesRows .admin-mail-template-row[data-mail-company="'+company+'"]')].map((row,index)=>({id:row.dataset.commonQuoteMailId||`common-quote-mail-${company}-${index+1}`,name:row.querySelector('.admin-common-mail-name')?.value?.trim()||`Mail ${index+1}`,subject:row.querySelector('.admin-common-mail-subject')?.value||'',body:row.querySelector('.admin-common-mail-body')?.value||''}));
   }
-  function collectAdminCommonQuoteSmsTemplate(){
-    return{id:DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.id,name:DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.name,body:String(document.getElementById('adminCommonQuoteSmsBody')?.value||'').trim()||DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.body}
+  function collectAdminCommonQuoteSmsTemplate(company='evosun'){
+    const suffix=company==='mecasol'?'Mecasol':'';
+    return{id:company==='mecasol'?'common-quote-sms-meca':DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.id,name:DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.name,body:String(document.getElementById('adminCommonQuoteSmsBody'+suffix)?.value||'').trim()|| (company==='mecasol'?'Bonjour {client}, votre offre Meca-Sol {reference} est prête.':DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.body)};
   }
-  function collectAdminMailPostSignatureText(){
-    return String(document.getElementById('adminMailPostSignatureText')?.value??'').trim()||DEFAULT_MAIL_POST_SIGNATURE_TEXT
+  function collectAdminMailPostSignatureText(company='evosun'){
+    return String(document.getElementById('adminMailPostSignatureText'+(company==='mecasol'?'Mecasol':''))?.value??'').trim()||DEFAULT_MAIL_POST_SIGNATURE_TEXT;
   }
-  function collectAdminQuoteValidationEmail(){
+  function collectAdminQuoteValidationEmail(company='evosun'){
+    const suffix=company==='mecasol'?'Mecasol':'';
+    const current=commonValidationEmailConfigForCompany(company);
+    const byKey=(id,key)=>String(document.getElementById(id+suffix)?.value??current[key]??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG[key]);
     return{
-      buttonLabel:String(document.getElementById('adminQuoteValidationButtonLabel')?.value??'').trim()||DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.buttonLabel,
-      subject:String(document.getElementById('adminQuoteValidationSubject')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.subject),
-      body:String(document.getElementById('adminQuoteValidationBody')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.body),
-      pageTitle:String(document.getElementById('adminQuoteValidationPageTitle')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageTitle),
-      pageIntro:String(document.getElementById('adminQuoteValidationPageIntro')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageIntro),
-      pageConfirmLabel:String(document.getElementById('adminQuoteValidationPageConfirmLabel')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.pageConfirmLabel),
-      confirmationTitle:String(document.getElementById('adminQuoteValidationConfirmationTitle')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationTitle),
-      confirmationBody:String(document.getElementById('adminQuoteValidationConfirmationBody')?.value??DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.confirmationBody)
-    }
+      buttonLabel:byKey('adminQuoteValidationButtonLabel','buttonLabel').trim()||current.buttonLabel,
+      subject:byKey('adminQuoteValidationSubject','subject'),body:byKey('adminQuoteValidationBody','body'),
+      pageTitle:byKey('adminQuoteValidationPageTitle','pageTitle'),pageIntro:byKey('adminQuoteValidationPageIntro','pageIntro'),
+      pageConfirmLabel:byKey('adminQuoteValidationPageConfirmLabel','pageConfirmLabel'),
+      confirmationTitle:byKey('adminQuoteValidationConfirmationTitle','confirmationTitle'),
+      confirmationBody:byKey('adminQuoteValidationConfirmationBody','confirmationBody')
+    };
   }
   function emailTemplateVariables(){
     const customer=window.quotePdfCustomer||pendingPdfCustomer||{},company=getCompanyProfile?.()||{};
@@ -34137,7 +34353,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(legacy&&typeof MutationObserver==='function')new MutationObserver(syncCommonPdfReadyFromLegacyLink).observe(legacy,{attributes:true,childList:true,subtree:true});
   },0);
 
-  function syncQuoteMailButton(){const btn=document.getElementById('openQuoteEmailComposer');if(!btn)return;btn.classList.toggle('ready',Boolean(window.quotePdfBlob&&window.quotePdfFilename&&[1,7].includes(Number(window.quotePdfSimulator))))}
+  function syncQuoteMailButton(){const btn=document.getElementById('openQuoteEmailComposer');if(!btn)return;btn.classList.toggle('ready',Boolean(window.quotePdfBlob&&window.quotePdfFilename&&[1,5,7].includes(Number(window.quotePdfSimulator))))}
   function selectedEmailTemplateCard(){
     const radio=document.querySelector('#quoteEmailTemplateChoices input[name="quoteEmailTemplate"]:checked');
     return radio?.closest('.quote-email-template-item')||null
@@ -34153,6 +34369,289 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(!card)return{subject:'',body:''};
     return{subject:String(card.querySelector('.quote-email-card-subject')?.value||''),body:String(card.querySelector('.quote-email-card-body')?.value||'')}
   }
+
+  // V1575 — COMMON « Envoi PDF au client » (AFF-275), identique pour SIM1, SIM5 et SIM7.
+  // Le CGS utilise super-task → res.partner.message_post ; jamais Outlook.
+  let commonQuoteMailDrafts=[];
+  let commonQuoteMailSelected=0;
+  const commonQuoteMailModal=()=>document.getElementById('commonQuoteSendModal');
+  const commonQuoteMailStatus=(message,error=false)=>{
+    const node=document.getElementById('commonQuoteSendGlobalStatus');
+    if(node){node.textContent=message;node.classList.toggle('error',Boolean(error));node.classList.remove('warning','success')}
+  };
+  function commonQuoteMailBrand(source){
+    // V1575: les modèles sont autonomes par société; ne pas réécrire les textes administrés.
+    return String(source||'');
+  }
+  function commonQuoteMailLinkBody(body){
+    const link=Number(window.quotePdfSimulator)===5?String(window.sim5PublicValidationUrl||'').trim():'';
+    return link?`${body}\n\nLien sécurisé de validation de votre offre :\n${link}`:body;
+  }
+  function commonQuoteMailSaveDraft(){
+    const draft=commonQuoteMailDrafts[commonQuoteMailSelected];if(!draft)return;
+    draft.to=String(document.getElementById('commonQuoteSendToInput')?.value||'').trim();
+    draft.subject=String(document.getElementById('commonQuoteSendSubjectInput')?.value||'');
+    draft.body=String(document.getElementById('commonQuoteSendBodyInput')?.value||'');
+  }
+  function commonQuoteMailChoose(index){
+    if(!commonQuoteMailDrafts[index])return;
+    commonQuoteMailSaveDraft();commonQuoteMailSelected=index;
+    const draft=commonQuoteMailDrafts[index];
+    const recipient=document.getElementById('commonQuoteSendToInput');
+    const subject=document.getElementById('commonQuoteSendSubjectInput');
+    const body=document.getElementById('commonQuoteSendBodyInput');
+    if(recipient)recipient.value=draft.to||'';
+    if(subject)subject.value=draft.subject||'';
+    if(body)body.value=draft.body||'';
+    document.querySelectorAll('#commonQuoteSendGrid [data-common-send-choice]').forEach(button=>{
+      const selected=Number(button.dataset.commonSendChoice)===index;
+      button.classList.toggle('active',selected);
+      button.setAttribute('aria-pressed',String(selected));
+    });
+    commonQuoteMailStatus(`Modèle « ${draft.name} » sélectionné. Objet et message modifiables avant l'envoi.`);
+  }
+  function commonOpenQuoteSendModal(){
+    if(!(window.quotePdfBlob instanceof Blob)||!window.quotePdfFilename){
+      alert('Créez d’abord le PDF de l’offre avant de préparer l’envoi au client.');return
+    }
+    const modal=commonQuoteMailModal(),root=document.getElementById('commonQuoteSendGrid');
+    if(!modal||!root)return;
+    const vars=emailTemplateVariables(),customer=window.quotePdfCustomer||{};
+    const fields={commonQuoteSendClientName:vars.client||'—',commonQuoteSendClientEmail:vars.email||'—',
+      commonQuoteSendClientPhone:String(customer.phone||customer.mobile||document.getElementById('projectCustomerPhone')?.value||'—'),
+      commonQuoteSendClientAddress:String(customer.address||document.getElementById('projectCustomerAddress')?.value||'—'),
+      commonQuoteSendReference:vars.reference||'—',commonQuoteSendPdfName:window.quotePdfFilename};
+    Object.entries(fields).forEach(([id,value])=>{const element=document.getElementById(id);if(element)element.textContent=value});
+    const quoteCompany=commonEmailCompanyForQuote();
+    const templates=commonEmailSettingsForCompany(quoteCompany).commonQuoteMailTemplates;
+    const emailCompanyLabel=document.getElementById('commonQuoteSendCompanyLabel');
+    if(emailCompanyLabel)emailCompanyLabel.textContent=quoteCompany==='mecasol'?'Modèles Meca-Sol':'Modèles EVO-Sun';
+    commonQuoteMailDrafts=templates.slice(0,3).map((template,index)=>({
+      name:String(template.name||`Mail ${index+1}`),to:vars.email||'',
+      subject:commonQuoteMailBrand(applyEmailVariables(template.subject)),
+      body:commonQuoteMailBrand(applyEmailVariables(template.body))
+    }));
+    commonQuoteMailDrafts.push({name:'Message libre',to:vars.email||'',
+      subject:`Votre offre ${vars.societe} ${vars.reference}`,
+      body:`Bonjour ${vars.client||''},\n\nVeuillez trouver notre offre ${vars.reference} concernant votre projet.\n\nBien à vous,\n${vars.societe}`});
+    const labels=['BT-1578','BT-1579','BT-1580','BT-1581'];
+    const choices=commonQuoteMailDrafts.map((draft,i)=>`<button type="button" class="common-send-choice" data-bt-ref="${labels[i]}" data-common-send-choice="${i}" aria-pressed="false">${escapeHtml(draft.name)}</button>`).join('');
+    root.innerHTML=`<div class="common-send-choice-row" role="group" aria-label="Modèles COMMON d'envoi du PDF">${choices}</div>
+      <div class="common-send-editor">
+        <div><label for="commonQuoteSendToInput">Destinataire</label><input id="commonQuoteSendToInput" type="email" autocomplete="email" placeholder="client@email.be"></div>
+        <div><label for="commonQuoteSendSubjectInput">Objet</label><input id="commonQuoteSendSubjectInput" type="text"></div>
+        <div><label for="commonQuoteSendBodyInput">Corps de l'e-mail</label><textarea id="commonQuoteSendBodyInput" rows="6"></textarea></div>
+        <div class="common-send-mail-options">
+          <label title="L’image de signature nécessite un support HTML dans super-task. Le mail reste lisible en texte brut."><input type="checkbox" data-bt-ref="BT-1585" id="commonQuoteUsePersonalSignature"> Signature image (serveur HTML requis)</label>
+          <label><input type="checkbox" data-bt-ref="BT-1586" id="commonQuoteUseTeamSignature"> Signer « L’équipe ${quoteCompany==='mecasol'?'Meca-Sol':'EVO-Sun'} »</label>
+          <label><input type="checkbox" data-bt-ref="BT-1587" id="commonQuoteUseReplyPrompt"> Répondre à ce mail</label>
+        </div>
+        <div class="common-send-actions">
+          <a class="btn secondary" data-bt-ref="BT-1582" id="commonQuoteSendDownload" download="${escapeHtml(window.quotePdfFilename||'offre.pdf')}">Télécharger le PDF</a>
+          <button type="button" class="btn primary" data-bt-ref="BT-1584" id="commonQuoteSendViaOdoo">Envoyer le PDF via Odoo</button>
+          <button type="button" class="btn secondary" data-bt-ref="BT-1588" id="commonQuoteSendRetrySms" hidden>Réessayer le SMS uniquement</button>
+        </div>
+      </div>`;
+    const download=document.getElementById('commonQuoteSendDownload');
+    if(download)download.href=window.quotePdfObjectUrl||'#';
+    const last=window.commonQuoteMailLastSent;
+    const key=`${quoteCompany}:${Number(customer.odooId||customer.odooPartnerId||document.getElementById('projectCustomerOdooId')?.value||0)}:${window.quotePdfFilename}`;
+    const sentBtn=document.getElementById('commonQuoteSendViaOdoo');
+    if(last?.key===key&&sentBtn){sentBtn.disabled=true;sentBtn.textContent='E-mail déjà envoyé';}
+    const share=document.getElementById('commonQuoteSendShare');
+    if(share)share.disabled=!(typeof navigator.share==='function'&&typeof File==='function');
+    commonQuoteMailSelected=-1;commonQuoteMailChoose(0);
+    const smsToggle=modal.querySelector('.common-quote-send-sms-toggle');
+    const smsInput=document.getElementById('commonQuoteSendSmsEnabled');
+    const smsHint=document.getElementById('commonQuoteSendSmsHint');
+    const mobile=String(odooCustomerSelected?.id==customer.odooId?odooCustomerSelected?.mobile||odooCustomerSelected?.phone||'':'').trim();
+    const smsNumber=mobile||String(customer.mobile||customer.phone||document.getElementById('projectCustomerPhone')?.value||'').trim();
+    const smsUsable=Boolean(smsNumber&&smsNumber.replace(/\D/g,'').length>=8);
+    modal.dataset.smsNumber=smsUsable?smsNumber:'';
+    if(smsToggle)smsToggle.hidden=false;
+    if(smsInput){smsInput.disabled=!smsUsable;smsInput.checked=smsUsable;}
+    if(smsHint)smsHint.textContent=smsUsable?`SMS facultatif vers ${smsNumber}, envoyé via Odoo après le mail.`:'Aucun téléphone utilisable : SMS indisponible pour ce client.';
+    const retryBtn=document.getElementById('commonQuoteSendRetrySms');
+    if(retryBtn)retryBtn.hidden=!(last?.key===key&&last?.sms?.state==='error'&&smsUsable);
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');
+    setTimeout(()=>document.getElementById('commonQuoteSendToInput')?.focus(),0);
+  }
+  window.commonOpenQuoteSendModal=commonOpenQuoteSendModal;
+  function closeCommonQuoteSendModal(){
+    const modal=commonQuoteMailModal();modal?.classList.remove('open');modal?.setAttribute('aria-hidden','true');
+  }
+  function commonQuoteMailDetails(){
+    commonQuoteMailSaveDraft();return commonQuoteMailDrafts[commonQuoteMailSelected]||null
+  }
+  function commonQuoteMailValid(){
+    const data=commonQuoteMailDetails();
+    if(!data||!data.to||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.to)){
+      commonQuoteMailStatus('Indiquez une adresse e-mail de destinataire valide.',true);return null
+    }
+    if(!data.subject.trim()||!data.body.trim()){
+      commonQuoteMailStatus('Renseignez un objet et le texte du message.',true);return null
+    }
+    return data
+  }
+  // V1577 — Envoi réel depuis Odoo, jamais depuis Outlook.
+  // Toutes les interfaces COMMON d'envoi PDF utilisent ce transport partagé.
+  // super-task (mode send_mail) était le circuit historique de message_post.
+  async function commonSendMailOdoo({partnerId,recipient,sender,subject,body,bodyHtml,attachmentBlob,attachmentName,company}){
+    const id=Number(partnerId);
+    if(!Number.isInteger(id)||id<=0)throw new Error('Client Odoo non lié. Sélectionnez un client Odoo dans l’étape 1.');
+    if(!database)throw new Error('Supabase non connecté.');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(recipient||'')))throw new Error('Destinataire incorrect.');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(sender||'')))throw new Error('Adresse expéditeur non configurée dans Admin → Société.');
+    if(!(attachmentBlob instanceof Blob)||attachmentBlob.size===0||attachmentBlob.size>24*1024*1024)
+      throw new Error('PDF absent ou trop volumineux (limite 24 Mo).');
+    const safeRef=quoteArtifactSafePart(emailTemplateVariables().reference||'offre').slice(0,96);
+    const safeName=quoteArtifactSafePart(String(attachmentName||'offre.pdf').replace(/\.pdf$/i,'')).slice(0,96)+'.pdf';
+    const path=`common-mail-pdfs/${quoteArtifactSafePart(company)}/${safeRef}/${Date.now()}-${crypto.randomUUID()}/${safeName}`;
+    const storage=database.storage.from(QUOTE_ROOF_BUCKET);
+    const upload=await storage.upload(path,attachmentBlob,{contentType:'application/pdf',cacheControl:'3600',upsert:false});
+    if(upload.error)throw new Error(`Enregistrement sécurisé du PDF impossible : ${upload.error.message||upload.error}`);
+    const signed=await storage.createSignedUrl(path,3600);
+    if(signed.error||!signed.data?.signedUrl)throw new Error(`Lien privé du PDF impossible : ${signed.error?.message||'URL manquante'}`);
+    // Le serveur Odoo joint le PDF et poste dans le vrai chatter du client.
+    const result=await odooContactNoteRequest({
+      mode:'send_mail',
+      partnerId:id,
+      recipient:String(recipient).trim(),
+      sender:String(sender).trim(),
+      subject:String(subject),
+      body:String(body),
+      bodyHtml:String(bodyHtml||''), // Option future, ignorée par super-task historique
+      attachmentUrl:signed.data.signedUrl,
+      attachmentName:safeName,
+      company:String(company)
+    });
+    if(result?.ok!==true)throw new Error(String(result?.error||result?.message||'La passerelle Odoo n’a pas confirmé l’envoi.'));
+    return result;
+  }
+  window.commonSendMailOdoo=commonSendMailOdoo;
+  async function commonQuoteSmsSend({partnerId,phone,company}){
+    const profile=commonEmailSettingsForCompany(company);
+    const template=String(profile?.commonQuoteSmsTemplate?.body||DEFAULT_COMMON_QUOTE_SMS_TEMPLATE.body);
+    const vars={...emailTemplateVariables(),societe:company==='mecasol'?'Meca-Sol':'EVO-Sun',
+      lien_validation:String(window.sim5PublicValidationUrl||'')};
+    const body=template.replace(/\{(client|email|reference|projet|date|societe|lien_validation)\}/g,(_,key)=>String(vars[key]||''));
+    if(!body.trim())throw new Error('Le modèle SMS 01 est vide : complétez-le dans Admin.');
+    try{
+      const result=await odooContactNoteRequest({mode:'send_sms',partnerId:Number(partnerId),phone:String(phone),body});
+      if(result?.ok!==true)throw new Error(String(result?.error||result?.message||'Envoi SMS Odoo non confirmé.'));
+      const state=String(result.state||result.smsState||'unknown').toLowerCase();
+      if(window.commonQuoteMailLastSent)window.commonQuoteMailLastSent.sms={state,result};
+      const status=state==='sent'?'SMS envoyé via Odoo':(['outgoing','pending','queued','unknown'].includes(state)?'SMS transmis à Odoo, en attente de confirmation':`SMS : statut ${state} — vérifier Odoo`);
+      commonQuoteMailStatus(`E-mail envoyé via Odoo. ${status}.`);
+      const retry=document.getElementById('commonQuoteSendRetrySms');if(retry)retry.hidden=true;
+    }catch(error){
+      const message=String(error?.message||error||'Erreur inconnue');
+      if(window.commonQuoteMailLastSent)window.commonQuoteMailLastSent.sms={state:'error',error:message};
+      commonQuoteMailStatus(`E-mail envoyé via Odoo, mais SMS NON confirmé : ${message}. Vérifiez les crédits SMS Odoo, le numéro et l’état de sms.sms.`,true);
+      const retry=document.getElementById('commonQuoteSendRetrySms');if(retry)retry.hidden=false;
+    }
+  }
+  async function commonQuoteMailSendViaOdoo(){
+    const data=commonQuoteMailValid();
+    if(!data)return;
+    const company=commonEmailCompanyForQuote();
+    const customer=window.quotePdfCustomer||pendingPdfCustomer||{};
+    const partnerId=Number(customer.odooId||customer.odooPartnerId||document.getElementById('projectCustomerOdooId')?.value||0);
+    if(window.commonQuoteMailLastSent?.key===`${company}:${partnerId}:${window.quotePdfFilename}`){
+      commonQuoteMailStatus('Ce PDF a déjà été envoyé par ce COMMON. Pour éviter un doublon, le renvoi automatique est bloqué. Le SMS se réessaie séparément.');return;
+    }
+    if(!Number.isSafeInteger(partnerId)||partnerId<=0){
+      commonQuoteMailStatus('Choisissez un client Odoo dans l’étape 1 avant d’envoyer. Le courrier doit rester dans son chatter.',true);
+      return;
+    }
+    const profile=getCompanyProfile(company)||{};
+    const sender=String(profile.email||'').trim();
+    const name=company==='mecasol'?'Meca-Sol':'EVO-Sun';
+    if(!sender||!sender.includes('@')){
+      commonQuoteMailStatus(`Adresse expéditeur ${name} manquante dans Administration → Société.`,true);
+      return;
+    }
+    const signature=Boolean(document.getElementById('commonQuoteUsePersonalSignature')?.checked);
+    const team=Boolean(document.getElementById('commonQuoteUseTeamSignature')?.checked);
+    const reply=Boolean(document.getElementById('commonQuoteUseReplyPrompt')?.checked);
+    const signatureUrl=String(offerAdminConfig?.userSignatures?.[String(currentUserEmail||'').toLowerCase()]?.url||'');
+    if(signature&&!/^https:\/\//i.test(signatureUrl)){
+      commonQuoteMailStatus('Signature personnelle introuvable : configurez-la dans l’Admin ou décochez cette option.',true);
+      return;
+    }
+    // Le super-task actuellement déployé attend un message TEXTE : il se charge
+    // de l'échapper et de transformer les sauts de ligne en <br> une seule fois.
+    // Ne pas lui envoyer directement du HTML, sinon les balises s'affichent dans le mail.
+    const escapeMail=value=>String(value??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    let bodyPlain=commonQuoteMailLinkBody(data.body);
+    if(team)bodyPlain+=`\n\nL’équipe ${name}`;
+    if(reply){
+      const note=String(commonEmailSettingsForCompany(company)?.mailPostSignatureText||'').trim();
+      if(note)bodyPlain+=`\n\n${note}`;
+    }
+    // Préparer en parallèle une version riche pour une future extension serveur.
+    // Le serveur historique utilise bodyPlain. Il ne sait pas afficher une image
+    // depuis un corps HTML déjà composé ; ne pas réinsérer de balises dans bodyPlain.
+    let bodyHtml=`<div>${escapeMail(bodyPlain).replace(/\r?\n/g,'<br>')}</div>`;
+    if(signature)bodyHtml+=`<p><img src="${escapeMail(signatureUrl)}" alt="Signature" style="max-width:240px;max-height:110px"></p>`;
+    const smsChecked=Boolean(document.getElementById('commonQuoteSendSmsEnabled')?.checked);
+    const smsNumber=String(commonQuoteMailModal()?.dataset.smsNumber||'').trim();
+    if(smsChecked&&!smsNumber){commonQuoteMailStatus('SMS : aucun numéro utilisable.',true);return;}
+    // Prévenir du comportement réel : actuellement la signature image n'est
+    // pas mise en forme par l'Edge Function, même si un HTML alternatif est fourni.
+    if(signature){
+      const proceed=await evoConfirm('La signature image exige une mise à jour HTML de la fonction super-task. Le mail sera lisible, mais la photo de signature ne sera pas intégrée avec le traitement actuel. Envoyer quand même ?',
+        {title:'Signature image à vérifier',kicker:'Odoo / super-task',confirmText:'Envoyer sans signature image',cancelText:'Annuler'});
+      if(!proceed)return;
+    }
+    if(!(await evoConfirm(`Envoyer maintenant l’offre ${emailTemplateVariables().reference} à ${data.to} depuis Odoo (${name}) ?`,{title:'Confirmer l’envoi Odoo',kicker:name,confirmText:'Envoyer via Odoo',cancelText:'Annuler'})))return;
+    const button=document.getElementById('commonQuoteSendViaOdoo');
+    if(button)button.disabled=true;
+    commonQuoteMailStatus('Envoi vers Odoo en cours : archivage du PDF et publication dans le chatter du client…');
+    try{
+      const result=await commonSendMailOdoo({
+        partnerId,recipient:data.to,sender,subject:data.subject,body:bodyPlain,bodyHtml,
+        attachmentBlob:window.quotePdfBlob,attachmentName:window.quotePdfFilename,company
+      });
+      window.commonQuoteMailLastSent={key:`${company}:${partnerId}:${window.quotePdfFilename}`,mail:result,sms:null,at:new Date().toISOString()};
+      if(button){button.disabled=true;button.textContent='E-mail envoyé via Odoo';}
+      if(!smsChecked){
+        commonQuoteMailStatus('E-mail accepté par Odoo. SMS non demandé. Vérifiez l’envoi dans le chatter du client.');
+      }else{
+        commonQuoteMailStatus(`E-mail accepté par Odoo. Transmission du SMS au ${smsNumber}…`);
+        await commonQuoteSmsSend({partnerId,phone:smsNumber,company});
+      }
+      const node=document.getElementById('commonQuoteSendGlobalStatus');
+      if(node&&!node.classList.contains('error'))node.classList.add('success');
+      console.info('COMMON Odoo send_mail',result);
+    }catch(error){
+      commonQuoteMailStatus(`Envoi Odoo non confirmé : ${error?.message||error}`,true);
+    }finally{if(button)button.disabled=false;}
+  }
+  document.getElementById('commonQuoteSendClose')?.addEventListener('click',closeCommonQuoteSendModal);
+  commonQuoteMailModal()?.addEventListener('click',event=>{if(event.target===event.currentTarget)closeCommonQuoteSendModal()});
+  document.getElementById('commonQuoteSendGrid')?.addEventListener('click',event=>{
+    const choice=event.target.closest('[data-common-send-choice]');
+    if(choice){commonQuoteMailChoose(Number(choice.dataset.commonSendChoice));return}
+    if(event.target.closest('#commonQuoteSendViaOdoo')){void commonQuoteMailSendViaOdoo();return}
+    if(event.target.closest('#commonQuoteSendRetrySms')){
+      const last=window.commonQuoteMailLastSent;
+      const phone=String(commonQuoteMailModal()?.dataset.smsNumber||'');
+      if(!last?.mail||!phone){commonQuoteMailStatus('Envoi mail préalable ou téléphone introuvable.',true);return}
+      const company=commonEmailCompanyForQuote();
+      const customer=window.quotePdfCustomer||pendingPdfCustomer||{};
+      const id=Number(customer.odooId||customer.odooPartnerId||document.getElementById('projectCustomerOdooId')?.value||0);
+      if(last.key!==`${company}:${id}:${window.quotePdfFilename}`){commonQuoteMailStatus('Ce PDF ne correspond pas à l’e-mail précédemment envoyé.',true);return}
+      void commonQuoteSmsSend({partnerId:id,phone,company});return
+    }
+  });
+  document.getElementById('commonQuoteSendGrid')?.addEventListener('input',event=>{
+    if(event.target.matches('#commonQuoteSendToInput,#commonQuoteSendSubjectInput,#commonQuoteSendBodyInput'))commonQuoteMailSaveDraft()
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&commonQuoteMailModal()?.classList.contains('open'))closeCommonQuoteSendModal()
+  });
+
   function openQuoteEmailComposer(){
     if(!window.quotePdfBlob||!window.quotePdfFilename){alert('Créez d’abord le PDF avant de préparer l’e-mail.');return}
     const modal=document.getElementById('quoteEmailModal'),vars=emailTemplateVariables(),to=document.getElementById('quoteEmailTo');
@@ -34161,7 +34660,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(document.getElementById('quoteEmailPdfName'))document.getElementById('quoteEmailPdfName').textContent=window.quotePdfFilename||'—';
     if(to)to.value=vars.email||'';
     const pdfLink=document.getElementById('quoteEmailPdfDownload');if(pdfLink){pdfLink.href=window.quotePdfObjectUrl||'#';pdfLink.download=window.quotePdfFilename||'offre.pdf'}
-    const choices=document.getElementById('quoteEmailTemplateChoices'),templates=normalizeOfferAdminConfig({mailTemplates:offerAdminConfig.mailTemplates}).mailTemplates;
+    const choices=document.getElementById('quoteEmailTemplateChoices'),templates=commonEmailSettingsForCompany(commonEmailCompanyForQuote()).mailTemplates;
     if(choices){
       choices.innerHTML=templates.map((t,index)=>`<div class="quote-email-template-item${index===0?' selected':''}"><div class="quote-email-template-head"><input type="radio" name="quoteEmailTemplate" value="${escapeHtml(t.id)}"${index===0?' checked':''}><strong>${escapeHtml(t.name)}</strong></div><label>Objet</label><input class="input quote-email-card-subject" value="${escapeHtml(applyEmailVariables(t.subject))}"><label>Corps du mail</label><textarea class="input quote-email-card-body">${escapeHtml(applyEmailVariables(t.body))}</textarea></div>`).join('');
       choices.querySelectorAll('input[name="quoteEmailTemplate"]').forEach(input=>input.addEventListener('change',updateQuoteEmailTemplateSelection));
@@ -34173,18 +34672,14 @@ async function retrieveSingleVictronProductPhoto(id,button){
   }
   function closeQuoteEmailComposer(){const modal=document.getElementById('quoteEmailModal');modal?.classList.remove('open');modal?.setAttribute('aria-hidden','true')}
   function launchOutlookCompose(){
-    const to=String(document.getElementById('quoteEmailTo')?.value||'').trim(),message=currentQuoteEmailMessage(),subject=message.subject,body=message.body;
-    if(!to){alert('Renseignez une adresse e-mail avant d’ouvrir Outlook.');return}
-    if(!selectedEmailTemplateCard()){alert('Sélectionnez un modèle d’e-mail.');return}
-    const url=`https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(url,'_blank','noopener');
-    const notice=document.getElementById('quoteEmailNotice');if(notice)notice.textContent='Outlook est ouvert avec le destinataire, l’objet et le texte du modèle sélectionné. Le PDF reste disponible via « Télécharger le PDF ».'
+    closeQuoteEmailComposer();
+    commonOpenQuoteSendModal();
   }
   async function shareQuoteEmailWithPdf(){
     if(!window.quotePdfBlob||!navigator.share)return;
     const message=currentQuoteEmailMessage(),file=new File([window.quotePdfBlob],window.quotePdfFilename||'offre.pdf',{type:'application/pdf'}),to=String(document.getElementById('quoteEmailTo')?.value||''),subject=message.subject,body=message.body;
     if(!selectedEmailTemplateCard()){alert('Sélectionnez un modèle d’e-mail.');return}
-    try{if(navigator.canShare&&!navigator.canShare({files:[file]}))throw new Error('Partage de fichiers non pris en charge');await navigator.share({title:subject,text:`${to?`À : ${to}\n\n`:''}${body}`,files:[file]})}catch(error){if(error?.name!=='AbortError'){const notice=document.getElementById('quoteEmailNotice');if(notice)notice.textContent=`Le partage du PDF n’est pas disponible dans ce navigateur : ${error?.message||error}. Ouvrez Outlook puis joignez le PDF téléchargé.`}}
+    try{if(navigator.canShare&&!navigator.canShare({files:[file]}))throw new Error('Partage de fichiers non pris en charge');await navigator.share({title:subject,text:`${to?`À : ${to}\n\n`:''}${body}${Number(window.quotePdfSimulator)===5&&window.sim5PublicValidationUrl?`\n\nLien de validation sécurisé : ${window.sim5PublicValidationUrl}`:''}`,files:[file]})}catch(error){if(error?.name!=='AbortError'){const notice=document.getElementById('quoteEmailNotice');if(notice)notice.textContent=`Le partage du PDF n’est pas disponible dans ce navigateur : ${error?.message||error}. Ouvrez Outlook puis joignez le PDF téléchargé.`}}
   }
 
   function managementHomeModules(){
@@ -35636,6 +36131,12 @@ async function retrieveSingleVictronProductPhoto(id,button){
   }
   function applyCompanyProfile({resetVat=true}={}){
     const p=getCompanyProfile();
+    const exWorksLabel=document.querySelector('.sim5-sales-condition-toggle strong');
+    const exWorksHint=document.querySelector('.sim5-sales-condition-toggle small');
+    if(exWorksLabel)exWorksLabel.textContent=activeCompany==='mecasol'?'Prix de vente au départ de notre atelier Meca-Sol':'Prix de vente au départ de nos ateliers à Liège';
+    if(exWorksHint)exWorksHint.textContent=activeCompany==='mecasol'
+      ?'Si cette option est cochée, la mention apparaît dans le devis : Cap Skirring, Sénégal.'
+      :'Si cette option est cochée, la mention apparaît dans le devis : rue Natalis, 2 · 4020 Liège.';
     monthlyPvReference=Array.isArray(p.monthlyPvReference)&&p.monthlyPvReference.length===12?p.monthlyPvReference.map(v=>Math.max(0,Number(v)||0)):[...DEFAULT_COMPANY_SETTINGS.evosun.monthlyPvReference];
     document.documentElement.style.setProperty('--green',p.accent||'#c5f90b');
     document.getElementById('simulatorMainTitle').textContent=typeof activeSimulatorMode!=='undefined'&&activeSimulatorMode==='offgrid'?`Simulateur Off-Grid ${p.displayName}`:`Simulateur technique ${p.displayName}`;
@@ -36135,6 +36636,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     }
     if(snapshot.company&&['evosun','mecasol'].includes(snapshot.company)){
       activeCompany=snapshot.company;
+      syncSim3MecasolDistancePlacement();
       document.querySelectorAll('.company-choice[data-company]').forEach(b=>b.classList.toggle('active',b.dataset.company===activeCompany));
       applyCompanyProfile({resetVat:false})
     }
@@ -37050,6 +37552,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
       try{URL.revokeObjectURL(window.quotePdfObjectUrl)}catch{}
     }
     window.quotePdfObjectUrl='';
+    window.sim5PublicValidationUrl='';
     window.quotePdfBlob=null;
     window.quotePdfFilename='';
     window.quotePdfVariant='';
@@ -47064,6 +47567,23 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(typeof renderPanel==='function')renderPanel({skipField:true})
   }
 
+  // V1576 — conserver une entrée UNIQUE pour la distance du COMMON SmartSolar.
+  // SIM3 Meca-Sol : immédiatement sous Type de panneau, avant les choix manuel/auto.
+  // Tout autre mode : retour du même champ à sa position d'origine (sans perdre sa valeur).
+  function syncSim3MecasolDistancePlacement(){
+    const distance=document.querySelector('#choice .mppt-single-field-distance[data-cdr-ref="CDR-850"]');
+    const home=document.getElementById('sim3MecasolDistanceHome');
+    const panel=document.querySelector('#offgridSizingStep .offgrid-sizing-panel-choice');
+    if(!distance||!home||!panel)return;
+    const moveUp=activeCompany==='mecasol'&&activeSimulatorMode==='offgrid';
+    if(moveUp){
+      if(distance.parentElement!==panel)panel.appendChild(distance);
+    }else if(distance.previousElementSibling!==home){
+      home.insertAdjacentElement('afterend',distance);
+    }
+    distance.classList.toggle('sim3-mecasol-distance-early',moveUp);
+  }
+
   function setSimulatorMode(mode,{scroll=true,restoreSilo=true}={}){
     /* V1297 — SIM4 possède désormais son propre état. */
     if(mode==='industrial'||mode==='pro'){
@@ -47101,6 +47621,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(cgsMecasolSim7Active&&!cgsViewingSavedQuote)selectedInverter='';
     if(typeof mecasolInverterConfirmedKey!=='undefined'&&!cgsViewingSavedQuote)mecasolInverterConfirmedKey='';
     activeSimulatorMode=nextMode;
+    syncSim3MecasolDistancePlacement();
     // V1559 : recalcul et affichage des conditions propres à SIM7 Meca-Sol.
     renderPaymentTermsStatus();
     // Le nouveau silo doit être actif avant de reconstruire les produits Odoo.
@@ -49706,6 +50227,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
 
   document.querySelectorAll('.company-choice[data-company]').forEach(button=>button.addEventListener('click',()=>{
     activeCompany=button.dataset.company;
+    syncSim3MecasolDistancePlacement();
     const camsCustom=document.getElementById('offgridCamsCustomLocation');if(camsCustom)camsCustom.checked=false;
     resetOffgridCamsLocationToDefault();applyOffgridCamsCompanyDefaults();
     baseMiscManualOverride=false;
@@ -49842,6 +50364,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     });
     companySettings=next;
     writeCompanySettings(companySettings);
+    offerAdminConfig.sharedCompanyDefaults=cgsSharedCompanyDefaults();
     offerAdminConfig.companyLogos=offerAdminConfig.companyLogos||{};
     ['evosun','mecasol'].forEach(id=>{const p=companySettings[id];offerAdminConfig.companyLogos[id]={light:String(p.logoLightUrl||p.logoUrl||''),dark:String(p.logoDarkUrl||'')}});
     saveOfferAdminConfig().catch(error=>console.warn('Synchronisation logos sociétés',error));
@@ -50818,14 +51341,13 @@ async function retrieveSingleVictronProductPhoto(id,button){
     if(!Number.isFinite(transportPct)||!Number.isFinite(dutyPct)||transportPct<0||dutyPct<0){
       return '<small class="sim5-admin-logistics">Transport / douane : taux à renseigner dans Admin.</small>';
     }
-    // V1565 — mêmes coûts unitaires que le tableau : arrondi au centime pour que
-    // prix rendu + bénéfice affiché = prix de vente net affiché.
+    // V1572 — distinguer clairement :
+    // 1) la majoration CP Meca-Sol (fixe par catégorie / promo société),
+    // 2) la marge réelle restante après éventuelle remise globale du devis.
     const cent=value=>Math.round((Number(value)+Number.EPSILON)*100)/100;
     const shipping=cent(base*transportPct/100),customs=cent(base*dutyPct/100),landed=cent(base+shipping+customs);
     const eur=value=>Number(value).toLocaleString('fr-BE',{style:'currency',currency:'EUR',minimumFractionDigits:2,maximumFractionDigits:2});
     const pct=value=>Number(value).toLocaleString('fr-BE',{minimumFractionDigits:0,maximumFractionDigits:2})+' %';
-    // SIM5 utilise le tarif du profil Shop, puis applique la remise globale
-    // uniquement aux lignes de matériel éligibles : calcul identique au devis.
     const quotedUnit=Number(row.salePrice);
     const discount=row.categoryId==='pose'?0:sim5AdditionalDiscountPct();
     const netUnit=Number.isFinite(quotedUnit)?cent(quotedUnit*(1-discount/100)):NaN;
@@ -50833,17 +51355,42 @@ async function retrieveSingleVictronProductPhoto(id,button){
     const markup=landed>0&&Number.isFinite(gain)?100*gain/landed:NaN;
     const positive=Number.isFinite(gain)&&gain>=0;
     const sign=positive?'+':'';
-    const marginLabel=discount>0?'Marge Meca-Sol après remise du devis':'Marge Meca-Sol';
+    const promo=cgsEffectiveMarginPromotion(row.odooId,'mecasol',row.categoryId||'');
+    const cpMarginLine=Number.isFinite(Number(promo?.baseMargin))
+      ?`<span class="sim5-admin-cost-line">Majoration CP Meca-Sol : ${pct(promo.baseMargin)}${promo?.active?` → ${pct(promo.marginPct)} après remise commerciale produit`:''}</span>`
+      :'';
+    const marginLabel=discount>0?'Marge réelle Meca-Sol après remise du devis':'Marge réelle Meca-Sol';
     const profit=Number.isFinite(markup)
       ?`<span class="sim5-admin-profit${positive?'':' is-negative'}" title="Gain brut unitaire HT / coût rendu Meca-Sol ; hors frais généraux">${marginLabel} : ${sign}${pct(markup)} · ${sign}${eur(gain)} / unité</span>`
       :'<span class="sim5-admin-profit is-negative">Marge Meca-Sol : prix de vente à vérifier</span>';
     return `<small class="sim5-admin-logistics">
-      <span class="sim5-admin-cost-line"><span class="sim5-admin-cost-main">Achat EVO-Sun : <strong>${eur(base)}</strong></span> · Transport (${pct(transportPct)}) : ${eur(shipping)} · Douane (${pct(dutyPct)}) : ${eur(customs)}</span>
+      <span class="sim5-admin-cost-line"><span class="sim5-admin-cost-main">Achat EVO-Sun : <strong>${eur(base)}</strong></span></span>
+      <span class="sim5-admin-cost-line">Transport (${pct(transportPct)}) : ${eur(shipping)}</span>
+      <span class="sim5-admin-cost-line">Douane (${pct(dutyPct)}) : ${eur(customs)}</span>
       <span class="sim5-landed-label">Coût rendu Meca-Sol : ${eur(landed)}</span>
+      ${cpMarginLine}
       ${profit}
     </small>`;
   }
+  /* V1571: SIM5 default electrician labor, derived from shared Admin hours/rate.
+     User may edit/remove it; never re-add after an explicit deletion or on read-only closed quotes. */
+  function sim5EnsureElectricianDefault(){
+    if(activeSimulatorMode!=='quote-only'||cgsViewingSavedQuote)return;
+    if(sim5State.electricianDefaultDismissed)return;
+    const units=(sim5State.items||[]).filter(row=>
+      ['inverter','solar-inverter'].includes(String(row.categoryId||''))&&Number(row.qty)>0
+    ).reduce((sum,row)=>sum+(Number(row.qty)||0),0);
+    if(!units)return;
+    const hours=Math.max(0,Number(getAdminDefaultNumber('electricianDefaultHours',6))||0);
+    const rate=Math.max(0,Number(activeElectricianRate(activeCompany))||0);
+    if(!hours||!rate)return; // No fabricated labor price when the admin has not defined a rate.
+    const id='sim5-electrician-default',old=sim5State.miscItems.find(row=>row.id===id);
+    if(old)return; // Manual quantity or tariff changes must not be overwritten.
+    sim5State.miscItems.push({id,name:'MO électricien',details:`Main-d’œuvre : ${hours} h / onduleur · tarif administré`,qty:Math.round(units*hours),unitPrice:rate,vatRate:sim5DefaultLineVatRate()});
+    sim5RenderMiscItems();
+  }
   function sim5RenderOfferTable(){
+    sim5EnsureElectricianDefault();
     const root=document.getElementById('sim5OfferRows'),empty=document.getElementById('sim5TableEmpty');if(!root)return;
     if(empty)empty.hidden=sim5State.items.length>0;
     // Calcul privé et à la volée ; les taux de transport et de douane ne sont pas figés dans le devis client.
@@ -50939,6 +51486,7 @@ async function retrieveSingleVictronProductPhoto(id,button){
     });
     root.querySelectorAll('[data-sim5-misc-delete]').forEach(btn=>btn.addEventListener('click',()=>{
       const index=Number(btn.dataset.sim5MiscDelete);
+      if(sim5State.miscItems[index]?.id==='sim5-electrician-default')sim5State.electricianDefaultDismissed=true;
       sim5State.miscItems.splice(index,1);
       sim5RenderMiscItems();sim5UpdateTotals()
     }))
@@ -53264,7 +53812,20 @@ document.getElementById('victronCatalogSearch')?.addEventListener('input',render
   document.getElementById('victronCatalogNamesBatch')?.addEventListener('click',()=>completeVictronSupplierNames({limit:20}).catch(error=>{const n=document.getElementById('victronCatalogNotice');if(n)n.textContent='Contrôle E-Order impossible : '+String(error?.message||error).slice(0,160)}));
   document.getElementById('syncVictronCatalog')?.addEventListener('click',syncVictronCatalog);
   refreshVictronCooldownUi();
-  document.getElementById('refreshOdooMigrationProducts')?.addEventListener('click',loadOdooMigrationProducts);document.getElementById('openVictronPrices')?.addEventListener('click',()=>openVictronPriceModal());document.getElementById('saveOdooMigration')?.addEventListener('click',saveOdooMigration);document.getElementById('odooPriceSearch')?.addEventListener('input',renderOdooPriceEditor);document.getElementById('odooPriceCategoryFilter')?.addEventListener('change',renderOdooPriceEditor);document.getElementById('refreshOdooPrices')?.addEventListener('click',()=>loadOdooPriceEditor({force:true}));document.getElementById('saveOdooPrices')?.addEventListener('click',saveOdooPriceChanges);document.getElementById('saveShopPricing')?.addEventListener('click',saveShopPricingAdmin);document.getElementById('resetShopPricing')?.addEventListener('click',resetShopPricingAdmin);document.getElementById('applyShopPricingOdoo')?.addEventListener('click',applyShopPricingToOdoo);document.getElementById('odooMigrationSearch')?.addEventListener('input',renderOdooMigration);document.getElementById('odooMigrationStatusFilter')?.addEventListener('change',renderOdooMigration);document.getElementById('odooMigrationCategoryFilter')?.addEventListener('change',renderOdooMigration);document.getElementById('odooMigrationResetFilters')?.addEventListener('click',()=>setOdooMigrationFilters('classified',''));document.getElementById('homeModuleAddForm')?.addEventListener('submit',e=>{
+  document.getElementById('refreshOdooMigrationProducts')?.addEventListener('click',loadOdooMigrationProducts);document.getElementById('openVictronPrices')?.addEventListener('click',()=>openVictronPriceModal());document.getElementById('saveOdooMigration')?.addEventListener('click',saveOdooMigration);document.getElementById('odooPriceSearch')?.addEventListener('input',renderOdooPriceEditor);document.getElementById('odooPriceCategoryFilter')?.addEventListener('change',renderOdooPriceEditor);document.getElementById('refreshOdooPrices')?.addEventListener('click',()=>loadOdooPriceEditor({force:true}));document.getElementById('saveOdooPrices')?.addEventListener('click',saveOdooPriceChanges);document.querySelectorAll('[data-shop-pricing-apply]').forEach(checkbox=>{
+    checkbox.addEventListener('change',()=>{if(checkbox.checked)shopPricingApplyDefaultToAll(checkbox)})
+  });
+  document.querySelectorAll('[data-shop-pricing-apply]').forEach(checkbox=>{
+    const source=document.getElementById(String(checkbox.dataset.defaultInput||''));
+    source?.addEventListener('input',()=>{if(checkbox.checked)shopPricingApplyDefaultToAll(checkbox)})
+  });
+  document.getElementById('shopPricingRows')?.addEventListener('input',event=>{
+    const field=event.target?.dataset?.shopPricingField;
+    if(!field)return;
+    const checkbox=document.querySelector('[data-shop-pricing-apply="'+field+'"]');
+    if(checkbox)checkbox.checked=false;
+  });
+  document.getElementById('saveShopPricing')?.addEventListener('click',saveShopPricingAdmin);document.getElementById('resetShopPricing')?.addEventListener('click',resetShopPricingAdmin);document.getElementById('applyShopPricingOdoo')?.addEventListener('click',applyShopPricingToOdoo);document.getElementById('odooMigrationSearch')?.addEventListener('input',renderOdooMigration);document.getElementById('odooMigrationStatusFilter')?.addEventListener('change',renderOdooMigration);document.getElementById('odooMigrationCategoryFilter')?.addEventListener('change',renderOdooMigration);document.getElementById('odooMigrationResetFilters')?.addEventListener('click',()=>setOdooMigrationFilters('classified',''));document.getElementById('homeModuleAddForm')?.addEventListener('submit',e=>{
   e.preventDefault();
   if(!requireAdminAccess())return;
   const name=String(document.getElementById('homeModuleAddName')?.value||'').trim(),
@@ -53339,7 +53900,7 @@ document.getElementById('saveHomeModules')?.addEventListener('click',async()=>{
   renderHomeModuleAdmin();
   renderManagementHomeModules()
 });
-document.getElementById('equipmentCategoryAddForm')?.addEventListener('submit',addEquipmentCategory);document.getElementById('technicalProfileAddForm')?.addEventListener('submit',addTechnicalProfile);document.getElementById('equipmentCategoryAddButton')?.addEventListener('click',event=>{const form=document.getElementById('equipmentCategoryAddForm');if(form&&typeof form.requestSubmit==='function')return;addEquipmentCategory(event)});document.getElementById('catalogEquipmentGrid')?.addEventListener('click',e=>{const btn=e.target.closest('[data-custom-equipment-category]');if(btn)openCustomEquipmentCategory(btn.dataset.customEquipmentCategory)});document.getElementById('backFromCustomEquipmentCategory')?.addEventListener('click',()=>{openSection('manageHub');openAdminTheme('catalog')});document.querySelectorAll('.odoo-migration-view-tab[data-odoo-view]').forEach(btn=>btn.addEventListener('click',()=>setOdooMigrationView(btn.dataset.odooView||'inbox')));document.getElementById('odooMigrationSummaryFilters')?.addEventListener('click',e=>{const btn=e.target.closest('[data-odoo-summary-filter]');if(btn)setOdooMigrationSummaryFilter(btn.dataset.odooSummaryFilter||'inbox')});document.addEventListener('click',e=>{const btn=e.target.closest?.('.odoo-migration-view-tab[data-odoo-view]');if(btn)setOdooMigrationView(btn.dataset.odooView||'inbox')});document.getElementById('odooMigrationCategoryProgress')?.addEventListener('click',e=>{const btn=e.target.closest('[data-odoo-category-filter]');if(btn)setOdooMigrationFilters('classified',btn.dataset.odooCategoryFilter||'')});document.getElementById('refreshSupabaseUsage')?.addEventListener('click',loadSupabaseUsage);document.getElementById('saveAdminMailTemplates')?.addEventListener('click',async()=>{if(!requireAdminAccess())return;offerAdminConfig.mailTemplates=collectAdminMailTemplates();offerAdminConfig.commonQuoteMailTemplates=collectAdminCommonQuoteMailTemplates();offerAdminConfig.commonQuoteSmsTemplate=collectAdminCommonQuoteSmsTemplate();offerAdminConfig.mailPostSignatureText=collectAdminMailPostSignatureText();offerAdminConfig.quoteValidationEmail=collectAdminQuoteValidationEmail();await saveOfferAdminConfig({noticeId:'adminMailTemplatesNotice'});renderAdminMailTemplates()});document.getElementById('adminDefaultsSearch')?.addEventListener('input',renderAdminDefaults);document.getElementById('adminDefaultsCategory')?.addEventListener('change',renderAdminDefaults);document.getElementById('adminDefaultsScope')?.addEventListener('change',renderAdminDefaults);document.getElementById('saveAdminDefaults')?.addEventListener('click',saveAdminDefaultsFromUi);document.getElementById('restoreAllAdminDefaults')?.addEventListener('click',restoreAllAdminDefaults);document.getElementById('applyAdminDefaultsCurrent')?.addEventListener('click',()=>{if(!requireAdminAccess())return;applyAdminDefaultsToProject({markAsDefault:true,refresh:true});syncElectricianRateControl();const marginKey=activeCompany==='mecasol'?'profitMarginMecasol':'profitMarginEvosun';const marginValue=adminDefaults[marginKey];const marginInput=document.getElementById('profitMargin');if(marginInput&&Object.prototype.hasOwnProperty.call(adminDefaults,marginKey)&&[...marginInput.options].some(o=>o.value===String(marginValue)))marginInput.value=String(marginValue);renderQuoteSummary();const notice=document.getElementById('adminDefaultsNotice');if(notice)notice.textContent='Valeurs administrateur appliquées au projet actuellement ouvert.'});document.getElementById('backFromEfficienciesManager')?.addEventListener('click',()=>openSection('manageHub'));['adminEfficiencySmartSolar','adminEfficiencyMultiInv','adminEfficiencyMultiCharger','adminEfficiencySolarInv','adminEfficiencyBatteryRt'].forEach(id=>document.getElementById(id)?.addEventListener('input',updateEfficiencyAdminPreview));document.getElementById('saveAdminEfficiencies')?.addEventListener('click',()=>saveEfficiencyManage({applyCurrent:false}));document.getElementById('applyAdminEfficienciesCurrent')?.addEventListener('click',()=>saveEfficiencyManage({applyCurrent:true}));document.getElementById('restoreAdminEfficiencies')?.addEventListener('click',restoreEfficiencyManage);document.getElementById('backFromVisualEquipmentsManager')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('visualEquipmentAddForm')?.addEventListener('submit',addVisualEquipment);document.getElementById('backFromSchematicRolesManager')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('schematicFunctionalRoleForm')?.addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('schematicFunctionalRoleName');await schematicAddRole('functional',input?.value);if(input)input.value=''});document.getElementById('schematicConnectionRoleForm')?.addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('schematicConnectionRoleName');await schematicAddRole('connection',input?.value);if(input)input.value=''});document.getElementById('backFromSchematicsManager')?.addEventListener('click',()=>{if(sim5SchematicEditorReturn){sim5SchematicEditorReturn=false;const back=document.getElementById('backFromSchematicsManager');if(back)back.textContent='Retour à l’administration';openSection('quoteOnlySimulator');setTimeout(sim5RenderSchematic,0)}else openSection('manageHub')});initSchematicEditorEvents();initCommonSchematicPickerEvents();
+document.getElementById('equipmentCategoryAddForm')?.addEventListener('submit',addEquipmentCategory);document.getElementById('technicalProfileAddForm')?.addEventListener('submit',addTechnicalProfile);document.getElementById('equipmentCategoryAddButton')?.addEventListener('click',event=>{const form=document.getElementById('equipmentCategoryAddForm');if(form&&typeof form.requestSubmit==='function')return;addEquipmentCategory(event)});document.getElementById('catalogEquipmentGrid')?.addEventListener('click',e=>{const btn=e.target.closest('[data-custom-equipment-category]');if(btn)openCustomEquipmentCategory(btn.dataset.customEquipmentCategory)});document.getElementById('backFromCustomEquipmentCategory')?.addEventListener('click',()=>{openSection('manageHub');openAdminTheme('catalog')});document.querySelectorAll('.odoo-migration-view-tab[data-odoo-view]').forEach(btn=>btn.addEventListener('click',()=>setOdooMigrationView(btn.dataset.odooView||'inbox')));document.getElementById('odooMigrationSummaryFilters')?.addEventListener('click',e=>{const btn=e.target.closest('[data-odoo-summary-filter]');if(btn)setOdooMigrationSummaryFilter(btn.dataset.odooSummaryFilter||'inbox')});document.addEventListener('click',e=>{const btn=e.target.closest?.('.odoo-migration-view-tab[data-odoo-view]');if(btn)setOdooMigrationView(btn.dataset.odooView||'inbox')});document.getElementById('odooMigrationCategoryProgress')?.addEventListener('click',e=>{const btn=e.target.closest('[data-odoo-category-filter]');if(btn)setOdooMigrationFilters('classified',btn.dataset.odooCategoryFilter||'')});document.getElementById('refreshSupabaseUsage')?.addEventListener('click',loadSupabaseUsage);document.getElementById('saveAdminMailTemplates')?.addEventListener('click',async()=>{if(!requireAdminAccess())return;offerAdminConfig.mailTemplates=collectAdminMailTemplates();offerAdminConfig.commonQuoteMailTemplates=collectAdminCommonQuoteMailTemplates();offerAdminConfig.commonQuoteSmsTemplate=collectAdminCommonQuoteSmsTemplate();offerAdminConfig.mailPostSignatureText=collectAdminMailPostSignatureText();offerAdminConfig.quoteValidationEmail=collectAdminQuoteValidationEmail('evosun');offerAdminConfig.mailCommonsMecasol={mailTemplates:collectAdminMailTemplates('mecasol'),commonQuoteMailTemplates:collectAdminCommonQuoteMailTemplates('mecasol'),commonQuoteSmsTemplate:collectAdminCommonQuoteSmsTemplate('mecasol'),mailPostSignatureText:collectAdminMailPostSignatureText('mecasol'),quoteValidationEmail:collectAdminQuoteValidationEmail('mecasol')};await saveOfferAdminConfig({noticeId:'adminMailTemplatesNotice'});renderAdminMailTemplates()});document.getElementById('adminDefaultsSearch')?.addEventListener('input',renderAdminDefaults);document.getElementById('adminDefaultsCategory')?.addEventListener('change',renderAdminDefaults);document.getElementById('adminDefaultsScope')?.addEventListener('change',renderAdminDefaults);document.getElementById('saveAdminDefaults')?.addEventListener('click',saveAdminDefaultsFromUi);document.getElementById('restoreAllAdminDefaults')?.addEventListener('click',restoreAllAdminDefaults);document.getElementById('applyAdminDefaultsCurrent')?.addEventListener('click',()=>{if(!requireAdminAccess())return;applyAdminDefaultsToProject({markAsDefault:true,refresh:true});syncElectricianRateControl();const marginKey=activeCompany==='mecasol'?'profitMarginMecasol':'profitMarginEvosun';const marginValue=adminDefaults[marginKey];const marginInput=document.getElementById('profitMargin');if(marginInput&&Object.prototype.hasOwnProperty.call(adminDefaults,marginKey)&&[...marginInput.options].some(o=>o.value===String(marginValue)))marginInput.value=String(marginValue);renderQuoteSummary();const notice=document.getElementById('adminDefaultsNotice');if(notice)notice.textContent='Valeurs administrateur appliquées au projet actuellement ouvert.'});document.getElementById('backFromEfficienciesManager')?.addEventListener('click',()=>openSection('manageHub'));['adminEfficiencySmartSolar','adminEfficiencyMultiInv','adminEfficiencyMultiCharger','adminEfficiencySolarInv','adminEfficiencyBatteryRt'].forEach(id=>document.getElementById(id)?.addEventListener('input',updateEfficiencyAdminPreview));document.getElementById('saveAdminEfficiencies')?.addEventListener('click',()=>saveEfficiencyManage({applyCurrent:false}));document.getElementById('applyAdminEfficienciesCurrent')?.addEventListener('click',()=>saveEfficiencyManage({applyCurrent:true}));document.getElementById('restoreAdminEfficiencies')?.addEventListener('click',restoreEfficiencyManage);document.getElementById('backFromVisualEquipmentsManager')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('visualEquipmentAddForm')?.addEventListener('submit',addVisualEquipment);document.getElementById('backFromSchematicRolesManager')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('schematicFunctionalRoleForm')?.addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('schematicFunctionalRoleName');await schematicAddRole('functional',input?.value);if(input)input.value=''});document.getElementById('schematicConnectionRoleForm')?.addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('schematicConnectionRoleName');await schematicAddRole('connection',input?.value);if(input)input.value=''});document.getElementById('backFromSchematicsManager')?.addEventListener('click',()=>{if(sim5SchematicEditorReturn){sim5SchematicEditorReturn=false;const back=document.getElementById('backFromSchematicsManager');if(back)back.textContent='Retour à l’administration';openSection('quoteOnlySimulator');setTimeout(sim5RenderSchematic,0)}else openSection('manageHub')});initSchematicEditorEvents();initCommonSchematicPickerEvents();
   document.getElementById('backFromFlatStructureManager').addEventListener('click',()=>openSection('manageHub'));document.getElementById('backFromDefaultsManager')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('backFromCompanyManager').addEventListener('click',()=>openSection('manageHub'));document.getElementById('backFromUserManager').addEventListener('click',()=>openSection('manageHub'));document.getElementById('backFromUserQuotes')?.addEventListener('click',()=>openSection('manageHub'));document.getElementById('refreshAdminQuotes')?.addEventListener('click',renderAdminUserQuotes);document.getElementById('adminQuoteSearch')?.addEventListener('input',renderAdminQuoteRows);document.getElementById('backFromPanelManager').addEventListener('click',()=>openSection('manageHub'));document.getElementById('backToCalculator').addEventListener('click',()=>openSection('manageHub'));document.getElementById('backFromRoofManager').addEventListener('click',()=>openSection('manageHub'));
   document.getElementById('savePanelFamilyImportDuty')?.addEventListener('click',()=>saveFamilyImportDutyFromControl('panelFamilyImportDuty','panel','notice'));
   document.getElementById('saveSmartSolarFamilyImportDuty')?.addEventListener('click',()=>saveFamilyImportDutyFromControl('smartSolarFamilyImportDuty','smartsolar','smartSolarManageNotice'));
@@ -53768,21 +54329,21 @@ document.getElementById('equipmentCategoryAddForm')?.addEventListener('submit',a
   });
   const quoteModal=document.getElementById('quoteModal');
   let pendingPdfVariant='base';
-  const INTERNET_OFFER_NOTE="Cette offre vous a été envoyée à titre indicatif et reflète les informations que vous nous avez transmises. Elle ne pourra être validée qui suite au passage d'un technicien de chez Evo-Sun";
+  const INTERNET_OFFER_NOTE="Cette offre vous a été envoyée à titre indicatif et reflète les informations que vous nous avez transmises. Elle ne pourra être validée qu'à la suite du passage d'un technicien de chez Evo-Sun.";
+  const internetOfferNoteForCompany=()=>INTERNET_OFFER_NOTE.replace('Evo-Sun',activeCompany==='mecasol'?'Meca-Sol':'EVO-Sun');
+  const INTERNET_OFFER_NOTE_REGEX=/Cette offre vous a été envoyée à titre indicatif et reflète les informations que vous nous avez transmises\. Elle ne pourra être validée (?:qui suite au|qu'à la suite du) passage d'un technicien de chez (?:Evo-Sun|EVO-Sun|Meca-Sol)\.?/gi;
+  const hasInternetOfferNote=value=>/Cette offre vous a été envoyée à titre indicatif et reflète les informations que vous nous avez transmises\./i.test(String(value||''));
   function setInternetOfferNote(enabled){
     const notes=document.getElementById('quoteNotes');
     if(!notes)return;
-    const current=String(notes.value||'');
-    if(enabled){
-      if(!current.includes(INTERNET_OFFER_NOTE))notes.value=[current.trim(),INTERNET_OFFER_NOTE].filter(Boolean).join(current.trim()?'\n\n':'');
-    }else{
-      notes.value=current.replace(INTERNET_OFFER_NOTE,'').replace(/\n{3,}/g,'\n\n').trim()
-    }
+    const current=String(notes.value||''),withoutTemplate=current.replace(INTERNET_OFFER_NOTE_REGEX,'').replace(/\n{3,}/g,'\n\n').trim();
+    notes.value=enabled?[withoutTemplate,internetOfferNoteForCompany()].filter(Boolean).join(withoutTemplate?'\n\n':''):withoutTemplate;
   }
   document.getElementById('quoteInternetOffer')?.addEventListener('change',event=>setInternetOfferNote(Boolean(event.target.checked)));
-  document.getElementById('quoteNotes')?.addEventListener('input',()=>{const checkbox=document.getElementById('quoteInternetOffer'),notes=document.getElementById('quoteNotes');if(checkbox&&notes)checkbox.checked=String(notes.value||'').includes(INTERNET_OFFER_NOTE)});
+  document.getElementById('quoteNotes')?.addEventListener('input',()=>{const checkbox=document.getElementById('quoteInternetOffer'),notes=document.getElementById('quoteNotes');if(checkbox&&notes)checkbox.checked=hasInternetOfferNote(notes.value)});
   async function openQuotePdfPreparation(variant='base'){
     pendingPdfVariant=variant==='development'?'development':'base';
+    if(activeSimulatorMode==='quote-only'){window.sim5PublicValidationUrl='';const a=document.getElementById('sim5CustomerValidationLink');if(a){a.hidden=true;a.href='#'}}
     resetCommonPdfReady();
     const status=document.getElementById('quotePdfStatus'),trigger=document.getElementById(pendingPdfVariant==='development'?'openQuotePdfDevelopment':'openQuotePdfBase');
     const quoteTitleInput=document.getElementById('quoteTitle'),pvDefaultTitle='Installation photovoltaïque avec stockage batterie',offgridDefaultTitle='Installation solaire Off-Grid avec stockage batterie';
@@ -53809,7 +54370,7 @@ document.getElementById('equipmentCategoryAddForm')?.addEventListener('submit',a
       if(status)status.textContent=`${lockedReference} enregistré dans Supabase · préparation du PDF autorisée.`;
       const modalTitle=document.getElementById('quoteModalTitle');if(modalTitle)modalTitle.textContent=pendingPdfVariant==='development'?'Préparer le PDF en développement':'Préparer le PDF de base';
       const submitButton=document.querySelector('#quotePdfForm button[type=submit]');if(submitButton)submitButton.textContent=pendingPdfVariant==='development'?'Préparer le PDF en développement':'Préparer le PDF de base';
-      const internetOfferCheckbox=document.getElementById('quoteInternetOffer'),notesField=document.getElementById('quoteNotes');if(internetOfferCheckbox&&notesField)internetOfferCheckbox.checked=String(notesField.value||'').includes(INTERNET_OFFER_NOTE);
+      const internetOfferCheckbox=document.getElementById('quoteInternetOffer'),notesField=document.getElementById('quoteNotes');if(internetOfferCheckbox&&notesField){internetOfferCheckbox.checked=hasInternetOfferNote(notesField.value);if(internetOfferCheckbox.checked)setInternetOfferNote(true)}
       quoteModal.classList.add('open');setTimeout(()=>document.getElementById('quoteDate')?.focus(),0)
     }catch(error){
       console.error(error);
@@ -53901,7 +54462,7 @@ ${error.message||error}`)
   document.getElementById('exportOffgridInteractiveProfile')?.addEventListener('click',exportOffgridInteractiveProfile);
   document.getElementById('openQuotePdfBase').addEventListener('click',async()=>{await openQuotePdfPreparation('base')});
   document.getElementById('openQuotePdfDevelopment').addEventListener('click',async()=>{await openQuotePdfPreparation('development')});
-  document.getElementById('openQuoteEmailComposer')?.addEventListener('click',()=>window.commonOpenQuoteSendModal?.());
+  document.getElementById('openQuoteEmailComposer')?.addEventListener('click',()=>commonOpenQuoteSendModal());
   document.getElementById('closeQuoteEmailComposer')?.addEventListener('click',closeQuoteEmailComposer);
   document.getElementById('quoteEmailModal')?.addEventListener('click',event=>{if(event.target===event.currentTarget)closeQuoteEmailComposer()});
   document.getElementById('openOutlookCompose')?.addEventListener('click',launchOutlookCompose);
@@ -53999,7 +54560,8 @@ ${error.message||error}`)
       status.textContent=`PDF créé · étape 3/3 — archivage avec l’offre ${displayQuoteReference(savedQuote)}…`;
       savedQuote=await cgsPdfWithDeadline(freezeQuoteArtifactsForPdf(savedQuote,pendingPdfVariant,selected),30000,'Archivage PDF');
       status.classList.remove('error');
-      status.textContent=`${displayQuoteReference(savedQuote)} · PDF ${pendingPdfVariant==='development'?'développement':'de base'} figé dans Supabase avec son dossier technique ✓`
+      status.textContent=`${displayQuoteReference(savedQuote)} · PDF ${pendingPdfVariant==='development'?'développement':'de base'} figé dans Supabase avec son dossier technique ✓`;
+      setQuoteStorageStatus('');
     }catch(error){console.error(error);status.classList.add('error');status.textContent=`Impossible de préparer le devis : ${error.message||error}`;alert(status.textContent)}
   });
   document.getElementById('quotePdfForm').addEventListener('submit',async event=>{event.preventDefault();const value=id=>document.getElementById(id).value.trim(),status=document.getElementById('quotePdfStatus');status.classList.remove('error');status.textContent=pendingPdfVariant==='development'?'Préparation du PDF en développement…':'Préparation du PDF de base…';try{pendingPdfCustomer={name:value('projectCustomerName'),email:value('projectCustomerEmail'),phone:value('projectCustomerPhone'),odooId:value('projectCustomerOdooId'),address:value('projectCustomerAddress'),postalCode:value('projectCustomerPostalCode'),city:value('projectCustomerCity'),reference:value('quoteReference'),date:value('quoteDate'),vatRate:value('projectVatRate'),validity:value('quoteValidity'),title:value('quoteTitle'),notes:value('quoteNotes')};quoteModal.classList.remove('open');openPdfPageSelector()}catch(error){console.error(error);status.classList.add('error');status.textContent=`Impossible de préparer le devis : ${error.message||error}`;alert(status.textContent)}});
@@ -54228,6 +54790,7 @@ ${error.message||error}`)
   function showLoginScreen(message=''){
     currentUserRole='';
     currentUserEmail='';
+    document.body.classList.remove('cgs-df-admin');
     window.cgsAllowedCompanyUi=null;
     offerAdminConfigSource='initialisation';
     offerAdminConfigLoadError='';
@@ -54297,7 +54860,7 @@ ${error.message||error}`)
       const permitted=verifiedAccess.user.app_metadata?.cgs_company;
       window.cgsAllowedCompanyUi=(permitted==='mecasol'||permitted==='evosun')?permitted:null;
       if(window.cgsAllowedCompanyUi)activeCompany=window.cgsAllowedCompanyUi;
-      const {data:profile,error:profileError}=await database.from('profiles').select('email,role').eq('id',user.id).maybeSingle();currentUserEmail=(profile?.email||user.email||'').trim().toLowerCase();try{syncSolarCablePriceFromAdmin()}catch{}currentUserRole=isDominiqueAdmin()?'admin':'technician';const managementUserEarly=document.getElementById('managementHubUser');if(managementUserEarly){managementUserEarly.textContent=`${currentUserEmail||'Compte inconnu'} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'} · Auth Supabase`;managementUserEarly.title=`Session Supabase : ${currentUserEmail||'inconnue'}`;}if(!profile&&!profileError){try{await database.from('profiles').upsert({id:user.id,email:currentUserEmail,role:currentUserRole},{onConflict:'id'})}catch{}}await loadCatalogFromDatabase();await loadOfferAdminConfig();await loadSchematicsFromDatabase();await loadSchematicRolesFromDatabase();void cgsEnsureSimulatorAccessoriesLoaded();const managementUserFinal=document.getElementById('managementHubUser');if(managementUserFinal){managementUserFinal.textContent=`${currentUserEmail||'Compte inconnu'} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'} · Config : ${offerAdminConfigSource||'—'}`;managementUserFinal.title=offerAdminConfigLoadError?`Configuration distante non chargée : ${offerAdminConfigLoadError}`:'Configuration Supabase chargée';}document.getElementById('connectedUser').textContent=`${currentUserEmail} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'}`;document.getElementById('headerAdminButton').style.display=isDominiqueAdmin()?'inline-flex':'none';const hubAdminButton=document.getElementById('hubAdminButton');if(hubAdminButton)hubAdminButton.style.display=isDominiqueAdmin()?'flex':'none';const adminQuotesLink=document.getElementById('adminQuotesLink');if(adminQuotesLink)adminQuotesLink.style.display=isDominiqueAdmin()?'block':'none';document.getElementById('databaseStatus').textContent='Base EVO-Sun connectée';document.getElementById('databaseStatus').classList.remove('error');document.getElementById('loginScreen').classList.add('hidden');document.getElementById('evosunApp').classList.remove('auth-pending');document.getElementById('globalAppNav')?.removeAttribute('hidden');document.body.classList.add('simulator-open');
+      const {data:profile,error:profileError}=await database.from('profiles').select('email,role').eq('id',user.id).maybeSingle();currentUserEmail=(profile?.email||user.email||'').trim().toLowerCase();try{syncSolarCablePriceFromAdmin()}catch{}currentUserRole=isDominiqueAdmin()?'admin':'technician';document.body.classList.toggle('cgs-df-admin',isDominiqueAdmin());const managementUserEarly=document.getElementById('managementHubUser');if(managementUserEarly){managementUserEarly.textContent=`${currentUserEmail||'Compte inconnu'} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'} · Auth Supabase`;managementUserEarly.title=`Session Supabase : ${currentUserEmail||'inconnue'}`;}if(!profile&&!profileError){try{await database.from('profiles').upsert({id:user.id,email:currentUserEmail,role:currentUserRole},{onConflict:'id'})}catch{}}await loadCatalogFromDatabase();await loadOfferAdminConfig();await cgsLoadSharedCompanyDefaults();await loadSchematicsFromDatabase();await loadSchematicRolesFromDatabase();void cgsEnsureSimulatorAccessoriesLoaded();const managementUserFinal=document.getElementById('managementHubUser');if(managementUserFinal){managementUserFinal.textContent=`${currentUserEmail||'Compte inconnu'} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'} · Config : ${offerAdminConfigSource||'—'}`;managementUserFinal.title=offerAdminConfigLoadError?`Configuration distante non chargée : ${offerAdminConfigLoadError}`:'Configuration Supabase chargée';}document.getElementById('connectedUser').textContent=`${currentUserEmail} · ${isDominiqueAdmin()?'Administrateur':'Utilisateur'}`;document.getElementById('headerAdminButton').style.display=isDominiqueAdmin()?'inline-flex':'none';const hubAdminButton=document.getElementById('hubAdminButton');if(hubAdminButton)hubAdminButton.style.display=isDominiqueAdmin()?'flex':'none';const adminQuotesLink=document.getElementById('adminQuotesLink');if(adminQuotesLink)adminQuotesLink.style.display=isDominiqueAdmin()?'block':'none';document.getElementById('databaseStatus').textContent='Base EVO-Sun connectée';document.getElementById('databaseStatus').classList.remove('error');document.getElementById('loginScreen').classList.add('hidden');document.getElementById('evosunApp').classList.remove('auth-pending');document.getElementById('globalAppNav')?.removeAttribute('hidden');document.body.classList.add('simulator-open');
 /* V1198 — Le body démarre déjà en management-hub-open afin qu’aucun simulateur ne soit peint avant la fin du chargement Supabase/catalogues. */
 try{if(typeof openManagementHub==='function')openManagementHub()}catch{}
 applyAdminDefaultsToProject({markAsDefault:true,refresh:false});renderApplication();populateManualMpptModels();applyCompanyProfile({resetVat:true});updateBaseMiscellaneous();draftQuoteBaseReference=createQuoteBaseReference();updateQuoteToolbar();const quoteDate=document.getElementById('quoteDate');if(quoteDate&&!quoteDate.value){const now=new Date(),localToday=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);quoteDate.value=localToday}setQuoteStorageStatus(`Nouveau devis : référence réservée ${draftQuoteBaseReference}.`);const projectResetApplied=applyProjectResetContext();initOdooCustomerSelector();if(!projectResetApplied&&typeof openManagementHub==='function'&&!document.body.classList.contains('management-hub-open'))openManagementHub();releaseEvoBootCoverAfterPaint();
@@ -55197,7 +55760,7 @@ async function printSim5DevelopmentPdf(customer,selectedPageNumbers=null){
           blockY=Math.min(179,Math.max(totalsY,171)),
           exWorksLiege=Boolean(document.getElementById('sim5ExWorksLiege')?.checked),
           commercialNote=exWorksLiege
-            ?'Prix de vente au départ de nos ateliers à Liège : rue Natalis, 2 · 4020 Liège'
+            ?(activeCompany==='mecasol'?'Prix de vente au départ de notre atelier Meca-Sol · Cap Skirring, Sénégal':'Prix de vente au départ de nos ateliers à Liège : rue Natalis, 2 · 4020 Liège')
             :'Prix de vente HTVA — marge commerciale déjà comprise.';
 
         border(10,blockY,112,15,white,stroke,3,.3);
@@ -55780,7 +56343,7 @@ async function printSim5DevelopmentPdf(customer,selectedPageNumbers=null){
 
     const validationY=124.5,noteY=132;
     round(207,validationY,70,6.4,dark,3.2);
-    sTextBox(String(offerAdminConfig.quoteValidationEmail?.buttonLabel||DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.buttonLabel),209,validationY+.35,66,5.6,{size:3.8,min:2.7,style:'bold',color:green,align:'center',valign:'middle',maxLines:1});
+    sTextBox(String(commonValidationEmailConfigForCompany(activeCompany)?.buttonLabel||DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG.buttonLabel),209,validationY+.35,66,5.6,{size:3.8,min:2.7,style:'bold',color:green,align:'center',valign:'middle',maxLines:1});
 
     const lowerInfoY=158,lowerInfoH=18,signatureY=181;
     border(10,lowerInfoY,176,lowerInfoH,[248,250,239],dark,3,.55);
@@ -55966,7 +56529,35 @@ async function printSim5QuotePdf(customer,selectedPageNumbers=null,pdfVariant='b
 
   function solution(){newPage();header('Fonctionnement de votre solution','SIMULATEUR 5 · FONCTIONNEMENT');const g=sim5SchematicGroups(),blocks=[];if(g.panels.length)blocks.push(['Production solaire','Les panneaux photovoltaïques produisent l’énergie solaire utilisée par votre installation.']);if(g.smartsolar.length)blocks.push(['SmartSolar / MPPT','Le régulateur adapte en permanence le point de fonctionnement des panneaux et transfère l’énergie vers le bus DC.']);if(g.solarInverters.length)blocks.push(['Onduleur solaire','L’onduleur solaire convertit directement la production photovoltaïque en courant alternatif pour le site.']);if(g.batteries.length)blocks.push(['Stockage batterie','La batterie permet de stocker l’énergie disponible pour la restituer ultérieurement selon la configuration du système.']);if(g.inverters.length)blocks.push(['Onduleur / chargeur','Le MultiPlus, Quattro ou appareil équivalent assure la conversion entre AC et DC et peut gérer alimentation du site, charge batterie et fonctions de backup.']);if(g.ev.length)blocks.push(['Recharge véhicule','La borne de recharge est intégrée comme consommation pilotable de l’installation.']);if(g.monitoring.length)blocks.push(['Monitoring','Les équipements de supervision permettent de suivre le fonctionnement et les flux énergétiques de l’installation.']);if(!blocks.length)blocks.push(['Composition de votre solution','Votre offre est constituée des équipements sélectionnés manuellement dans le devis.']);blocks.slice(0,6).forEach((b,i)=>{const col=i%2,row=Math.floor(i/2),x=17+col*133,y=43+row*47;doc.setFillColor(...light);doc.roundedRect(x,y,126,40,4,4,'F');doc.setFillColor(...green);doc.rect(x,y,4,40,'F');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text(b[0],x+9,y+12,{maxWidth:110});doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(...grey);doc.text(doc.splitTextToSize(b[1],108),x+9,y+21)});footer()}
   function conditions(){newPage();header('Offre financière & conditions de paiement','SIMULATEUR 5 · CONDITIONS');card(17,42,80,30,'Montant HTVA',money(data.saleTotal));card(105,42,80,30,'TVA',money(data.vatAmount));card(193,42,86,30,'Total TVAC',money(data.saleTotalInclVat),true);doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(13);doc.text('Échelonnement des paiements',17,92);const pays=[[paymentTerms.deposit,'À la commande'],[paymentTerms.delivery,'À la livraison'],[paymentTerms.balance,`Solde à ${paymentTerms.balanceDays} jours date facture`]];pays.forEach((item,i)=>{const x=17+i*88;doc.setFillColor(...(i===0?green:light));doc.roundedRect(x,103,80,31,4,4,'F');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text(`${item[0]} %`,x+40,116,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(6);doc.text(doc.splitTextToSize(item[1],70),x+40,124,{align:'center'})});doc.setFillColor(...light);doc.roundedRect(17,151,126,27,4,4,'F');doc.roundedRect(153,151,126,27,4,4,'F');doc.setTextColor(...grey);doc.setFont('helvetica','bold');doc.setFontSize(6.5);doc.text('VALIDITÉ DE L’OFFRE',23,161);doc.text('DÉLAI DE RÉALISATION',159,161);doc.setTextColor(...dark);doc.setFontSize(12);doc.text('30 jours',23,172);doc.text('À convenir',159,172);footer()}
-  function order(){newPage();header('Bon pour accord','SIMULATEUR 5 · ACCEPTATION');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(customer.name||'Client',17,49);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text([customer.address,[customer.postalCode,customer.city].filter(Boolean).join(' ')].filter(Boolean).join(' · '),17,59,{maxWidth:155});doc.setFillColor(...green);doc.roundedRect(174,40,106,28,4,4,'F');doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text(money(data.saleTotalInclVat),227,57,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Montant total TVAC',227,64,{align:'center'});doc.setTextColor(...dark);doc.setFontSize(9);doc.text('Le client confirme son accord sur l’offre et autorise la préparation définitive du projet selon les éléments repris dans ce devis.',17,84,{maxWidth:260});const pays=[[paymentTerms.deposit,'Commande'],[paymentTerms.delivery,'Livraison'],[paymentTerms.balance,`Solde ${paymentTerms.balanceDays} j. date facture`]];pays.forEach((item,i)=>{const x=17+i*88;doc.setFillColor(...(i===0?green:light));doc.roundedRect(x,94,80,22,3,3,'F');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text(`${item[0]} %`,x+40,103,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(5.5);doc.text(item[1],x+40,111,{align:'center',maxWidth:72})});['Date et lieu','Nom et mention « Bon pour accord »','Signature'].forEach((label,i)=>{const x=17+i*88;doc.setFont('helvetica','bold');doc.setFontSize(8);doc.text(label,x,136);doc.setDrawColor(130,140,145);doc.line(x,174,x+73,174)});footer()}
+  function order(){newPage();header('Bon pour accord','SIMULATEUR 5 · ACCEPTATION');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(customer.name||'Client',17,49);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text([customer.address,[customer.postalCode,customer.city].filter(Boolean).join(' ')].filter(Boolean).join(' · '),17,59,{maxWidth:155});doc.setFillColor(...green);doc.roundedRect(174,40,106,28,4,4,'F');doc.setFont('helvetica','bold');doc.setFontSize(14);doc.text(money(data.saleTotalInclVat),227,57,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text('Montant total TVAC',227,64,{align:'center'});doc.setTextColor(...dark);doc.setFontSize(9);doc.text('Le client confirme son accord sur l’offre et autorise la préparation définitive du projet selon les éléments repris dans ce devis.',17,84,{maxWidth:260});const pays=[[paymentTerms.deposit,'Commande'],[paymentTerms.delivery,'Livraison'],[paymentTerms.balance,`Solde ${paymentTerms.balanceDays} j. date facture`]];pays.forEach((item,i)=>{const x=17+i*88;doc.setFillColor(...(i===0?green:light));doc.roundedRect(x,94,80,22,3,3,'F');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text(`${item[0]} %`,x+40,103,{align:'center'});doc.setFont('helvetica','normal');doc.setFontSize(5.5);doc.text(item[1],x+40,111,{align:'center',maxWidth:72})});['Date et lieu','Nom et mention « Bon pour accord »','Signature'].forEach((label,i)=>{const x=17+i*88;doc.setFont('helvetica','bold');doc.setFontSize(8);doc.text(label,x,136);doc.setDrawColor(130,140,145);doc.line(x,174,x+73,174)});if(sim5ValidationLink){doc.setFillColor(...green);doc.roundedRect(17,181,263,11,3,3,'F');doc.setTextColor(...dark);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.text('VALIDER VOTRE BON DE COMMANDE EN LIGNE',148.5,188,{align:'center'});doc.link(17,181,263,11,{url:sim5ValidationLink})}footer()}
+  // Only public signed HTTPS URLs may be communicated to customers. PDF blob links are local-only.
+  let sim5ValidationLink='';
+  if(pdfVariant==='base'){
+    if(!activeQuoteRecord?.id)throw new Error('SIM5 : enregistrez le devis dans Supabase avant de préparer un lien client.');
+    sim5ValidationLink=await cgsPdfWithDeadline(createPublicQuoteValidationLink({
+      quoteId:String(activeQuoteRecord.id),
+      reference:String(customer.reference||''),client:String(customer.name||''),
+      clientEmail:String(customer.email||''),
+      odooPartnerId:Number(customer.odooId||document.getElementById('projectCustomerOdooId')?.value||0)||0,
+      address:[customer.address,`${customer.postalCode||''} ${customer.city||''}`.trim()].filter(Boolean).join(', '),
+      project:String(customer.title||'Vente de matériel'),
+      date:String(customer.date||''),companyId:activeCompany,
+      company:String(company.displayName||company.legalName||''),
+      baseAmount:Number(data.saleTotalInclVat)||0,exchangeRate:Number(company.priceFactor)||655.957,
+      validityDays:30,options:[],
+      config:(()=>{
+        // V1575 — confirmation SIM5 : même COMMON e-mail que SIM7, selon société.
+        const v=commonValidationEmailConfigForCompany(activeCompany);
+        return {pageTitle:v.pageTitle,pageIntro:v.pageIntro,pageConfirmLabel:v.pageConfirmLabel,
+          confirmationTitle:v.confirmationTitle,confirmationBody:v.confirmationBody,
+          confirmationSubject:v.subject,confirmationEmailBody:v.body}
+      })()
+    }),18000,'Validation en ligne SIM5');
+    if(!/^https:\/\//i.test(sim5ValidationLink))throw new Error('Lien de validation SIM5 invalide : le PDF n’a pas été publié.');
+    window.sim5PublicValidationUrl=sim5ValidationLink;
+    const publicAnchor=document.getElementById('sim5CustomerValidationLink');
+    if(publicAnchor){publicAnchor.href=sim5ValidationLink;publicAnchor.hidden=false;}
+  }
   const renderers={cover,toc,summary,energy:productible,products:composition,schematic,solution,conditions,order};
   const actualStarts=new Map();
   for(const descriptor of selected){
@@ -55981,7 +56572,7 @@ async function printSim5QuotePdf(customer,selectedPageNumbers=null,pdfVariant='b
     sim1Kit.drawToc(entries,tocLinks);
     tocLinks.forEach(link=>doc.link(link.x,link.y,link.w,link.h,{pageNumber:link.pageNumber,magFactor:'Fit'}))
   }
-  const blob=doc.output('blob'),url=URL.createObjectURL(blob),link=document.getElementById('quotePdfDownload'),status=document.getElementById('quotePdfStatus'),suffix=pdfVariant==='development'?'-DEV':'-BASE',filename=`${customer.reference||'offre'}-sim5${suffix}.pdf`;if(window.quotePdfObjectUrl)URL.revokeObjectURL(window.quotePdfObjectUrl);window.quotePdfObjectUrl=url;window.quotePdfBlob=blob;window.quotePdfFilename=filename;window.quotePdfVariant=pdfVariant;if(link){link.href=url;link.download=filename;link.classList.add('ready');link.textContent=`Ouvrir / télécharger ${filename}`};showCommonPdfReady({url,filename,variant:pdfVariant,pageCount:doc.getNumberOfPages(),simulator:5});syncQuoteMailButton();if(status){status.classList.remove('error');status.textContent=`PDF Simulateur 5 ${pdfVariant==='development'?'en développement':'de base'} créé · ${doc.getNumberOfPages()} page${doc.getNumberOfPages()>1?'s':''}.`};return true
+  const blob=doc.output('blob'),url=URL.createObjectURL(blob),link=document.getElementById('quotePdfDownload'),status=document.getElementById('quotePdfStatus'),suffix=pdfVariant==='development'?'-DEV':'-BASE',filename=`${customer.reference||'offre'}-sim5${suffix}.pdf`;if(window.quotePdfObjectUrl)URL.revokeObjectURL(window.quotePdfObjectUrl);window.quotePdfObjectUrl=url;window.quotePdfBlob=blob;window.quotePdfFilename=filename;window.quotePdfVariant=pdfVariant;window.quotePdfSimulator=5;window.quotePdfCustomer={...customer};if(link){link.href=url;link.download=filename;link.classList.add('ready');link.textContent=`Ouvrir / télécharger ${filename}`};showCommonPdfReady({url,filename,variant:pdfVariant,pageCount:doc.getNumberOfPages(),simulator:5});syncQuoteMailButton();if(status){status.classList.remove('error');status.textContent=`PDF Simulateur 5 ${pdfVariant==='development'?'en développement':'de base'} créé · ${doc.getNumberOfPages()} page${doc.getNumberOfPages()>1?'s':''}.`};return true
 }
 async function printValidatedQuotePdf(customer,selectedPageNumbers=null,pdfVariant='base'){
   if(activeSimulatorMode==='quote-only')return printSim5QuotePdf(customer,selectedPageNumbers,pdfVariant);
@@ -56806,7 +57397,7 @@ lines[lines.length-1]=truncateLine(`${remainder}...`,boxW)}}
   const drawDynamicOrderPage=async(orderPageNumber)=>{
     const orderOpts=data.options.slice(0,5);
     const validationOptionsText=orderOpts.length?orderOpts.map(o=>`• ${o.name} — Qté ${o.quantity||1} — ${money(optionSalePriceInclVat((Number(o.price)||0)*(o.quantity||1),vatRate))} TVAC`).join('\n'):'Aucune option facultative proposée.';
-    const validationCfg=offerAdminConfig.quoteValidationEmail&&typeof offerAdminConfig.quoteValidationEmail==='object'?offerAdminConfig.quoteValidationEmail:DEFAULT_QUOTE_VALIDATION_EMAIL_CONFIG,
+    const validationCfg=commonValidationEmailConfigForCompany(isMecaSim7Pdf?'mecasol':'evosun'),
       validationOptionsPayload=orderOpts.map((o,index)=>({key:String(o.id||o.key||o.name||`option-${index}`),name:String(o.name||`Option ${index+1}`),quantity:Math.max(1,Number(o.quantity)||1),amount:Number(optionSalePriceInclVat((Number(o.price)||0)*(o.quantity||1),vatRate))||0})),
       validationAddress=[String(customer.address||'').trim(),`${String(customer.postalCode||'').trim()} ${String(customer.city||'').trim()}`.trim()].filter(Boolean).join('\n');
     let validationUrl='';
@@ -56838,7 +57429,7 @@ lines[lines.length-1]=truncateLine(`${remainder}...`,boxW)}}
     txt('CLIENT',15,54,5,'bold',grey);textBox(customer.name,15,55,166,6,{size:8,min:5.2,style:'bold',valign:'middle',maxLines:1});textBox(`${customer.address} - ${customer.postalCode} ${customer.city}`,15,61,166,5,{size:6,min:4.2,color:grey,valign:'middle',maxLines:1});
     txt('RÉFÉRENCE',196,53.1,4.2,'bold',grey);textBox(customer.reference,196,55,57,5.6,{size:6,min:4.1,style:'bold',valign:'middle',maxLines:1});txt('DATE',255,53.1,4.2,'bold',grey);textBox(date,255,55,28,5.6,{size:5.5,min:4,style:'bold',valign:'middle',maxLines:1});textBox(customer.title,196,61.4,64,4.8,{size:4.7,min:3.4,color:grey,valign:'middle',maxLines:1});textBox(`TVA ${vatRate} %`,263,61.4,21,4.8,{size:4.1,min:3.3,style:'bold',color:[154,196,0],align:'right',valign:'middle',maxLines:1});
     const optionCount=orderOpts.length,optionRowStep=6.2,optionsStartY=113,optionsListBottom=optionsStartY+Math.max(optionCount,1)*optionRowStep,optionsPanelBottom=Math.max(153,optionsListBottom+25),optionsPanelHeight=optionsPanelBottom-73;
-    fill(11,75,174,optionsPanelHeight-2,white);txt('INSTALLATION COMPRISE DANS L’OFFRE',15,79,6,'bold');const availableOrderRows=(data.quoteRows||data.rows.filter(r=>r.visibleInQuote!==false)).filter(r=>r.section!=='Options'),coreOrderRows=availableOrderRows.filter(r=>!['Accessoires','Divers','Main-d’œuvre'].includes(r.section)),laborOrderRows=availableOrderRows.filter(r=>r.section==='Main-d’œuvre'),visibleMiscellaneousRows=availableOrderRows.filter(r=>r.section==='Divers'),accessoryOrderRows=availableOrderRows.filter(r=>r.section==='Accessoires'),mandatoryOrderRows=[{article:'Réception par un organisme agréé',details:'Contrôle de conformité RGIE de l’installation solaire',qty:1},{article:'Envoi du dossier technique au GRD',details:'Formalités et déclaration de l’installation',qty:1}],orderRows=[...coreOrderRows,...laborOrderRows,...visibleMiscellaneousRows,...accessoryOrderRows].slice(0,12).concat(mandatoryOrderRows),orderRowStep=Math.min(6.55,64/Math.max(orderRows.length,1)),orderRowHeight=Math.min(6,orderRowStep-.25),orderFontSize=orderRows.length>10?4.8:5.6,orderDetailSize=orderRows.length>10?4.5:5.2;orderRows.forEach((r,i)=>{const y=84+i*orderRowStep;if(i%2===0)fill(14,y,168,orderRowHeight,[249,250,247]);textBox(r.article,15,y,50,orderRowHeight,{size:orderFontSize,min:3.6,style:i<4||i>=orderRows.length-2?'bold':'normal',valign:'middle',maxLines:1});textBox(r.details||'',67,y,99,orderRowHeight,{size:orderDetailSize,min:3.4,color:grey,valign:'middle',maxLines:1});textBox(r.qty,169,y,12,orderRowHeight,{size:orderFontSize,min:3.6,style:'bold',align:'right',valign:'middle',maxLines:1})});
+    fill(11,75,174,optionsPanelHeight-2,white);txt('INSTALLATION COMPRISE DANS L’OFFRE',15,79,6,'bold');const availableOrderRows=(data.quoteRows||data.rows.filter(r=>r.visibleInQuote!==false)).filter(r=>r.section!=='Options'),coreOrderRows=availableOrderRows.filter(r=>!['Accessoires','Divers','Main-d’œuvre'].includes(r.section)),laborOrderRows=availableOrderRows.filter(r=>r.section==='Main-d’œuvre'),visibleMiscellaneousRows=availableOrderRows.filter(r=>r.section==='Divers'),accessoryOrderRows=availableOrderRows.filter(r=>r.section==='Accessoires'),mandatoryOrderRows=[],orderRows=[...coreOrderRows,...laborOrderRows,...visibleMiscellaneousRows,...accessoryOrderRows].slice(0,12).concat(mandatoryOrderRows),orderRowStep=Math.min(6.55,64/Math.max(orderRows.length,1)),orderRowHeight=Math.min(6,orderRowStep-.25),orderFontSize=orderRows.length>10?4.8:5.6,orderDetailSize=orderRows.length>10?4.5:5.2;orderRows.forEach((r,i)=>{const y=84+i*orderRowStep;if(i%2===0)fill(14,y,168,orderRowHeight,[249,250,247]);textBox(r.article,15,y,50,orderRowHeight,{size:orderFontSize,min:3.6,style:i<4||i>=orderRows.length-2?'bold':'normal',valign:'middle',maxLines:1});textBox(r.details||'',67,y,99,orderRowHeight,{size:orderDetailSize,min:3.4,color:grey,valign:'middle',maxLines:1});textBox(r.qty,169,y,12,orderRowHeight,{size:orderFontSize,min:3.6,style:'bold',align:'right',valign:'middle',maxLines:1})});
     fill(192,75,94,optionsPanelHeight-2,white);txt('MONTANT DE BASE ET OPTIONS',196,79,5.7,'bold');round(196,86,85,14,dark,3);textBox('PRIX DE BASE TVAC',201,89,35,7,{size:5,min:3.8,style:'bold',color:white,valign:'middle',maxLines:1});const orderBasePriceParts=String(money(total)).split(/\s*\|\s*/);
     if(orderBasePriceParts.length>1){
       textBox(orderBasePriceParts[0],238,87.1,39,5.4,{size:8.7,min:5.8,style:'bold',color:green,align:'right',valign:'middle',maxLines:1});
